@@ -1,0 +1,96 @@
+---
+title: "Media y Coeficientes de Pearson"
+author: "Antonio Álvarez Caballero"
+date: "12 de marzo de 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Media
+
+Partiendo de esta implementación de la función _media_
+
+```{r media}
+media <- function(x=NA){
+  x <- x[!is.na(x)]
+  
+  media <- sum(x) / length(x)
+  
+  return(media)
+}
+```
+
+
+La modificamos para que devuelva el número de elementos que había antes de quitar los _NA_ y después.
+
+```{r media_MOD}
+media.MOD <- function(x=NA){
+  tamanio.antes <- length(x)
+  
+  x <- x[!is.na(x)]
+  
+  num.quitados <- tamanio.antes - length(x)
+  
+  media <- sum(x) / length(x)
+  
+  return(list("Media" = media, "Tamanio" = tamanio.antes, "Quitados" = num.quitados))
+}
+
+```
+
+Hacemos una pequeña prueba.
+
+```{r PruebaMedia}
+entrada <- c(1,2,3,NA,4,NA)
+
+print(media.MOD(entrada))
+```
+
+\newpage
+# Coeficientes de Pearson
+
+Calculemos ahora los coeficientes de _asimetría_ y _curtosis_ de _Pearson_. Vienen definidos respectivamente por:
+
+$$\gamma_1 = \mu_3 / \sigma^3$$
+
+$$\gamma_2 = \mu_4 / \sigma^4$$
+
+Primero definimos el momento centrado de orden _k_
+
+```{r momentoCentrado}
+momento <- function(x = NA, k = 1) {
+  x <- x[!is.na(x)]
+  return( media((x - media(x)) ^ k) )
+}
+
+```
+
+Ahora definimos dichos coeficientes.
+
+```{r Asimetria}
+coeficientes.asimetria.curtosis <- function(x = NA){
+  mu_3 <- momento(x,3)
+  sigma_2 <- momento(x,2)
+  sigma_3 <- sigma_2 ^ (3/2)
+  
+  mu_4 <- momento(x,4)
+  sigma_4 <- sigma_2 ^ 2
+  
+  asimetria <- mu_3 / sigma_3
+  curtosis <- mu_4 / sigma_4
+  
+  return(list("Asimetria" = asimetria, "Curtosis" = curtosis))
+}
+```
+
+Mostramos una pequeña prueba.
+
+```{r pruebaCoeficientes}
+x <- c(1,2,3,NA,4,NA)
+
+print(coeficientes.asimetria.curtosis(x))
+```
+
