@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Examen Estadísica Computacional</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</head>
+
+<body>
+<h1>Examen Estadística Computacional</h1>
+<h2>Antonio Álvarez Caballero</h2>
+
+<p>Esto es un esqueleto para el examen de Estadística Computacional :)</p>
+
+<h3>Preguntas cortas de teoría</h3>
+
+<p><b>Pregunta</b> ¿Cómo se carga un libro en R?</p>
+<p><b>Respuesta</b> Con las funciones <b>library()</b> o <b>require()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se miran los libros instalados en R?</p>
+<p><b>Respuesta</b> Con la función <b>library()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se miran los libros cargados en R?</p>
+<p><b>Respuesta</b> Con la función <b>search()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se sabe si existe un libro en R?</p>
+<p><b>Respuesta</b> Buscando en CRAN </p>
+
+<h3>Cosillas prácticas</h3>
+
+<!--begin.rcode
+library(ggplot2)
+pairs(cars)
+end.rcode-->
+
+<p>Pintar funciones:</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+data <- data.frame(x = 1:500)
+ggplot(data, aes(x)) +
+  stat_function(fun=sin, n=nrow(data), geom="point")
+plot(x = 1:500, y = sin(1:500))
+end.rcode-->
+
+<p>Pintar funciones de $\mathbb{R}^2$:</p>
+
+<!--begin.rcode fig.width=7, fig.height=6
+f <- function(x,y) {(x-10)^2 + (y-20)^2 - 400}
+
+x <- seq(-50,50,length=1000)
+y <- seq(-50,50,length=1000)
+z <- outer(x,y,f)
+
+contour(x,y,z,levels=0,drawlabels=FALSE, main=expression((x-10)^2 + (y-20)^2 - 400), xlab="", ylab="", xlim=c(-50, 50), ylim=c(-50, 50))
+end.rcode-->
+
+<p> Para medir el tiempo se usa <b>Sys.time</b> o <b>system.time()</b> </p>
+
+<!--begin.rcode
+system.time(replicate(500000, factorial(100)))
+
+end.rcode-->
+
+
+
+</body>
+
+
+</html>

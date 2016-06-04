@@ -1,0 +1,11 @@
+---
+output: pdf_document
+---
+
+* ¿Cómo se carga un libro? 
+  ..* Con library o require
+* ¿Cómo mirar los libros cargados?
+* ¿Existe (en CRAN) el libro x?
+* 
+
+

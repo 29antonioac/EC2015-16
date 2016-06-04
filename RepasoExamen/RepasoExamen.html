@@ -1,0 +1,143 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<title>Examen Estadísica Computacional</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</head>
+
+<body>
+<h1>Examen Estadística Computacional</h1>
+<h2>Antonio Álvarez Caballero</h2>
+
+<p>Esto es un esqueleto para el examen de Estadística Computacional :)</p>
+
+<h3>Preguntas cortas de teoría</h3>
+
+<p><b>Pregunta</b> ¿Cómo se carga un libro en R?</p>
+<p><b>Respuesta</b> Con las funciones <b>library()</b> o <b>require()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se miran los libros instalados en R?</p>
+<p><b>Respuesta</b> Con la función <b>library()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se miran los libros cargados en R?</p>
+<p><b>Respuesta</b> Con la función <b>search()</b></p>
+
+<p><b>Pregunta</b> ¿Cómo se sabe si existe un libro en R?</p>
+<p><b>Respuesta</b> Buscando en CRAN </p>
+
+<h3>Cosillas prácticas</h3>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
+<span class="hl kwd">pairs</span><span class="hl std">(cars)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+
+<p>Pintar funciones:</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">500</span><span class="hl std">)</span>
+<span class="hl kwd">ggplot</span><span class="hl std">(data,</span> <span class="hl kwd">aes</span><span class="hl std">(x))</span> <span class="hl opt">+</span>
+  <span class="hl kwd">stat_function</span><span class="hl std">(</span><span class="hl kwc">fun</span><span class="hl std">=sin,</span> <span class="hl kwc">n</span><span class="hl std">=</span><span class="hl kwd">nrow</span><span class="hl std">(data),</span> <span class="hl kwc">geom</span><span class="hl std">=</span><span class="hl str">&quot;point&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">500</span><span class="hl std">,</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">sin</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">500</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-2-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+
+<p>Pintar funciones de $\mathbb{R}^2$:</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">f</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">) {(x</span><span class="hl opt">-</span><span class="hl num">10</span><span class="hl std">)</span><span class="hl opt">^</span><span class="hl num">2</span> <span class="hl opt">+</span> <span class="hl std">(y</span><span class="hl opt">-</span><span class="hl num">20</span><span class="hl std">)</span><span class="hl opt">^</span><span class="hl num">2</span> <span class="hl opt">-</span> <span class="hl num">400</span><span class="hl std">}</span>
+
+<span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl kwc">length</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">)</span>
+<span class="hl std">y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl kwc">length</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">)</span>
+<span class="hl std">z</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">outer</span><span class="hl std">(x,y,f)</span>
+
+<span class="hl kwd">contour</span><span class="hl std">(x,y,z,</span><span class="hl kwc">levels</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl kwc">drawlabels</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl kwd">expression</span><span class="hl std">((x</span><span class="hl opt">-</span><span class="hl num">10</span><span class="hl std">)</span><span class="hl opt">^</span><span class="hl num">2</span> <span class="hl opt">+</span> <span class="hl std">(y</span><span class="hl opt">-</span><span class="hl num">20</span><span class="hl std">)</span><span class="hl opt">^</span><span class="hl num">2</span> <span class="hl opt">-</span> <span class="hl num">400</span><span class="hl std">),</span> <span class="hl kwc">xlab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwc">ylim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+
+<p> Para medir el tiempo se usa <b>Sys.time</b> o <b>system.time()</b> </p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">system.time</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl num">500000</span><span class="hl std">,</span> <span class="hl kwd">factorial</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">)))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    user  system elapsed 
+##   0.626   0.010   0.634
+</pre></div>
+</div></div>
+
+
+
+</body>
+
+
+</html>
