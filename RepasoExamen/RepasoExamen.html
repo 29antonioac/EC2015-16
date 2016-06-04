@@ -93,6 +93,11 @@ MathJax.Hub.Config({
 <p><b>Pregunta</b> ¿Cómo se miran los libros cargados en R?</p>
 <p><b>Respuesta</b> Con la función <b>search()</b></p>
 
+<p><b>Pregunta</b> ¿Cómo se miran las rutas donde R busca los libros?</p>
+<p><b>Respuesta</b> Con la función <b>searchpaths()</b></p>
+
+Inciso: Hizo hincapié en el solapamiento de funciones entre libros. ¡Asegurarse de que no cargáis un libro con funciones que ya existen! Pag 57 del manual, sección 3.8.
+
 <p><b>Pregunta</b> ¿Cómo se sabe si existe un libro en R?</p>
 <p><b>Respuesta</b> Buscando en CRAN </p>
 
@@ -131,7 +136,7 @@ MathJax.Hub.Config({
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">system.time</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl num">500000</span><span class="hl std">,</span> <span class="hl kwd">factorial</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">)))</span>
 </pre></div>
 <div class="output"><pre class="knitr r">##    user  system elapsed 
-##   0.626   0.010   0.634
+##   0.603   0.003   0.605
 </pre></div>
 </div></div>
 
