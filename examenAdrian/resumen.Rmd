@@ -1,0 +1,118 @@
+---
+title: "Resumen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Cosas a tener en cuenta
+
+- Libro. Biblioteca.
+- Función generic == específica -> distintos tipos de datos.
+- Explicar magnitudes y variables codificadas como:
+```
+  Sexo = c("H","M")
+```
+
+## Cosas básicas
+
+- Asignación: <-, =
+
+### vectores
+
+- 1:10
+- todos mismo tipo
+- empiezan por el índice 1 (no 0)
+- las operaciones entre vectores se hacen componente a componente
+- selección de componentes de un vector: 
+```
+  x[i]
+  x[seq(1,10,by=2)] # subconjunto de índices explícito
+  x[y==2] # subconjunto de índices lógicos
+```
+- cuidado con vector(, 50). mejor vector(mode="numeric", 50)
+
+### matrices
+
+- matrix(1:10, 2, 5)
+- todos mismo tipo
+- empiezan por el índice 1 (no 0)
+- las operaciones entre matrices se hacen componente a componente
+- selección de componentes de una matriz:
+```
+  matriz[i,j] # componente (i,j)
+  matriz[1,] # 1ª fila
+  matriz[,1] # 1ª columna
+```
+- producto matricial: %*%
+
+### listas
+
+- list(A=1:10, B=2)
+- pueden ser distinto tipo
+- nombrar siempre a las variables
+- seleccion de componentes
+```
+  lista$A # elemento con nombre A
+  lista[[1]] # primer elemento
+```
+- usar para devolver datos desde una función
+
+### dataframe
+
+- data.frame(Peso=c(50, 60), Altura=c(1.60, 1.70), Sexo=c("H","M"))
+- pueden ser de distinto tipo
+- nombrar siempre a las variables
+- selección de componentes
+```
+  hoja$Peso
+  hoja[[1]]
+```
+- I() para identificadores como nombres
+
+## Lista funciones
+
+- help()
+- ls()
+- mean()
+- c()
+- vector(mode, length)
+- length()
+- search()
+- matriz(data, nrow, ncol, byrow)
+- t()
+- crossprod()
+- outer()
+- solve()
+- eigen()
+- determinant()
+- list()
+- data.frame()
+- I()
+- is()
+- as()
+- apropos()
+- summary()
+- typeof()
+
+## Otros
+
+Si tenemos una serie de datos, es común crear la matriz utilizando solo el número de columnas (igual al número de características):
+
+```{r}
+Peso <- c(74, 47, 83)
+Altura <- c(1.73, 1.55, 1.79)
+matrix(c(Peso, Altura), ncol=2)
+```
+
+Si queremos escribir rápidamente una matriz dada:
+```
+  3 2
+  1 -1
+```
+```{r}
+matrix(c(3, 2, 1, -1), ncol=2, byrow=T)
+```
+
