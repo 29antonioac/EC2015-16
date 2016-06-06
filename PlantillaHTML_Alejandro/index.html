@@ -216,14 +216,14 @@
                         
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">movimiento</span><span class="hl std">(</span><span class="hl num">10000</span><span class="hl std">,</span> <span class="hl kwc">mostrar</span> <span class="hl std">= T)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## No he terminado de moverme.
+<div class="output"><pre class="knitr r">## He llegado al límite.
 </pre></div>
 </div></div>
 
 
 
 
-                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><code class="knitr inline">FALSE</code>, podemos confirmar que no se ha llegado al borde del cuadrado.</p>
+                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><code class="knitr inline">TRUE</code>, podemos confirmar que sí se ha llegado al borde del cuadrado.</p>
                         <p>Para hacer un gráfico del proceso, simplemente tenemos que recuperar el camino con el elemento <code>Progresion</code> de la lista devuelta por el método y dibujar los puntos de ese vector. Podemos añadir, para la mejor visualización del gráfico, unas líneas que representen el borde del recinto y un par de puntos que representen el punto inicial y el punto final.
                       
 
@@ -255,7 +255,7 @@
                     <div class="solucion">
                         <p>Definimos la función solicitada, en la que usamos <code>replicate</code>, una función de <code>R</code> que permite repetir un proceso tantas veces como se le indique. Como lo que queremos es el número de pasos, lo que haremos será repetir <code>n</code> veces la llamada a <code>movimiento</code>, tomando el resultado que nos interesa: el elemento <code>Pasos</code> de la lista devuelta:</p>
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">repeticion</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl kwc">maxPasos</span> <span class="hl std">=</span> <span class="hl num">10000</span><span class="hl std">){</span>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">repeticion</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl kwc">maxPasos</span> <span class="hl std">=</span> <span class="hl num">Inf</span><span class="hl std">){</span>
   <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(n,</span> <span class="hl kwd">movimiento</span><span class="hl std">(maxPasos)</span><span class="hl opt">$</span><span class="hl std">Pasos))</span>
 <span class="hl std">}</span>
 </pre></div>
@@ -271,13 +271,25 @@
                         </p>
                     </div>
                     <div class="solucion">
-                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento, basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto:</p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">pasos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">repeticion</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">)</span>
-<span class="hl std">media</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(pasos)</span>
+                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto. Además,usaremos la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos el número de repeticiones</span>
+<span class="hl std">num.rep</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100</span>
+
+<span class="hl com"># Tomamos nota del reloj en el instante actual</span>
+<span class="hl std">inicio</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">Sys.time</span><span class="hl std">()</span>
+
+<span class="hl com"># Hacemos las 100 repeticiones solicitadas</span>
+<span class="hl std">pasos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">repeticion</span><span class="hl std">(num.rep)</span>
+
+<span class="hl com"># Tomamos nota del reloj en el instante actual</span>
+<span class="hl std">final</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">Sys.time</span><span class="hl std">()</span>
+
+<span class="hl std">pasos.media</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">mean</span><span class="hl std">(pasos)</span>
+<span class="hl std">tiempo.media</span> <span class="hl kwb">&lt;-</span> <span class="hl std">(final</span> <span class="hl opt">-</span> <span class="hl std">inicio)</span><span class="hl opt">/</span><span class="hl std">num.rep</span>
 </pre></div>
 </div></div>
 
-                        <p>Tenemos así que, de media, se necesitan unos 5009.26 pasos para salir del recinto.
+                        <p>Tenemos así que, de media, se necesitan unos 6109.88 pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, 0.5462421 segundos en calcular la trayectoria del punto hasta que sale del recinto.
                     </div>
                 </div>
             </div>
