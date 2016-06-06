@@ -177,8 +177,11 @@ punto.inicial <- c(0,0)
 punto.final <- t(res$Progresion[nrow(res$Progresion),])
 points(rbind(punto.inicial, punto.final), pch=20, col="blue")
 
-# Añadimos los bordes del recinto cuadrado
-abline(h=c(-100,100), v=c(-100,100), col="coral")
+# # Añadimos los bordes del recinto cuadrado
+# abline(h=c(-100,100), v=c(-100,100), col="coral")
+
+# Añadimos los bordes del recinto cuadrado con polygon
+polygon(c(-100,100,100,-100), c(100,100,-100,-100), border = "coral")
 end.rcode-->
                     </div>
                 </div>
@@ -194,7 +197,7 @@ end.rcode-->
                         <p>Definimos la función solicitada, en la que usamos <code>replicate</code>, una función de <code>R</code> que permite repetir un proceso tantas veces como se le indique. Como lo que queremos es el número de pasos, lo que haremos será repetir <code>n</code> veces la llamada a <code>movimiento</code>, tomando el resultado que nos interesa: el elemento <code>Pasos</code> de la lista devuelta:</p>
 
 <!--begin.rcode
-repeticion <- function(n = 1000, maxPasos = 10000){
+repeticion <- function(n = 1000, maxPasos = Inf){
   return(replicate(n, movimiento(maxPasos)$Pasos))
 }
 end.rcode-->
@@ -209,13 +212,25 @@ end.rcode-->
                         </p>
                     </div>
                     <div class="solucion">
-                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento, basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto:</p>
+                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto. Además,usaremos la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
 <!--begin.rcode
-pasos <- repeticion(100)
-media <- mean(pasos)
+# Definimos el número de repeticiones
+num.rep <- 100
+
+# Tomamos nota del reloj en el instante actual
+inicio <- Sys.time()
+
+# Hacemos las 100 repeticiones solicitadas
+pasos <- repeticion(num.rep)
+
+# Tomamos nota del reloj en el instante actual
+final <- Sys.time()
+
+pasos.media <- mean(pasos)
+tiempo.media <- (final - inicio)/num.rep
 end.rcode-->
 
-                        <p>Tenemos así que, de media, se necesitan unos <!-- rinline I(media) --> pasos para salir del recinto.
+                        <p>Tenemos así que, de media, se necesitan unos <!-- rinline I(pasos.media) --> pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, <!-- rinline I(tiempo.media) --> segundos en calcular la trayectoria del punto hasta que sale del recinto.
                     </div>
                 </div>
             </div>
