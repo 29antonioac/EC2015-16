@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
   Sexo = c("H","M")
 ```
+- Para ver donde apunta una gráfica, verla como una navaja. -> ¿por donde picha más?
+> hist permite saber si es asimétrica y para donde apunta
 
 ## Cosas básicas
 
@@ -88,22 +90,43 @@ knitr::opts_chunk$set(echo = TRUE)
 ### estructuras de control:
 
 - if (condición) acción1 [else acción2]
-
-
-#> Estructura escalar. No usar condiciones que devuelvan más de un valor
+> Estructura escalar. No usar condiciones que devuelvan más de un valor
 > Útil para comparar valores individuales
 
 - ifelse(condición, acción en caso cierto, acción en caso falso)
-<Li> Estructura vectorial. Se ejecuta el cuerpo por cada elemento
-> de la condición.t```
+> Estructura vectorial. Se ejecuta el cuerpo por cada elemento
+> de la condición.
+```
       ifelse(x==0), NA, 1/x)  # x es un vector
 ```
 
 - switch(expresión,[valor-1=]acción-1,....,[valor-n=]acción-n)
-a funciones
+> Si la condición es de carácter, usar as.character(x) para evitar
+> que valores númericos accedan al switch. Se suelde dejar
+> la ultima acción sin condición.
+
+- for (variable in valores) acción
+> Cuidado con los valores del tipo 2:0 = 2 1 0, no vacío!
+
+- while (condición) acción
+- repeat acción
+- next / break
+
+### simular un experimento
+
+```{r, eval=FALSE}
+Distribucion <- function(experimento, repeticiones = 5) {
+  return(replicate(repeticiones, experimento))
+}
+d = Distribucion(foo()$salida_i)
+summary(d)
+hist(d)
+```
+
+## Lista funciones
 
 - help()
-- ls()
+- ls(..., all.names=T/F, ...)
 - mean()
 - c()
 - vector(mode, length)
@@ -119,8 +142,9 @@ a funciones
 - list()
 - data.frame()
 - I()
-- is()
-- as()
+- is(): is.numeric(), is.integer(), is.infinite()
+- any(): anyNA()
+- as(): as.character()
 - apropos()
 - summary()
 - typeof()
@@ -129,8 +153,6 @@ a funciones
 - prod()
 - function()
 - var() 
-- sd()
-
 > var() es un estimador de varianza poblacional (dividido por n-1).
 > Para calcular la varianza muestral (dividido por n) hay tres formas:
 ```
@@ -143,6 +165,7 @@ a funciones
       moment(x, 2, TRUE)
 ```
 
+- sd()
 > Para calcular la desviación típica hay tres formas también:
 ```
       # 1 forma
@@ -161,10 +184,21 @@ a funciones
       # 2 forma
       library(moments)
       moment(x, n, TRUE)
-      
 ```
 
-## Fragmentos reutilizables
+
+- cat()
+- seq()
+- sample(x, size, replace)
+```
+    sample(40, 1000, T) # 1000 numeros entre el 1 y el 40
+```
+
+- .Random.seed
+- Sys.time()
+
+## Fragmento- plot()
+s reutilizables
 
 Si tenemos una serie de datos, es común crear la matriz utilizando solo el número de columnas (igual al número de características):
 
@@ -190,5 +224,38 @@ name <- function(x = NA) {
   # ...
   return(x)
 }
+```
+
+Ejemplo de función recurrente vectorial
+```{r, eval=FALSE}
+name <- function(x, ...) {
+  # estructura a desarollar
+  x=vector(mode="numeric", n)
+  
+  # modificar x con un bucle
+  for (i in 1:n){
+    x[i] = ...
+  }
+  
+  # devolvemos el dato que nos interese
+  return(x[n])
+}
+```
+
+
+Calcular la distancia entre una serie de puntos
+```{r, eval=FALSE}
+distancia.ORIGEN <- function(x,y){
+  return(outer(x, y, function(x,y) sqrt(x^2+y^2)))
+}
+
+```
+
+Medición de tiempos
+```{r, eval=FALSE}
+tiempoinicial=Sys.time()
+# lo que se quiere medir
+tiempofinal=Sys.time()
+cat(tiempofinal - tiempoinicial)
 ```
 
