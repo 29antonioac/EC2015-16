@@ -150,7 +150,7 @@
                         </p>
                     </div>
                     <div class="solucion">
-                        <p>Definimos la función requerida, en la que el lanzamiento de la moneda lo simularemos con la función <code>sample</code>, tomando dos muestras con reemplazamiento del conjunto <code>{1,2}</code>, donde <span class="code">1<span> representa la cara de la moneda y <code>2</code>, la cruz.</p>
+                        <p>Definimos la función requerida, en la que el lanzamiento de la moneda lo simularemos con la función <code>sample</code>, tomando dos muestras con reemplazamiento del conjunto <code>{1,2}</code>, donde <code>1</code> representa la cara de la moneda y <code>2</code>, la cruz.</p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">movimiento</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">maxIter</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mostrar</span> <span class="hl std">= F){</span>
   <span class="hl com"># Definimos la posición inicial</span>
@@ -216,14 +216,14 @@
                         
 <div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">movimiento</span><span class="hl std">(</span><span class="hl num">10000</span><span class="hl std">,</span> <span class="hl kwc">mostrar</span> <span class="hl std">= T)</span>
 </pre></div>
-<div class="output"><pre class="knitr r">## He llegado al límite.
+<div class="output"><pre class="knitr r">## No he terminado de moverme.
 </pre></div>
 </div></div>
 
 
 
 
-                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><code class="knitr inline">TRUE</code>, podemos confirmar que sí se ha llegado al borde del cuadrado.</p>
+                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><code class="knitr inline">FALSE</code>, podemos confirmar que no se ha llegado al borde del cuadrado.</p>
                         <p>Para hacer un gráfico del proceso, simplemente tenemos que recuperar el camino con el elemento <code>Progresion</code> de la lista devuelta por el método y dibujar los puntos de ese vector. Podemos añadir, para la mejor visualización del gráfico, unas líneas que representen el borde del recinto y un par de puntos que representen el punto inicial y el punto final.
                       
 
@@ -277,7 +277,7 @@
 </pre></div>
 </div></div>
 
-                        <p>Tenemos así que, de media, se necesitan unos 5289.48 pasos para salir del recinto.
+                        <p>Tenemos así que, de media, se necesitan unos 5009.26 pasos para salir del recinto.
                     </div>
                 </div>
             </div>
