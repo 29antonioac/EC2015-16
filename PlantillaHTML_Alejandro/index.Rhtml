@@ -177,8 +177,11 @@ punto.inicial <- c(0,0)
 punto.final <- t(res$Progresion[nrow(res$Progresion),])
 points(rbind(punto.inicial, punto.final), pch=20, col="blue")
 
-# Añadimos los bordes del recinto cuadrado
-abline(h=c(-100,100), v=c(-100,100), col="coral")
+# # Añadimos los bordes del recinto cuadrado
+# abline(h=c(-100,100), v=c(-100,100), col="coral")
+
+# Añadimos los bordes del recinto cuadrado con polygon
+polygon(c(-100,100,100,-100), c(100,100,-100,-100), border = "coral")
 end.rcode-->
                     </div>
                 </div>

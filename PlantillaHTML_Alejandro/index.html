@@ -238,8 +238,11 @@
 <span class="hl std">punto.final</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(res</span><span class="hl opt">$</span><span class="hl std">Progresion[</span><span class="hl kwd">nrow</span><span class="hl std">(res</span><span class="hl opt">$</span><span class="hl std">Progresion),])</span>
 <span class="hl kwd">points</span><span class="hl std">(</span><span class="hl kwd">rbind</span><span class="hl std">(punto.inicial, punto.final),</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
 
-<span class="hl com"># Añadimos los bordes del recinto cuadrado</span>
-<span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">v</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
+<span class="hl com"># # Añadimos los bordes del recinto cuadrado</span>
+<span class="hl com"># abline(h=c(-100,100), v=c(-100,100), col=&quot;coral&quot;)</span>
+
+<span class="hl com"># Añadimos los bordes del recinto cuadrado con polygon</span>
+<span class="hl kwd">polygon</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">border</span> <span class="hl std">=</span> <span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
                     </div>
@@ -289,7 +292,7 @@
 </pre></div>
 </div></div>
 
-                        <p>Tenemos así que, de media, se necesitan unos 6109.88 pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, 0.5462421 segundos en calcular la trayectoria del punto hasta que sale del recinto.
+                        <p>Tenemos así que, de media, se necesitan unos 5571.06 pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, 0.4681501 segundos en calcular la trayectoria del punto hasta que sale del recinto.
                     </div>
                 </div>
             </div>
