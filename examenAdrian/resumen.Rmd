@@ -19,6 +19,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Cosas básicas
 
 - Asignación: <-, =
+- Operadores lógicos: !, &&, ||, <, >, <=, >=, ==
+- nombres largos de variables con puntos
 
 ### vectores
 
@@ -72,7 +74,33 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 - I() para identificadores como nombres
 
-## Lista funciones
+### funciones
+
+- function(*args)
+- usar siempre return al final
+- es recomendable sanitizar la entrada:
+```
+  if(is.numeric(x) && !anyNA(x) && !any(is.infinite(x))){
+    ...
+  }
+```
+
+### estructuras de control:
+
+- if (condición) acción1 [else acción2]
+
+
+#> Estructura escalar. No usar condiciones que devuelvan más de un valor
+> Útil para comparar valores individuales
+
+- ifelse(condición, acción en caso cierto, acción en caso falso)
+<Li> Estructura vectorial. Se ejecuta el cuerpo por cada elemento
+> de la condición.t```
+      ifelse(x==0), NA, 1/x)  # x es un vector
+```
+
+- switch(expresión,[valor-1=]acción-1,....,[valor-n=]acción-n)
+a funciones
 
 - help()
 - ls()
@@ -96,12 +124,51 @@ knitr::opts_chunk$set(echo = TRUE)
 - apropos()
 - summary()
 - typeof()
+- sin()
+- sum()
+- prod()
+- function()
+- var() 
+- sd()
 
-## Otros
+> var() es un estimador de varianza poblacional (dividido por n-1).
+> Para calcular la varianza muestral (dividido por n) hay tres formas:
+```
+      # 1 forma
+      mean((x-mean(x))^2) 
+      # 2 forma
+      ((n-1)/n)*var(x)
+      # 3 forma
+      library(moments)
+      moment(x, 2, TRUE)
+```
+
+> Para calcular la desviación típica hay tres formas también:
+```
+      # 1 forma
+      sqrt( mean((x-mean(x))^2) )
+      # 2 forma
+      ((n-1)/n)*sd(x)
+      # 3 forma
+      library(moments)
+      sqrt(moment(x, 2, TRUE))
+```
+
+> Para calcular los momentos centrales de orden n hay dos formas:
+```
+      # 1  forma
+      mean((x-mean(x))^n)
+      # 2 forma
+      library(moments)
+      moment(x, n, TRUE)
+      
+```
+
+## Fragmentos reutilizables
 
 Si tenemos una serie de datos, es común crear la matriz utilizando solo el número de columnas (igual al número de características):
 
-```{r}
+```{r, eval=FALSE}
 Peso <- c(74, 47, 83)
 Altura <- c(1.73, 1.55, 1.79)
 matrix(c(Peso, Altura), ncol=2)
@@ -112,7 +179,16 @@ Si queremos escribir rápidamente una matriz dada:
   3 2
   1 -1
 ```
-```{r}
+```{r, eval=FALSE}
 matrix(c(3, 2, 1, -1), ncol=2, byrow=T)
+```
+
+Ejemplo de función
+```{r, eval=FALSE}
+name <- function(x = NA) {
+  x=x[!is.na(x)]
+  # ...
+  return(x)
+}
 ```
 
