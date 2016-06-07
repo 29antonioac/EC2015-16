@@ -104,7 +104,20 @@ Inciso: Hizo hincapié en el solapamiento de funciones entre libros. ¡Asegurars
 <h3>Cosillas prácticas</h3>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>
-<span class="hl kwd">pairs</span><span class="hl std">(cars)</span>
+<span class="hl kwd">library</span><span class="hl std">(plotly)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'plotly'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:graphics':
+## 
+##     layout
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">pairs</span><span class="hl std">(cars)</span>
 </pre></div>
 </div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
 
@@ -135,13 +148,102 @@ Inciso: Hizo hincapié en el solapamiento de funciones entre libros. ¡Asegurars
 
 <div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">system.time</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl num">500000</span><span class="hl std">,</span> <span class="hl kwd">factorial</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">)))</span>
 </pre></div>
-<div class="output"><pre class="knitr r">##    user  system elapsed
-
-##   0.600   0.003   0.606
-
+<div class="output"><pre class="knitr r">##    user  system elapsed 
+##   0.930   0.007   0.937
 </pre></div>
 </div></div>
 
+Para el polígono con ggplot
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">data.poly</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">))</span>
+<span class="hl std">data.random</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">))</span>
+<span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span> <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= data.random,</span> <span class="hl kwd">aes</span><span class="hl std">(x,y),</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span> <span class="hl opt">+</span>  <span class="hl kwd">geom_polygon</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= data.poly,</span> <span class="hl kwd">aes</span><span class="hl std">(x,y),</span><span class="hl kwc">colour</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl num">NA</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+
+
+<h2> Ejercicio del dado </h2>
+
+<h3> Escribe una función, <b>Dado(n=100)</b>, que simule el lanzamiento de un dado en n ocasiones y devuelva un vector con los resultados.</h3>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">Dado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl std">dado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">6</span><span class="hl std">, n,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+  <span class="hl kwd">return</span><span class="hl std">(dado)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La prueba:
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 2 2 2 6 6 6 6 4 6 3 1 2
+</pre></div>
+</div></div>
+
+<h3> CuatroDados(n=100) que simule el lanzamiento de cuatro dados en n ocasiones y devolver una lista con los resultados.</h3>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl std">cuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">do.call</span><span class="hl std">(cbind,</span> <span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">= n,</span> <span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">),</span> <span class="hl kwc">simplify</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
+  <span class="hl kwd">return</span><span class="hl std">(cuatroDados)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La prueba
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+## [1,]    1    6    5    6    5    1    6    4    4     3     5     5
+## [2,]    2    3    6    3    3    2    4    6    5     2     4     3
+## [3,]    1    6    2    2    4    3    3    2    5     3     6     2
+## [4,]    3    5    3    2    1    5    6    5    6     4     4     1
+</pre></div>
+</div></div>
+
+
+<h3> SumaDeCuatroDados(n=100) </h3>
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">SumaDeCuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span><span class="hl std">=</span><span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl std">dados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">CuatroDados</span><span class="hl std">(n)</span>
+  <span class="hl std">suma</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">apply</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= dados,</span> <span class="hl kwc">MARGIN</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">, sum)</span>
+  <span class="hl kwd">return</span><span class="hl std">(suma)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La prueba:
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 17 11 14 19 11 16 15 14 13  9 13 12
+</pre></div>
+</div></div>
+
+<h3> P[sum < 12] </h3>
+
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sumas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">5000</span><span class="hl std">)</span>
+<span class="hl kwd">mean</span><span class="hl std">(sumas</span> <span class="hl opt">&lt;</span> <span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2368
+</pre></div>
+</div></div>
+
+<h3> Lo mismo pero para cualquier x </h3>
+
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ProbabilidadSumaDeCuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5000</span><span class="hl std">) {</span>
+  <span class="hl std">sumas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(n)</span>
+  <span class="hl kwd">mean</span><span class="hl std">(sumas</span> <span class="hl opt">&lt;</span> <span class="hl std">x)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ProbabilidadSumaDeCuatroDados</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5000</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2256
+</pre></div>
+</div></div>
 
 
 </body>

@@ -43,6 +43,7 @@ Inciso: Hizo hincapié en el solapamiento de funciones entre libros. ¡Asegurars
 
 <!--begin.rcode
 library(ggplot2)
+library(plotly)
 pairs(cars)
 end.rcode-->
 
@@ -74,6 +75,83 @@ system.time(replicate(500000, factorial(100)))
 
 end.rcode-->
 
+Para el polígono con ggplot
+
+<!--begin.rcode
+data.poly <- data.frame(x = c(-100,-100,100,100), y = c(-100,100,100,-100))
+data.random <- data.frame(x = runif(100,-100,100), y = runif(100,-100,100))
+ggplot() + geom_line(data = data.random, aes(x,y), colour = "blue") +  geom_polygon(data = data.poly, aes(x,y),colour="black",fill=NA)
+end.rcode-->
+
+
+<h2> Ejercicio del dado </h2>
+
+<h3> Escribe una función, <b>Dado(n=100)</b>, que simule el lanzamiento de un dado en n ocasiones y devuelva un vector con los resultados.</h3>
+
+<!--begin.rcode
+Dado <- function(n = 100) {
+  dado <- sample(1:6, n, replace = TRUE)
+  return(dado)
+}
+end.rcode-->
+
+La prueba:
+
+<!--begin.rcode
+Dado(12)
+end.rcode-->
+
+<h3> CuatroDados(n=100) que simule el lanzamiento de cuatro dados en n ocasiones y devolver una lista con los resultados.</h3>
+
+<!--begin.rcode
+CuatroDados <- function(n = 100) {
+  cuatroDados <- do.call(cbind, replicate(n = n, Dado(4), simplify = FALSE))
+  return(cuatroDados)
+}
+end.rcode-->
+
+La prueba
+
+<!--begin.rcode
+CuatroDados(12)
+end.rcode-->
+
+
+<h3> SumaDeCuatroDados(n=100) </h3>
+
+<!--begin.rcode
+SumaDeCuatroDados <- function(n=100) {
+  dados <- CuatroDados(n)
+  suma <- apply(X = dados, MARGIN = 2, sum)
+  return(suma)
+}
+end.rcode-->
+
+La prueba:
+
+<!--begin.rcode
+SumaDeCuatroDados(12)
+end.rcode-->
+
+<h3> P[sum < 12] </h3>
+
+<!--begin.rcode
+sumas <- SumaDeCuatroDados(5000)
+mean(sumas < 12)
+end.rcode-->
+
+<h3> Lo mismo pero para cualquier x </h3>
+
+<!--begin.rcode
+ProbabilidadSumaDeCuatroDados <- function(x = 12, n = 5000) {
+  sumas <- SumaDeCuatroDados(n)
+  mean(sumas < x)
+}
+end.rcode-->
+
+<!--begin.rcode
+ProbabilidadSumaDeCuatroDados(x = 12, n = 5000)
+end.rcode-->
 
 
 </body>
