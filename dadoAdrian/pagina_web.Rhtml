@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional</title>
+<link type="text/css" rel="stylesheet" href="miEstilo.css"/>
+</head>
+
+<body>
+
+<center>
+  <h1>Examen Estadística Computacional</h1>
+  <h3>Adrián Ranea Robles</h3>
+</center>
+
+<h2>Ejercicio 1</h2>
+
+<p>Blablabla</p>
+
+<!--begin.rcode
+Dado <- function(n = 100) {
+  return(sample(6, n, T))
+}
+Dado(10)
+end.rcode-->
+
+<h2>Ejercicio 2</h2>
+
+<p>Blobloblo</p>
+
+<!--begin.rcode
+CuatroDados <- function(n = 100) {
+  return(replicate(4, Dado(n), simplify=FALSE))
+  # return(list(dado1=Dado(n),dado2=Dado(n),dado3=Dado(n),dado4=Dado(n)))
+}
+CuatroDados(10)
+end.rcode-->
+
+<h2>Ejercicio 3</h2>
+
+<p>Blobloblo</p>
+
+<!--begin.rcode
+SumaDeCuatroDados <- function(n = 100) {
+  tiradas.CuatroDados = CuatroDados(n)
+  
+  #resultado = sapply(1:n, sum)
+  resultado = vector(mode="numeric", n)
+  for (i in 1:n) {
+    resultado[i] = tiradas.CuatroDados[[1]][i] + tiradas.CuatroDados[[2]][i] + tiradas.CuatroDados[[3]][i] + tiradas.CuatroDados[[4]][i]
+  }
+  
+  return(resultado)
+}
+SumaDeCuatroDados(100)
+end.rcode-->
+
+
+<h2>Ejercicio 4</h2>
+
+<p>Blobloblo</p>
+
+<!--begin.rcode
+sumas = SumaDeCuatroDados(50000)
+length(sumas[sumas < 12])/length(sumas)
+end.rcode-->
+
+
+<h2>Ejercicio 5</h2>
+
+<p>Blobloblo</p>
+
+<!--begin.rcode
+ProbabilidadSumaDeCuatroDados <- function(x=12, n=5000) {
+  sumas = SumaDeCuatroDados(n)
+  return(length(sumas[sumas < x])/length(sumas))
+}
+ProbabilidadSumaDeCuatroDados(13, 100)
+end.rcode-->
+
+
+</body>
+</html>
