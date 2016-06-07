@@ -226,8 +226,15 @@ pasos <- repeticion(num.rep)
 # Tomamos nota del reloj en el instante actual
 final <- Sys.time()
 
+# Calculamos el tiempo total
+tiempo.total <- final - inicio
+
+# Nos aseguramos de que estamos trabajando con segundos
+units(tiempo.total) <- "secs"
+
+# Calculamos medias de pasos y de tiempos
 pasos.media <- mean(pasos)
-tiempo.media <- (final - inicio)/num.rep
+tiempo.media <- (tiempo.total)/num.rep
 end.rcode-->
 
                         <p>Tenemos así que, de media, se necesitan unos <!-- rinline I(pasos.media) --> pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, <!-- rinline I(tiempo.media) --> segundos en calcular la trayectoria del punto hasta que sale del recinto.
