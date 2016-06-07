@@ -9,13 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Cosas a tener en cuenta
 
-- Libro. Biblioteca.
-- Función generic == específica -> distintos tipos de datos.
+- Cuidado con las traducciones de libro, biblioteca y generic (específica, != tipos datos)
 - Explicar magnitudes y variables codificadas como:
 ```
   Sexo = c("H","M")
 ```
 - Para ver donde apunta una gráfica, verla como una navaja. -> ¿por donde picha más?
+
 > hist permite saber si es asimétrica y para donde apunta
 
 ## Cosas básicas
@@ -90,22 +90,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ### estructuras de control:
 
 - if (condición) acción1 [else acción2]
+
 > Estructura escalar. No usar condiciones que devuelvan más de un valor
+
 > Útil para comparar valores individuales
 
 - ifelse(condición, acción en caso cierto, acción en caso falso)
+
 > Estructura vectorial. Se ejecuta el cuerpo por cada elemento
+
 > de la condición.
 ```
-      ifelse(x==0), NA, 1/x)  # x es un vector
+      ifelse(x==0, NA, 1/x)  # x es un vector
 ```
 
 - switch(expresión,[valor-1=]acción-1,....,[valor-n=]acción-n)
+
 > Si la condición es de carácter, usar as.character(x) para evitar
+
 > que valores númericos accedan al switch. Se suelde dejar
+
 > la ultima acción sin condición.
 
 - for (variable in valores) acción
+
 > Cuidado con los valores del tipo 2:0 = 2 1 0, no vacío!
 
 - while (condición) acción
@@ -115,13 +123,42 @@ knitr::opts_chunk$set(echo = TRUE)
 ### simular un experimento
 
 ```{r, eval=FALSE}
-Distribucion <- function(experimento, repeticiones = 5) {
-  return(replicate(repeticiones, experimento))
+DistriFoo <- function(n = 5, var.input) {
+  return(replicate(n, foo(var.input)$var.output)
 }
-d = Distribucion(foo()$salida_i)
+d = DistriFoo(1000, var1)
 summary(d)
 hist(d)
+
+# Ejemplo profesor
+DistriAses = function(n = 5,Maximo=1000){
+  Saco = vector(mode="numeric", length=n)
+  for(i in 1:n) Saco[i] = CuatroAses(F,Maximo)$E
+  Saco
+}
 ```
+
+### gráficos
+
+- plot(x, y, type, 
+  col="steelblue"
+  xlim=c(_,_), ylim=c(_,_),
+  xlab="", ylab="", main=""
+)
+
+> Las coordenadas pueden expresarse mediante dos vectores, una matriz de dos columnas, una lista con dos componentes llamados x e y
+
+Las siguientes funciones pintan elementos sobre un gráfico existente:
+
+- polygon(x, y, border="")
+- lines(x, y, type="l")
+- points(x, y, type="p")
+
+Para expresar las coordenadas es cómodo usar:
+```
+matrix(c(_, _, _, _, ...), ncol=2, byrow=T)
+```
+
 
 ## Lista funciones
 
@@ -153,7 +190,9 @@ hist(d)
 - prod()
 - function()
 - var() 
+
 > var() es un estimador de varianza poblacional (dividido por n-1).
+
 > Para calcular la varianza muestral (dividido por n) hay tres formas:
 ```
       # 1 forma
@@ -166,6 +205,7 @@ hist(d)
 ```
 
 - sd()
+
 > Para calcular la desviación típica hay tres formas también:
 ```
       # 1 forma
@@ -196,9 +236,18 @@ hist(d)
 
 - .Random.seed
 - Sys.time()
+- plot()
+- search()
+- searchpaths()
+- read.csv()
+- library(help)
+- polygon()
+- lines()
+- points()
+- runif()
 
-## Fragmento- plot()
-s reutilizables
+
+## Fragmentos reutilizables
 
 Si tenemos una serie de datos, es común crear la matriz utilizando solo el número de columnas (igual al número de características):
 
