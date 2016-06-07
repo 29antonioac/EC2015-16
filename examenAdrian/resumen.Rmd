@@ -101,7 +101,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 > de la condición.
 ```
-      ifelse(x==0), NA, 1/x)  # x es un vector
+      ifelse(x==0, NA, 1/x)  # x es un vector
 ```
 
 - switch(expresión,[valor-1=]acción-1,....,[valor-n=]acción-n)
@@ -123,12 +123,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ### simular un experimento
 
 ```{r, eval=FALSE}
-Distribucion <- function(experimento, repeticiones = 5) {
-  return(replicate(repeticiones, experimento))
+DistriFoo <- function(n = 5, var.input) {
+  return(replicate(n, foo(var.input)$var.output)
 }
-d = Distribucion(foo()$salida_i)
+d = DistriFoo(1000, var1)
 summary(d)
 hist(d)
+
+# Ejemplo profesor
+DistriAses = function(n = 5,Maximo=1000){
+  Saco = vector(mode="numeric", length=n)
+  for(i in 1:n) Saco[i] = CuatroAses(F,Maximo)$E
+  Saco
+}
 ```
 
 ### gráficos
