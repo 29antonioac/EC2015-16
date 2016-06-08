@@ -1,0 +1,33 @@
+---
+title: "UltimaClase"
+author: "Antonio Álvarez Caballero"
+date: "3 de junio de 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Última clase
+
+Leemos
+
+```{r}
+datos <- read.csv("Datos.txt")
+```
+
+Separamos en hombres y mujeres
+
+```{r}
+altura.mujeres <- datos$Altura[datos$Sexo == "Mujer"]
+altura.hombres <- datos$Altura[datos$Sexo != "Mujer"]
+```
+
+Hacemos el test
+
+```{r}
+t.test(altura.mujeres,altura.hombres)
+```
+
+

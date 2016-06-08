@@ -1,0 +1,11 @@
+Peso,Altura,Edad,Sexo
+85,170,22,Hombre
+63,162,22,Mujer
+48,156,21,Mujer
+60,161,23,Mujer
+65,167,22,Hombre
+70,178,22,Hombre
+45,155,23,Mujer
+62,167,32,Mujer
+80,180,21,Hombre
+52,164,21,Mujer
