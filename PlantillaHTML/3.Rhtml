@@ -27,12 +27,13 @@
 
         <header>
             <div id="nombre">
-                <h1>Estadística Computacional</h1>
+                <h1>Alejandro</h1>
+                <h2>García Montoro</h2>
             </div>
         </header>
 
         <div id="examen">
-            Soluciones al tercer ejercicio
+            Soluciones al tercer ejercicio del examen final de la asignatura Estadística Computacional
         </div>
 
         <div id="datos">
@@ -40,10 +41,6 @@
 
             <div id="datos_contenido">
                 <dl>
-                    <dt>Nombre</dt>
-                        <dd>Alejandro.</dd>
-                    <dt>Apellidos</dt>
-                        <dd>García Montoro.</dd>
                     <dt>DNI</dt>
                         <dd>76628233F</dd>
                     <dt>Grupo</dt>
@@ -60,63 +57,113 @@
                     <div class="enunciado">
                         <p class="cabecera">Enunciado:</p>
                         
-                        <p>El archivo <code>http://www.ugr.es/local/andresgc/ec/Datos.txt</code> contiene unos datos. Léelos en una hoja de datos. Haz un resumen estadístico de los mismos. Haz sendos resúmenes estadísticos de los hombres y de las mujeres. Suponiendo que la muestra está tomada al azar de una población donde se pensaba que el peso medio de los hombres y el de las mujeres era el mismo y que se desea contrastar si ha cambiado esta suposición, utiliza la función t.test para realizarlo.</p>
+                        <p>En este ejercicio se va a simular la clasificación de una serie de datos en el plano a partir de una recta, generando todos los datos del problema de forma aleatoria. El enunciado está basado en un ejercicio visto en la asignatura Aprendizaje Automático, correspondiente al grado en ingeniería informática.</p>
+                        <p>Considérese un cuadrado de lado 100 centrado en el origen. Se pide generar una muestra aleatoria de 50 puntos uniformemente distribuida sobre el cuadrado.</p>
+                        <p>Además, se pide generar una recta de forma aleatoria que corte al cuadrado.</p>
+                        <p>Por último, se pide clasificar, a partir de la recta, los puntos de la muestra generada: si se quedan a un lado se les asignará la clase <code>1</code> y, si se quedan al otro, la clase <code>-1</code>
                     </div>
                         
                     <div class="solucion">
-                        <p>Un rápido vistazo al archivo de texto nos permite ver que se trata de un archivo CSV; es decir, en el que los valores de cada campo están separados por comas. Leemos por tanto el archivo de texto con la función <code>read.csv</code>, a la que podemos pasar una URL absoluta y nos devuelve un objeto del tipo <code>data.frame</code></p>
+                        <p>Primero se ha implementado la siguiente función, que genera una lista de <code>N</code> vectores, cada de los cuales contiene una muestra de tamaño <code>dim</code> de una distribución uniforme entre los valores especificados por el vector de dos elementos <code>rango</code>.</p>
 
 <!--begin.rcode
-# Guardamos los datos del archivo de texto en un data.frame
-datos <- read.csv("http://www.ugr.es/~andresgc/ec/Datos.txt")
+# Devuelve una lista de N vectores de dimensión dim con una muestra
+# uniforme en el intervalo [rango[1], rango[2]]
+simula_unif <- function(N, dim, rango){
+    lapply(rep(dim, N), runif, min = rango[1], max = rango[2])
+}
 end.rcode-->
                     
-                        <p>Para hacer un resumen de una forma fácil podemos usar la función <code>summary</code>, cuyo cometido es exactamente el que vamos buscando. Además, para buscar posibles correlaciones entre todos los datos vamos a usar la función <code>pairs</code>, que genera gráficos para cada par de variables. Como luego vamos a tener que generar el mismo tipo de resumen para los hombres y mujeres por separado, vamos a encapsular estas dos órdenes en una función que reciba como parámetro el conjunto de datos a resumir; así aprovechamos código y acotamos los posibles errores de programación:</p>                    
+                        <p>Generamos ahora los datos solicitados, usando la función anterior y tomando como <code>x</code> (resp. <code>y</code>) los primeros (resp. segundos) valores de cada vector generado:</p>                  
 
 <!--begin.rcode
-resumen <- function(dat){
-  # Generamos un resumen automático de los datos
-  resultado <- summary(dat)
-  
-  # Generamos un gráfico para ver posibles correlaciones
-  pairs(dat, pch=20, col="steelblue")
-  
-  return(resultado)
+# Muestra uniforme de 50 puntos en el cuadrado [-50,50] x [-50,50]
+datos_unif <- simula_unif(50, 2, c(-50,50))
+
+# Guardamos las coordenadas en variables diferentes
+unif.x <- unlist(lapply(datos_unif, '[[', 1))
+unif.y <- unlist(lapply(datos_unif, '[[', 2))
+end.rcode-->
+                        
+                        <p>Podemos ver la muestra generada con la función <code>plot</code>:</p>
+
+<!--begin.rcode
+plot(unif.x, unif.y, col = 'red', pch = 20, asp=1,
+     main="Muestra uniforme", xlab="", ylab="")
+
+# Añadimos los bordes del recinto cuadrado con polygon
+polygon(c(-50,50,50,-50), c(50,50,-50,-50), border = "coral")
+end.rcode-->
+
+                        <p>Para la generación de una recta aleatoria se ha implementado la siguiente función:</p>
+
+<!--begin.rcode
+# Genera los parámetros (a,b) de una recta aleatoria y = a*x + b que corta
+# al cuadrado [intervalo[1], intervalo[2]] x [intervalo[1], intervalo[2]]
+simula_recta <- function(intervalo){
+    # Simulamos dos puntos dentro del cuadrado intervalo x intervalo
+    punto1 <- runif(2, min=intervalo[1], max=intervalo[2])
+    punto2 <- runif(2, min=intervalo[1], max=intervalo[2])
+    
+    # Generamos los parámetros que definen la recta
+    a <- (punto2[2] - punto1[2]) / (punto2[1] - punto1[1])
+    b <- -a * punto1[1] + punto1[2]
+    
+    # Devolvemos un vector concatenando ambos parámetros
+    c(a,b)
 }
 end.rcode-->
 
-<p>Hacemos ya el resumen conjunto pasándole a la función anteriormente definida el objeto <code>datos</code>:
+<p>Vamos a crear ahora una estructura abstracta que genera funciones etiquetadoras. Para ello definimos <code>generador_etiquetados</code>, una función que al ser llamada con otra función <code>f</code> como parámetro devuelve una función etiquetadora; es decir, una función que devuelve 1 o -1 según el signo que toma la función <code>f</code> al recibir los parámetros <code>x</code> e <code>y</code>:
 
 <!--begin.rcode
-resumen(datos)
+# Devuelve una función etiquetadora basada en el signo que
+# toma el parámetro f
+generador_etiquetados <- function(f){
+    function(x,y){
+        sign(f(x,y))
+    }
+}
 end.rcode-->
 
-                        <p>Para hacer los resúmenes separados de hombres y mujeres primero tenemos que separar unos datos de otros. Para ello vamos a tomar todas las filas del <code>data.frame</code> cuya columna <code>Sexo</code> sea de un único tipo, generando así un vector de tipo lógico que usaremos para elegir las filas deseadas:</p>
-                        
-<!--begin.rcode
-# Guardamos los datos correspondientes a hombres y 
-# los de las mujeres por separado
-datos.hombres <- datos[datos$Sexo == "Hombre", ]
-datos.mujeres <- datos[datos$Sexo == "Mujer", ]
-end.rcode-->
+<p>Resolver el ejercicio con la estructura anterior es ahora más sencillo: simplemente tenemos que definir la función <code>f(x,y) = y - ax - b</code>, donde <code>a</code> y <code>b</code> son los parámetros que definen la recta <code>y = ax + b</code>.</p>
 
-                        <p>Además, como ahora la última columna es siempre igual, podemos eliminarla para que en los resúmenes no se tenga en cuenta esta variable, que no dará información nueva al ser constante en cada subconjunto:</p>
-                        
-<!--begin.rcode
-# Eliminamos la última columna, que contiene valores constantes
-datos.hombres <- datos.hombres[, -ncol(datos.hombres)]
-datos.mujeres <- datos.mujeres[, -ncol(datos.mujeres)]
-end.rcode-->
-
-                        <p>Podemos reutilizar la función <code>resumen</code> para generar resúmenes de sendos subconjuntos y comprobar que todo lo hecho hasta ahora es correcto:</p>
+<p>Por tanto, basta simular una recta haciendo uso de la función implementada anteriormente y definir la función <code>f_1</code>, que será la que pasaremos al generador de funciones etiquetadoras:</p>
 
 <!--begin.rcode
-# Generamos el resumen para los hombres
-resumen(datos.hombres)
+# Generamos recta aleatoria
+recta <- simula_recta(c(-50,50))
 
-# Generamos el resumen para las mujeres
-resumen(datos.mujeres)
+# Definimos la función cuyo signo etiquetará los datos
+f1 <- function(x,y){
+    y - recta[1]*x - recta[2]
+}
+
+# Generamos función etiquetadora
+etiquetado1 <- generador_etiquetados(f1)
+
+# Encapsulamos los datos y las etiquetas en un data frame
+datos <- data.frame(X = unif.x, Y = unif.y,
+                    Etiqueta = etiquetado1(unif.x, unif.y))
 end.rcode-->
+
+<p>Por último, generamos la gráfica con <code>plot</code>, asignando un color diferente según el etiquetado, y añadiendo la gráfica de la recta simulada:</p>
+
+<!--begin.rcode
+# Definimos un vector de colores basado en las etiqueta
+colores <- ifelse(datos$Etiqueta == 1, "green", "red")
+
+# Generamos la gráfica
+plot(datos$X, datos$Y, asp = 1, col = colores, pch = 20,
+     main="Muestra uniforme etiquetada", xlab="", ylab="")
+
+# Añadimos los bordes del recinto cuadrado con polygon
+polygon(c(-50,50,50,-50), c(50,50,-50,-50), border = "coral")
+
+# Dibujamos la recta clasificadora
+abline(rev(recta))
+end.rcode-->
+
                     </div>
                 </div>
             </div>

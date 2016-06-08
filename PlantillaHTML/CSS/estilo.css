@@ -93,12 +93,10 @@ header {
 }
 
 header h1{
-    font-size: 60px;
-    padding-bottom: 0px; /* Espacio con respecto a la raya y el subtítulo */
+    font-size: 90px;
+    padding-bottom: 15px; /* Espacio con respecto a la raya y el subtítulo */
     font-variant: small-caps;
     text-align: center;
-    width: 650px;
-    line-height: 0.65em;
 }
 
 header h2{
@@ -106,8 +104,7 @@ header h2{
     color: black;
     border-top: 1px solid #ccc;
     padding-left: 14px;
-    text-align: center;
-    font-variant: small-caps;
+    letter-spacing: 18px;
 }
 
 /***************************************************
