@@ -37,26 +37,6 @@ a:hover {
     transition: color 500ms, border-color 0.8s;
 }
 
-ul, ol, ul ul, ol ul, ol ol, ul ol { 
-   list-style-type: disc; 
-   list-style-position: inside; 
-   margin-left: 30px;
-   margin-top: 10px;
-   margin-bottom:10px;
-}
-
-ol { 
-   list-style-type: decimal;
-}
-
-ul ul, ol ul { 
-   list-style-type: circle; 
-}
-
-ol ol, ul ol { 
-   list-style-type: lower-latin;
-}
-
 /***************************************************
  ********************        ***********************
  ******************** HEADER ***********************
@@ -97,7 +77,7 @@ header h1{
     padding-bottom: 0px; /* Espacio con respecto a la raya y el subtítulo */
     font-variant: small-caps;
     text-align: center;
-    width: 650px;
+    width: 700px;
     line-height: 0.65em;
 }
 
@@ -167,7 +147,7 @@ dt:after {
 }
 
 dd {
-    margin: 0 0 0 90px;
+    margin: 0 0 0 80px;
     padding: 0 0 10px 0;
 }
 

@@ -1,0 +1,61 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[ansinew]{inputenc} 
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+\section{knitr con \LaTeX}
+
+
+\subsection{Ejemplo  de uso}
+
+
+  
+Genero 200 números de la $N(0, 1)$ y los almaceno en el objeto $x$. 
+
+<<>>=
+    ## Esta línea es un comentario que no afecta al resultado final
+    x=rnorm(200)
+@
+
+Para que no aparezcan las órdenes que producen un resultado, 
+uso la metaorden \code{echo=FALSE}. 
+En el siguiente bloque  presento los primeros diez valores 
+anteriormente generados sin mostrar la orden que los genera.
+
+<<echo=FALSE>>=	
+	x[1:10]
+@
+
+Genero 200 números de la $U(0, 1)$ y los almaceno en el objeto $y$. 
+
+<<>>=
+    ## Esta línea es un comentario que no afecta al resultado final
+    y=runif(200)
+@
+
+
+Este es el histograma de $x$ (centrado mediante la opción
+   \code{fig.align='center'} y de tamaño 4x4 mediante las opciones \code{fig.width=4, fig.height=4}):
+
+<< fig.align='center', fig.width=4, fig.height=4>>=
+	## @knitr histograma
+    hist(x)
+@
+	
+Atención: Si en el directorio {\em figure} existe un archivo con el mismo nombre que el que se genera (aunque con otra extensión) puede dar problemas. Utilice un directorio vacío.
+
+Este es el histograma de $y$ (opciones de tamaño doble):
+
+<< fig.align='center', fig.width=8, fig.height=8>>=
+    hist(y)
+@
+	
+
+Puedo escribir resultados en la propia línea con la orden \code{Sexpr{}}, 
+como por ejemplo la media de $x$ es  \Sexpr{mean(x)} y la de de $y$ es  \Sexpr{mean(y)}.
+
+Nota: Al finalizar compilo el archivo \LaTeX { } (extensión .tex) con la opción de paso directo a PDF. Evidentemente he instalado previamente un compilador de LaTeX, como, por ejemplo, MikTeX.
+\end{document}

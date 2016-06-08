@@ -1,0 +1,1807 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="MiEstilo.css">
+	
+	<title>
+		Construcción de páginas WEB. HTML.
+	</title>
+		
+	<script type="text/javascript"
+	src=
+	"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+
+</head>
+
+<body>
+
+
+
+	<h1>
+		CONSTRUCCIÓN DE PÁGINAS WEB 
+		<BR>
+		HTML 
+	</h1>
+
+
+	<H3>
+		Andrés González Carmona
+	</H3>
+
+
+
+<hr>
+
+	<h2>
+		CONTENIDOS
+	</h2>
+
+	<ul>
+		<li><a href="#1">Qué es HTML</a></li>	
+		<li><a href="#2">Cómo especificar efectos del texto</a>	  </li>	
+		<li><a href="#3">Estructura básica de un documento HTML</a></li>	
+		<li><a href="#4">Estilos y efectos básicos</a></li>	
+		<ul>
+			<li><a href="#4.1">Títulos</a></li>	
+			<li><a href="#4.2">Atributos del texto</a></li>	
+			<li><a href="#4.3">Listas</a></li>	
+			<li><a href="#4.4">Varios</a></li>	   
+			<li><a href="#4.5">Fórmulas matemáticas</a></li>	   
+		</ul>
+		<li><a href="#5">Enlaces y gráficos</a></li>	
+		<ul>
+			<li><a href="#5.1">Introducción</a></li>	
+			<li><a href="#5.2">Qué es un URL (URI)</a></li>	
+			<li><a href="#5.3">Enlaces</a></li>	
+			<li><a href="#5.4">Gráficos</a></li>	
+		</ul>
+		<li><a href="#6">Caracteres especiales</a></li>	
+		<li><a href="#TABLAS">Tablas</a></li>	
+		<li><a href="#ESTILOS">Hojas de estilo</a></li>	
+		<li><a href="#ref">Referencias</a></li>	
+	</ul>
+	
+
+<hr>
+
+	<h2>
+		<a name="1">QUÉ ES HTML</a>
+	</h2>
+
+
+<p>
+	HTML (<i>HyperText Markup Language</i>) es un lenguaje que permite describir 
+hipertexto, es decir, texto presentado de forma estructurada con <i>enlaces</i> 
+(<i>hyperlinks</i>) que conducen a otros documentos o fuentes de información 
+relacionadas, y con <i>inserciones</i> multimedia (gráficos, sonido, etc.) La 
+descripción se basa en especificar en un texto la estructura lógica del 
+contenido (títulos, párrafos de texto normal, enumeraciones, definiciones, 
+citas, etc.) así como los diferentes efectos que se quieren dar (especificar los 
+lugares del documento donde se debe poner cursiva, negrita, o un gráfico 
+determinado) y dejar que luego la presentación final de dicho hipertexto se 
+realice por un programa especializado (un <EM>browser</EM> o visor, como Mozilla Firefox o 
+Microsoft Internet Explorer). 
+</p>
+
+<p>Es similar, por tanto, al modo en que se utiliza 
+el lenguaje \(\LaTeX\), aunque mucho menos estructurado. Por otra parte, en tanto que \(\LaTeX\) está bastante bien especificado, en el sentido de que no tiene variaciones muy grandes en poco tiempo, HTML está sujeto a grandes cambios, que se producen muy rápidamente, de tal modo que existen incluso peculiaridades definidas por el propio visor o la versión del mismo (por ejemplo, unas especiales para Mozilla Firefox, otras para Microsoft Internet Explorer) y otras en función de nuevas posibilidades (Extensiones para 3D, interactivas, etc.). 
+Los diferentes editores de HTML van incluyendo estas nuevas
+posibilidades, por lo que recomiendo su utilización. Por ejemplo, HTML-Kit, cuya penúltima versión puede conseguirse gratuitamente en
+</p>
+
+<p style="text-align: center">
+<a href="http://www.htmlkit.com/" target="HTML-Kit" title="HTML-Kit">http://www.htmlkit.com/</a>. 
+</p> 
+
+<p>Además, en tanto que un texto en \(\LaTeX\) debe estar correcto completamente, uno en HTML puede no estarlo, sin que el visor avise de dicha condición sino que, por el contrario, intentará presentarlo de la mejor manera posible.
+</p>
+
+<hr>
+
+
+	<h2>
+		<a name="2">CÓMO ESPECIFICAR EFECTOS DEL TEXTO</a>
+	</h2>
+
+<p>
+	La mayoría de los efectos se especifican de la misma forma: Rodeando el texto que se quiere marcar entre dos <i>directivas</i> (<i>tags</i>) que definen el efecto o unidad lógica que se desea. Las directivas están formadas por determinados códigos incluidos entre los signos &lt; y &gt;, y con la barra, <B>/</B>, cuando se trata de la segunda directiva de un efecto 
+(la de cierre).  Por ejemplo: <tt>&lt;efecto&gt;</tt> para abrir y 
+<tt>&lt;/efecto&gt;</tt> para cerrar. 
+
+<!-- Advierta que he usado &lt; para escribir el símbolo de «menor que» ya que si lo hubiese escrito directamente el visor entendería que es comienzo de una directiva -->
+
+
+Ciertas directivas solo se ponen una vez en el lugar del texto donde debe aparecer el efecto concreto. Esto es lo que ocurre, por ejemplo, para poner un gráfico, caso en el que se usa algo parecido a <tt>&lt;poner_gráfico_aquí&gt;</tt> (más adelante indicaré la directiva concreta que se utiliza).
+
+</p> 
+
+<p>
+
+	A veces es necesario o conveniente ofrecer datos adicionales en una directiva. Por ejemplo, cuando se define un <i>hiperenlace</i> hay que especificar su destino. 
+Para ello se incluyen parámetros en la directiva inicial, la de apertura, de la siguiente 
+forma: <tt>&lt;efecto parámetro1 parámetro2 ...&gt;</tt>. La directiva de 
+cierre, caso de ser necesaria, permanece sin modificación: <tt>&lt;/efecto&gt;</tt>.
+</p> 
+
+<p>
+
+	A lo largo de este documento leído con un visor de HTML se muestra el efecto de las directivas 
+más usadas en la creación de un documento HTML. Para cada una de ellas, primero 
+se muestra el texto fuente, y bajo este, el efecto que produce.
+
+</p> 
+
+
+<hr>
+
+	<h2>
+		<a name="3">
+			ESTRUCTURA BÁSICA DE UN DOCUMENTO HTML
+		</a>
+	</h2>
+
+<p> 
+
+Un documento HTML comienza con la directiva <tt>&lt;!DOCTYPE HTML></tt> que indica que es un documento de tipo HTML. Esta directiva no tiene directiva de finalización. A continuación <tt>&lt;html&gt;</tt>, que termina con 
+<tt>&lt;/html&gt;</tt>.  Dentro del documento (entre las directivas de principio 
+y fin de HTML) hay dos zonas bien diferenciadas: el <i>encabezamiento</i>, 
+delimitado por <tt>&lt;head&gt;</tt> y <tt>&lt;/head&gt;</tt>, que sirve para 
+definir diversos parámetros válidos en todo el documento; y el <i>cuerpo</i>, 
+delimitado por <tt>&lt;body&gt;</tt> y <tt>&lt;/body&gt;</tt>, donde reside la 
+información del documento.
+</p> 
+
+<p>
+En la única parte del encabezamiento en que me detendré ahora es en la directiva <tt>&lt;title&gt;</tt>, que permite especificar el título del documento HTML. 
+Este título no forma parte del documento en sí: no aparece, por ejemplo, al 
+principio del documento una vez que este se presenta con un programa adecuado, 
+sino que suele servir como título de la ventana del programa que lo muestra. Por ejemplo, en el encabezamiento de este manual he especificado: 
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;title>
+Construcción de páginas WEB. HTML
+&lt;/title&gt;</pre> 
+		</td>
+	</tr>
+</table>
+
+
+
+utilizando mayúsculas y minúsculas. Observe que el título 
+que encabeza el texto, por el contrario, lo he escrito solamente con mayúsculas, lo que permite distinguirlo del título <i>global</i> del documento.
+</p> 
+<p>
+
+El cuerpo de un documento HTML contiene el texto que, con la
+presentación y los efectos que se decidan, verá el
+<i>hiperlector</i>. Dentro del cuerpo son aplicables todos los efectos
+que se van a mencionar en el resto de este manual. Dichos efectos se
+especifican exclusivamente a través de directivas. Ello quiere decir
+que los espacios, tabulaciones y retornos de carro que se introduzcan
+en el fichero fuente no tienen ningún efecto a la hora de la presentación
+final del documento. Por ejemplo, escribiendo literalmente
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>Estas
+      palabras
+forman          una
+    frase.</pre>
+		</td>
+	</tr>
+</table>
+
+
+
+
+se obtiene exactamente el mismo resultado que con
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>Estas palabras forman una frase.</pre>
+		</td>
+	</tr>
+</table>
+	 
+</p> 
+
+<p> 
+A la hora de la verdad, lo que se ve es
+</p> 
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+Estas 
+         palabras 
+forman                una 
+frase.		</td>
+	</tr>
+</table>
+
+<p>
+En resumen, la estructura básica de un documento HTML tiene la forma
+siguiente:
+</p> 
+
+<pre>
+&lt;html&gt;
+	&lt;head>
+		&lt;title>Título&lt;/title>
+	&lt;/head>
+	&lt;body>
+		Texto del documento, menciones a gráficos, enlaces, etc.
+	&lt;/body>
+&lt;/html>
+</pre>
+<hr>
+
+
+<h2><a name="4">ESTILOS Y EFECTOS BÁSICOS</a></h2>
+
+<p> 
+Como ya he dicho, la estructura lógica del texto y los diferentes efectos se 
+especifican mediante <i>directivas</i>. A continuación incluyo algunas de las más utilizadas. En cada uno de los casos primero presento el texto 
+original HTML, es decir, lo que he escrito con el editor de textos, con las directivas situadas en los lugares adecuados; y después presento el efecto que dicho <i>texto fuente</i> produce una vez que se interpreta y se representa con el programa adecuado.
+</p> 
+
+<hr>
+
+<h3><a name="4.1">TÍTULOS</a></h3>
+
+<p> 
+
+Los títulos marcan la estructura del documento. Existen títulos de varios 
+niveles de importancia, y juegan un papel semejante a las órdenes <i>section, 
+subsection</i>,... en \(\LaTeX\). Se especifican con la directiva <b>h</b> (inicial de <i>header</i>, cabecera) seguida de un número de 1 a 6, que marca la importancia (tamaño) del título. En este manual he usado los niveles 2 y 3 para señalar las diferentes partes del documento.
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;h1>Mucha importancia&lt;/h1></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<h1>Mucha importancia</h1>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<pre>&lt;h2>Menos importancia&lt;/h2></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<h2>Menos importancia</h2>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<pre>&lt;h3>Mucha menos importancia&lt;/h3></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<h3>Mucha menos importancia</h3>
+		</td>
+	</tr>
+</table>
+</p> 
+<hr>
+
+<h3><a name="4.2">ATRIBUTOS DEL TEXTO</a></h3>
+
+<p> 
+	Mediante los atributos se determina el estilo y el tipo de letra que tendrá la presentación del documento final.
+</p> 
+
+<p> 
+
+En primer lugar hay que tener en cuenta que, como ya he dicho antes, al 
+presentar el documento se hace caso omiso de los espacios, tabulaciones y 
+retornos de carro que se encuentren en el texto fuente. Por ello cuando se 
+quiere forzar un final de línea es necesario utilizar una de las dos directivas siguientes: 		   
+<ul>
+<li> 
+	<tt>&lt;p> &lt;/p></tt> para marcar un párrafo 
+</li>	
+<li>
+<tt>&lt;br></tt> para marcar un 
+retorno de carro (El retorno de carro no tiene directiva de finalización.)
+</li>	
+</ul>
+La separación de líneas que 
+provoca <tt>&lt;p></tt> es algo mayor que la de <tt>&lt;br></tt>. Por ejemplo: 
+</p> 
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;p>
+Este será un texto normal (párrafo 1, línea 1).&lt;br>
+El primer párrafo estará formado por 2 líneas (párrafo 1,
+línea 2).
+&lt;/p>
+&lt;p>
+Este ya es el segundo párrafo (párrafo 2, línea 1).
+&lt;/p>
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<p>
+Este será un texto normal (párrafo 1, línea 1).<br>
+El primer párrafo estará formado por 2 líneas (párrafo 1,
+línea 2).
+</p>
+<p>
+Este ya es el segundo párrafo (párrafo 2, línea 1).
+</p>
+		</td>
+	</tr>
+</table>
+
+<p>
+	El primer atributo es el <i>texto normal</i>, 
+entendiendo como tal el que no tiene ninguna característica especial. Para 
+definir un párrafo como <i>normal</i> no es necesario poner ninguna directiva. </p> 
+
+<p>
+	El <i>texto preformateado</i> (directiva <tt>&lt;pre></tt>) se aplica 
+para que en la presentación final del documento se respeten los espacios y 
+retornos de carro del texto fuente. Además se presentará con un 
+tipo de letra de espaciado fijo, parecido al de una máquina de escribir. Este estilo de texto puede ser adecuado, por 
+ejemplo, para una tabla numérica sencilla, como la siguiente, aunque su principal utilidad es, como en este manual, para marcar ejemplos o listas de programas.
+</p>
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;pre>
+Texto preformateado
+---------------------
+|  1 |  2 |  3 |  4 |
+|  5 |  6 |  7 |  8 |
+|  9 | 10 | 11 | 12 |
+---------------------
+&lt;/pre></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<pre>
+Texto preformateado
+---------------------
+|  1 |  2 |  3 |  4 |
+|  5 |  6 |  7 |  8 |
+|  9 | 10 | 11 | 12 |
+---------------------
+</pre><p>
+		</td>
+	</tr>
+</table>
+
+
+<p> 
+
+Para hacer una cita textual dentro del documento, se 
+utiliza la directiva <tt>&lt;blockquote></tt>.
+</p> 
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre> 
+A continuación está escrita una cita tomada del libro <i>Cien años de
+soledad</i> de Gabriel García Márquez. Advierta el doble sangrado a derecha e izquierda.
+&lt;blockquote>
+Muchos años después, frente al pelotón de 
+fusilamiento,
+el coronel Aureliano Buendía había de recordar aquella tarde remota
+en que su padre lo llevó a conocer el hielo.
+&lt;/blockquote></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+A continuación está escrita una cita tomada del libro <i>Cien años de
+soledad</i> de Gabriel García Márquez. Advierta el doble sangrado a derecha e izquierda.
+<blockquote>
+Muchos años después, frente al pelotón de fusilamiento,
+el coronel Aureliano Buendía había de recordar aquella tarde remota
+en que su padre lo llevó a conocer el hielo.</blockquote>
+		</td>
+	</tr>
+</table>
+
+
+
+<p>
+	Una dirección se puede marcar con la directiva  &lt;address>.
+</p> 
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>Dirección: &lt;address>Andrés González &lt;br>andresgc@ugr.es&lt;/address></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+Dirección: <address>Andrés González <br>andresgc@ugr.es</address>
+		</td>
+	</tr>
+</table>
+
+<p>
+	Cuando la dirección es estrictamente de correo electrónico se suele marcar de tal modo que sea un enlace a dicha dirección, permitiendo por tanto la solicitud de envío de correo electrónico.
+</p>
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>
+&lt;a href="mailto:andresgc@ugr.es"&gt;
+	Escribe a Andrés
+&lt;/a&gt;
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<a href="mailto:andresgc@ugr.es">
+	Escribe a Andrés
+</a>
+		</td>
+	</tr>
+</table>
+ 
+
+
+
+<p>
+
+
+Se pueden incluir también atributos como cursiva y negrita, mediante &lt;i>, y &lt;b> respectivamente.
+</p>
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;b>Esto en negrita&lt;/b>,  &lt;i>esto en cursiva&lt;/i>
+ y &lt;b>&lt;i>esto en negrita y cursiva&lt;/b>&lt;/i>.
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<b>Esto en negrita</b>,  <i>esto en cursiva</i> y <b><i>esto en negrita y cursiva</b></i>.
+		</td>
+	</tr>
+</table>
+
+
+
+<p>
+	Se puede utilizar un tipo de letra similar al de una máquina de
+escribir, mediante la directiva &lt;tt>.
+</p>
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+		<pre>&lt;tt>Máquina de escribir&lt;/tt></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<tt>Máquina de escribir</tt>
+		</td>
+	</tr>
+</table>
+
+<p>
+	Para centrar algo se puede usar la directiva <tt>&lt;center></tt>.
+</p>
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td><pre>&lt;center>Verde que te quiero verde&lt;/center></pre>
+		</td>
+	</tr>
+	<tr>
+		<td><center>Verde que te quiero verde</center>
+		</td>
+	</tr>
+</table>
+
+<hr>
+
+<h3><a name="4.3">LISTAS</a></h3>
+
+<p>
+	Las listas se definen de forma muy sencilla: se dice dónde empieza la lista y dónde acaba la lista y, entre ambas, dónde empieza y termina cada punto. Las directivas que se utilicen en cada caso deben aparecer al principio de línea, o al menos sin texto por delante (sólo espacios o tabulaciones).
+</p>
+
+<p>
+	Existen tres tipos distintos de listas, cada una con una presentación 
+diferente: numeradas (&lt;ol>), no numeradas (&lt;ul>), y glosarios o listas de definiciones (&lt;dl>). Los elementos de las dos primeras se marcan con la directiva &lt;li>. En la última existen dos tipos de elementos que se agrupan por parejas: de <i>término</i> (<tt>&lt;dt></tt>) y de <i>definición</i> (<tt>&lt;dd></tt>).
+</p>
+
+<p>
+	Las listas se pueden anidar, es decir, en el lugar donde debería ir uno de los términos de la lista se puede incluir una nueva lista, que puede ser de cualquier tipo.
+</p>
+
+<p>
+	Esta es una lista no numerada:
+
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>
+&lt;ul>
+&lt;li>Tomates&lt;/li>
+&lt;li>Zanahorias&lt;/li>
+&lt;li>Puerros&lt;/li>
+&lt;/ul>
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<ul>
+<li>Tomates</li>	
+<li>Zanahorias</li>	
+<li>Puerros</li>	
+</ul>		
+		</td>
+	</tr>
+</table>
+
+
+
+
+y esta es una lista numerada:
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>
+&lt;ol>
+&lt;li>Tomates&lt;/li>
+&lt;li>Zanahorias&lt;/li>
+&lt;li>Puerros&lt;/li>
+&lt;/ol>
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<ol>
+<li>Tomates</li>	
+<li>Zanahorias</li>	
+<li>Puerros</li>	
+</ol>		
+		</td>
+	</tr>
+</table>
+
+<p>
+
+Ahora presento un glosario con los 
+términos perro, gato y pescadilla, y sus definiciones:
+
+
+</p>
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;dl>
+&lt;dt>Perro (&lt;i>n. masc.&lt;/i>)
+&lt;dd>Animal de cuatro patas que ladra.
+&lt;dt>Gato (&lt;i>n. masc.&lt;/i>)
+&lt;dd>Animal de cuatro patas que maúlla y se lleva muy mal con el
+perro.
+&lt;dt>Pescadilla (&lt;i>n. fem.&lt;/i>)
+&lt;dd>Animal que vive en el mar y se lleva muy mal con el gato. Posiblemente debería establecer una alianza con el perro.
+&lt;/dl></pre>
+		</td>
+	</tr>
+</table>	
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<dl>
+<dt>Perro (<i>n. masc.</i>)
+<dd>Animal de cuatro patas que ladra.
+<dt>Gato (<i>n. masc.</i>)
+<dd>Animal de cuatro patas que maúlla y se lleva muy mal con el perro.
+<dt>Pescadilla (<i>n. fem.</i>)
+<dd>Animal que vive en el mar y se lleva muy mal con el gato. Posiblemente debería establecer una alianza con el perro.
+</dl>
+		</td>
+	</tr>
+</table>
+
+
+
+<hr>
+
+
+<h3><a name="4.4">VARIOS</a></h3>
+
+<p>
+La directiva <tt>&lt;hr></tt>  incluye en el documento una línea horizontal de separación. 
+En este documento, por ejemplo, se han utilizado líneas horizontales para 
+separar las diferentes secciones</p>
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;hr></pre> 
+		</td>
+	</tr>
+	<tr>
+		<td>
+<hr>
+		</td>
+	</tr>
+</table>
+
+
+
+<p>
+
+Estas líneas pueden ser de varios tamaños, e incluso de colores, sin más que 
+añadir los parámetros oportunos
+
+</p>
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;hr size="40" color="#00FFFF"></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<hr size="40" color="#00FFFF">
+		</td>
+	</tr>
+</table>
+
+
+<p>
+
+
+
+Un comentario en un documento HTML, es una aclaración que no aparece en la 
+presentación del documento en el visor. Para definirlo se encierra el texto que 
+formará el comentario entre los símbolos <tt>&lt;!--</tt> y <tt>--></tt>. Por 
+ejemplo, un caso típico podría ser
+
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>Hola &lt;!-- Modificado por Andrés el 3 de octubre --> Adiós</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+Hola <!-- Modificado por Andrés el 3 de octubre --> Adiós
+		</td>
+	</tr>
+</table>
+
+
+
+cuyo comentario, como es lógico, no se muestra en el visor.
+</p>
+
+
+<p>
+Pueden incluirse subíndices y superíndices con las órdenes <tt>&lt;SUB></tt> y <tt>&lt;SUP></tt> respectivamente que, además, escriben en un tamaño de fuente levemente inferior. Por ejemplo:
+</p>
+
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>
+x&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>+x&lt;sub>1&lt;/sub>&lt;sup>2&lt;/sup>=z&lt;sup>2&lt;/sup>
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+x<sub>1</sub><sup>2</sup>+x<sub>2</sub><sup>2</sup>=z<sup>2</sup>
+		</td>
+	</tr>
+</table>					
+
+<h3><a name="4.5">Fórmulas matemáticas</a></h3>
+<p>
+	Se pueden mostrar fórmulas de \(\LaTeX\) añadiendo estas tres líneas  en el bloque &lt;head>.
+																		  
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+			<pre>
+    &lt;script 
+    type="text/javascript"
+    src=
+"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    >
+    &lt;/script>
+			</pre>
+		</td>
+	</tr>
+</table>
+
+tras lo cual se pueden escribir fórmulas matemáticas en \(\LaTeX\) utilizando uno de estos dos delimitadores:
+<ul>
+<li> 
+<pre>$$...$$</pre> para fórmulas en una línea separada, y </li>
+<li>  <pre>\(...\)</pre> para fórmulas en el propio texto.</li> 
+</ul>					 
+</p>
+
+<table border="2" align="center" bordercolor="red">
+<tr>
+<td>
+<pre>Si \(a \ne 0\), hay dos soluciones de la ecuación  \(ax^2 + bx + c = 0\) que vienen dadas por
+$$
+	x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+$$
+</pre>
+
+</td>
+</tr>
+<tr>
+<td>
+Si \(a \ne 0\), hay dos soluciones de la ecuación  \(ax^2 + bx + c = 0\) que vienen dadas por
+$$
+	x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+$$
+
+</td>
+</tr>
+</table>	
+
+<p>
+	Hay que tener en cuenta que este uso produce una interferencia con <b>HTML</b>  ya que no pueden escribirse dos símbolos de <b>$</b> directamente.
+ Del mismo modo, hay otros caracteres que se usan en las fórmulas que pueden interferir en el código <b>HTML</b>. El ejemplo más frecuente es el del signo "menor que". En principio, en cualquier fórmula debe escribirse con espacio en blanco delante y detrás y será suficiente para eliminar la interferencia, como en el siguiente ejemplo.
+</p>
+
+<table border="2" align="center" bordercolor="red">
+<tr>
+<td>  
+<pre>
+$$ 
+	x < y+5 
+$$
+</pre>
+</td>
+</tr>
+<tr>
+<td>
+$$ 
+	x < y+5 
+$$
+</td>
+</tr>
+</table>
+<p>
+La información completa está aquí: <a href="https://www.mathjax.org/" target="_blank">https://www.mathjax.org/</a>
+</p>
+
+<hr>
+
+<h2><a name="5">ENLACES Y GRÁFICOS</a></h2>
+
+<h3><a name="5.1">INTRODUCCIÓN</a></h3>
+
+<p>
+	Además de los muchos estilos y capacidades de presentación que ofrece HTML para 
+estructurar el documento en sí, disponemos de varias directivas que permiten 
+definir relaciones entre diferentes documentos y estructurar todo un conjunto de 
+documentos para crear una unidad lógica. La facilidad para definir este tipo de 
+enlaces es una de las razones de la potencia y versatilidad de HTML. Por la 
+similitud de tratamiento que tienen los enlaces y los gráficos, trataremos en 
+esta sección cómo pueden incluirse estos últimos en un documento.
+</p>
+
+<p>
+	Los enlaces en HTML se expresan rodeando con la directiva <tt>&lt;a></tt> el 	objeto (que puede ser un fragmento de texto o un gráfico) que vaya a servir como <i>anclaje</i> para el enlace. Por ejemplo, si se marca con <tt>&lt;a></tt> un gráfico, cuando en la presentación del documento en el visor se pulse con el ratón sobre dicho gráfico 
+<i>saltará</i> (en realidad, lo intentará) al objeto referenciado en el 
+enlace: otra parte del mismo documento, otro documento del mismo servidor (tanto HTML o no, como un 
+vídeo musical, un gráfico, etc.) o un documento en otro servidor.
+</p>
+
+<h3><a name="5.2">QUÉ ES UN URL (URI)</a></h3>
+
+<p>
+	Para especificar de manera uniforme el objeto al que apunta un enlace, se 
+utiliza una forma estandarizada que se denomina URL (<i>Uniform Resource 
+Locator</i>, es decir, <i>Localizador Uniforme de Recursos</i>)
+o URI (<i>Uniform Resource Identifier</i>, es decir, <i>Identificador Uniforme de Recursos</i>). Un URL está 
+formado de la siguiente manera: <i>esquema://maquina/ruta#posición en el archivo</i> (en realidad la barra, <b><tt>/</tt></b>, puede considerarse parte de la 
+<i>ruta</i>).
+</p>
+
+<p>
+	El <i>esquema</i>  identifica el tipo de servicio que va a 
+proporcionarse en el destino del enlace. La razón de esta aparente complicación 
+es que  WWW pretende unificar el acceso a servicios de información que 
+previamente eran incompatibles entre sí, como <i>ftp</i>, <i>gopher</i> o <i>telnet</i>. El esquema 
+más utilizado es <tt>http</tt>, correspondiente al propio WWW (es decir, que 
+cualquier referencia a un documento HTML debería comenzar con <tt>http://</tt>). 
+Otros esquemas frecuentes son <tt>https</tt>, <tt>ftp</tt> o <tt>telnet</tt>.
+</p>
+
+<p>
+	La <i>máquina</i> y la <i>ruta</i> sirven para localizar el objeto al que apunta 
+el enlace. La <i>máquina</i> es la identificación del servidor en el cual está 
+situado el objeto al que apunta el enlace. Puede ser simplemente el nombre de un 
+ordenador (como <tt>www.ugr.es</tt>) o el número IP de dicha máquina, 
+<tt>150.214.20.4</tt>, o también un nombre y un puerto (por 
+ejemplo <tt>www.ugr.es:8000</tt>).
+</p>
+
+<p>
+	La <i>ruta</i> es el nombre del fichero que contiene el documento en concreto, 
+incluyendo el nombre del subdirectorio en el que se encuentra, especificado a 
+partir de aquél que el servidor considere como inicial, que no tiene por qué 
+coincidir con el raíz. Los diferentes nombres que constituyan la ruta completa 
+al archivo se deben separar con la barra, <tt>/</tt>, (inclinada hacia la derecha) 
+tal y como se hace en el sistema operativo UNIX (inclinada al revés que en MS-DOS). El 
+nombre de un fichero dependerá del sistema operativo del ordenador en que 
+reside. Debe tenerse en cuenta que en UNIX las mayúsculas y las minúsculas son 
+distintas en los nombres de los ficheros: no es igual <b>FICHERO</b> que 
+<b>fichero</b>.
+</p>
+
+<p>
+	Por último, la <i>posición en el archivo</i> determina si este debe mostrarse desde el principio o situándose en alguna marca que contenga.
+</p>
+
+<p>
+	Conviene detenerse momentáneamente en la estructuración habitual de los 
+ficheros en un servidor de WWW. Para empezar, siempre hay una <i>página de 
+bienvenida</i> o página inicial (<i>home page</i>) que hace el papel de 
+directorio raíz en el servidor y que podría compararse con la <i>portada</i> de 
+un periódico o revista: si no se sabe exactamente qué es lo que se busca, o no 
+se sabe dónde encontrarlo, la portada es lo primero que se ve. Para acceder a la 
+<i>home page</i> de cualquier servidor de WWW, basta con escribir una barra en 
+el lugar de la ruta (es decir, reclamar al servidor el <i>directorio 
+raíz</i>). Por ejemplo, para acceder a la página de bienvenida de la Universidad 
+de Granada, hay que dirigirse a <tt>http://www.ugr.es/</tt>, y para ir a la de 
+NASA habría que contactar con <tt>http://www.nasa.gov/</tt>.</p>
+
+<p>
+	El resto de la información que se puede encontrar en un servidor de WWW se 
+distribuye a partir de ese directorio raíz en distintos subdirectorios y 
+archivos. Un convenio muy habitual relativo al nombre de los ficheros es hacer 
+que los archivos que contengan documentos HTML terminen en <tt>.html</tt> (en 
+<tt>.htm</tt> en MS-DOS) aunque puede usarse cualquier extensión.</p>
+
+<h3><a name="5.3">ENLACES</a></h3>
+
+<p>
+Con lo que ya he dicho, se puede abordar sin problemas cómo se introducen enlaces en un documento HTML. Para 
+definir un enlace es necesario indicar el lugar del que va a partir el enlace y 
+el lugar con el que se va a enlazar. Con la directiva <tt>&lt;a></tt> se marca 
+el objeto del cual va a partir el enlace. Dicha directiva debe incluir el 
+parámetro <tt>href="<i>URL</i>"</tt> para especificar el destino del enlace. Es 
+decir, que antes del objeto elegido se escribe <tt>&lt;a 
+href="<i>URL</i>"></tt>  y después del objeto se escribe  <tt>&lt;/a></tt>. Por 
+ejemplo, para que el texto <i>Pulse aquí para visitar NASA</i> enlace 
+con la página inicial de NASA, debe escribirse:</p>
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;a href="http://www.nasa.gov/">Pulse aquí para visitar 
+NASA&lt;/a></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<a href="http://www.nasa.gov/" target="NASA">Pulse aquí para visitar  NASA</a><p>
+		</td>
+	</tr>
+</table>
+
+
+<p>
+
+
+Por lo general los enlaces no son a otros ordenadores sino a otros documentos 
+que se encuentran en el mismo servidor. En este caso no es necesario escribir el 
+<i>camino completo</i> o <i>camino absoluto</i> al destino del enlace, sino que basta con dar la mínima 
+información imprescindible o <i>camino relativo</i>. Es decir, que si desde cierto documento se quiere 
+enlazar con otro que se encuentra en el mismo subdirectorio, basta con poner su 
+nombre, como en  
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<tt>&lt;a href="otro.htm">pulse aquí&lt;/a></tt>
+		</td>
+	</tr>
+</table>
+
+</p>
+
+<p>
+	Si se encuentra en 
+otro subdirectorio del mismo servidor, es suficiente con poner su ruta absoluta en dicho servidor, como en 
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<tt>&lt;a 
+href="/la/ruta/que/sea/otro.html">pulse aquí&lt;/a></tt>		</td>
+	</tr>
+</table>
+ 
+
+
+o utilizar rutas relativas en dicho servidor, como en  
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<tt>&lt;a 
+href="ruta/relativa/cosa.html">cosa&lt;/a></tt>		</td>
+	</tr>
+</table>
+
+</p>
+		 
+<p>
+Es muy conveniente usar caminos relativos tan cortos como sea posible. Ello permite cambiar de lugar la página sin tener que realizar ningún cambio en los caminos.
+</p>
+
+
+
+<h3><a name="5.4">GRÁFICOS</a></h3>
+
+<p>
+	Para incluir un gráfico en un documento HTML se utiliza la directiva 
+<tt>&lt;img></tt> (Esta directiva no tiene directiva final). En dicha directiva debe incluirse el parámetro 
+<tt>src="<i>URL</i>"</tt>,que indica dónde está el fichero con el gráfico 
+concreto a incluir. Esto permite una gran flexibilidad, ya que se pueden incluir gráficos que se encuentren 
+disponibles tanto en el propio servidor como en otros, sin que el lector final aprecie ninguna diferencia, salvo la velocidad de transferencia.
+</p>
+
+<p>
+	Existe alguna limitación respecto a los formatos gráficos que los visores de HTML puede interpretar sin problemas. Suelen usarse BMP, PNG y JPEG, que cualquier visor debería poder mostrar directamente. El formato GIF que era muy común está sometido a patente, por lo que cada vez se utiliza menos.
+Si utilizamos otro formato, es posible que cuando un visor esté accediendo al 
+documento, no comprenda ese formato y tenga que solicitar la <i>ayuda</i> de 
+otro programa, con lo cual el gráfico puede aparecer en un lugar diferente. 
+Muchos visores permiten la inclusión de <EM>plug-ins</EM>, programas que se 
+integran con ellos para ampliar sus posibilidades.
+</p>
+
+<p>
+	Hay un parámetro optativo de la directiva <tt>&lt;img></tt> que sirve para 
+proponer un texto alternativo a un gráfico. Este texto aparecerá cuando se esté 
+usando por un visor sin capacidades gráficas, o en tanto que no se carga el gráfico, o cuando este está cargado, si se detiene el ratón sobre el gráfico durante un tiempo determinado. Se trata de 
+<tt>alt="<i>texto</i>"</tt>.
+</p>
+
+<p>
+	Como ocurre con los enlaces, no es necesario escribir el URL 
+completo, sino que basta con dar la mínima información. Por ejemplo, para 
+colocar en este punto del documento un gráfico que está en el fichero 
+<tt>freson.jpg</tt>, en el mismo directorio en que se encuentra este archivo, se escribe:
+
+
+</p>
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;img src="freson.jpg" alt="Fresón">&lt;p></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	<img src="freson.jpg" alt="Fresón" >
+		</td>
+	</tr>
+</table>
+
+
+<p>
+
+
+Al especificar el texto alternativo "Fresón", un visor que no dispusiera del programa adecuado o que teniéndolo no encontrase el archivo del gráfico, mostraría algo 
+parecido a <tt>[Fresón]</tt> en lugar del propio dibujo.
+</p>
+
+<p>
+	El siguiente ejemplo incluye un gráfico de otro servidor especificando su URL absoluto.
+</p>
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>&lt;img
+src="http://www.nasa.gov/sites/default/themes/NASAPortal/images/nasa-logo.gif">&lt;p></pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<img src="http://www.nasa.gov/sites/default/themes/NASAPortal/images/nasa-logo.gif">
+		</td>
+	</tr>
+</table>
+
+
+<p>
+En este ejemplo, si no se dispone de conexión a Internet, o no puede alcanzarse el objetivo, no se mostraría ninguna imagen. Como tampoco se ha especificado un texto alternativo ni dimensiones del gráfico, tan solo se mostraría el recuadro que presenta el explorador de modo predeterminado para una imagen.
+</p>
+
+<p>
+	Además un gráfico servirá de anclaje para un enlace, sin más que utilizar la directiva 
+<tt>&lt;a></tt>. 
+</p>
+
+
+
+
+
+<table border="2" align="center" bordercolor="red">
+	<tr>
+		<td>
+<pre>
+	&lt;a 
+		href="http://www.nasa.gov/" 
+		target="NASA"
+	>
+		&lt;img
+			src=
+"http://www.nasa.gov/sites/default/themes/NASAPortal/images/nasa-logo.gif"
+			alt="Acceso a la página de NASA"
+		>
+	&lt;/a>
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	<a 
+		href="http://www.nasa.gov/" 
+		target="NASA"
+	>
+		<img
+			src=
+"http://www.nasa.gov/sites/default/themes/NASAPortal/images/nasa-logo.gif"
+			alt="Acceso a la página de NASA"
+		>
+	</a>
+		</td>
+	</tr>
+</table>
+
+
+
+<p>
+	La opción <b>target="nombre"</b> de la directiva &lt;a> hace que el enlace se presente en:
+
+<table border=2 bordercolor="red">
+<td>
+
+<DL>
+	<DT><B>target =</B> "nombre_ventana"
+	<DD>Abre el enlace en la ventana cuyo nombre se indica. Si no existe se abre una con ese nombre.<P>
+	
+	<DT><B>target =</B> "_blank"
+	<DD>Abre el enlace en una nueva copia del visor.<P>
+
+	<DT><B>target =</B> "_self"
+	<DD>Abre el enlace en la propia ventana.<P>
+	
+</DL>
+</td>
+</table>
+
+</p>
+
+
+
+
+
+<hr>
+
+
+	<h2>
+		<a name="6">CARACTERES ESPECIALES</a>
+		</h2>
+
+<p>
+	Existen limitaciones relativas al uso de determinados símbolos que significan 
+algo en HTML, como el de <i>menor que</i> (&lt;) o el signo inglés de 
+<i>ampersand</i>: &amp;.
+</p>
+
+<p>
+	Existe una razón evidente que impide que podamos escribir ciertos símbolos 
+directamente en un texto HTML, como por ejemplo  &lt;: este símbolo tiene un 
+significado especial en HTML indicando el comienzo de una directiva, y es necesario diferenciar claramente cuándo poseen ese 
+significado y cuándo deben aparecer literalmente en el visor. 
+Así para que aparezca  &lt; en el visor hay que <i>dar un 
+rodeo</i> escribiendo algo que no dé lugar a confusión, en este caso 
+<tt>&amp;lt;</tt>. Los símbolos más comunes afectados por esta limitación, y la forma de 
+escribirlos, se detallan a continuación:</p>
+
+<ul>
+<li>&lt; (<i>Menor que</i>): &amp;lt;</li>	
+<li>&gt; (<i>Mayor que</i>): &amp;gt;</li>	
+<li>&amp; (símbolo de <i>and</i>, o <i>ampersand</i>): &amp;amp;</li>	
+<li>&quot; (<i>comillas dobles</i>): &amp;quot;</li>	
+</ul>
+
+<p>
+	Es decir, que para mostrar  &lt;&quot;&gt; en el visor, hay que 
+poner <tt>&amp;lt;&amp;quot;&amp;gt;</tt> en el texto HTML original.
+</p>
+
+<p>
+	Hay más casos especiales, como si, por 
+ejemplo, en un texto HTML se quiere presentar la letra <b>&amp;ntilde;</b> (O cualquier otro símbolo <B>no inglés</B>). Existen tres formas de 
+hacerlo. La primera, que es a la que obliga el estándar original de HTML, 
+consiste en utilizar <i>entidades</i>, como las que antes se presentaron para 
+escribir ciertos símbolos. Las entidades comienzan siempre con el símbolo 
+<i>&amp;</i>, y terminan con un punto y coma (<i>;</i>) y entre ambos se incluye el identificador del carácter que queremos que se escriba.  Las entidades necesarias en español son:</p>
+
+
+<ul>
+	<li>á: &amp;aacute;</li>	
+	<li>é: &amp;eacute;</li>	
+	<li>í: &amp;iacute;</li>	
+	<li>ó: &amp;oacute;</li>	
+	<li>ú: &amp;uacute;</li>	
+	<li>Á: &amp;Aacute;</li>	
+	<li>É: &amp;Eacute;</li>	
+	<li>Í: &amp;Iacute;</li>	
+	<li>Ó: &amp;Oacute;</li>	
+	<li>Ú: &amp;Uacute;</li>	
+	<li>ü: &amp;uuml;</li>	
+	<li>Ü: &amp;Uuml;</li>	
+	<li>ñ: &amp;ntilde;</li>	
+	<li>Ñ: &amp;Ntilde;</li>	
+	<li>¿: &amp;#191;</li>	
+	<li>¡: &amp;#161;</li>	
+</ul>
+
+<p>
+	Como puede verse, las vocales acentuadas se identifican añadiendo el sufijo 
+<i>acute</i> (puesto que se trata de un acento agudo) a la vocal sin acentuar. 
+Para la u con diéresis y la eñe se usan <i>uml</i> tras una u y <i>tilde</i> 
+tras una ene, respectivamente. Para los signos de abrir 
+interrogación y exclamación, en vez de un nombre se usa el valor numérico de dichos caracteres en el código 
+estándar latin1 (ISO-8859-1). Esto se puede hacer con cualquier otro carácter 
+del código latin1, que es el código de caracteres básico en HTML, escribiendo 
+<i>&amp;#numero;</i>.
+</p>
+
+<p>
+	La segunda manera, que sin duda es más cómoda, consiste en no preocuparse por esta limitación y escribir literalmente los caracteres afectados, si los admite el editor (En España es dificil que el editor contenga, por ejemplo, los 
+caracteres cirílicos del alfabeto ruso). A pesar de que este método suele 
+funcionar en las conexiones WWW directas (porque el protocolo HTTP, que 
+transporta el código HTML por los vericuetos de Internet, requiere un canal de 8 
+bits) no tiene por qué funcionar bien siempre.</p>
+<p>
+
+La tercera consiste en utilizar un editor apropiado que traduzca todas las 
+apariciones de los caracteres especiales por sus correspondientes entidades 
+HTML, o viceversa. Con un programa así, se pueden escribir los documentos y luego traducirlos a HTML correcto.</p>
+
+
+
+<hr>
+
+
+	<h2>
+		<a name="TABLAS">TABLAS
+		</a>
+	</h2>
+
+
+
+<p>
+
+Las tablas son una representación por celdas ordenadas en filas y columnas. Una tabla se define mediante la directiva
+
+<B>&lt;table> &lt;/table></B> 
+que admite	los siguientes parámetros opcionales:
+
+</p>
+
+<table border="2" bordercolor="red">  
+<tr>
+<td>
+<DL>
+<DT><B>border =</B> núm.
+<DD>Indica el ancho del borde de la tabla expresado en puntos.
+
+<DT><B>cellspacing =</B> núm.
+<DD>Indica el espacio en puntos que separa las celdas que están dentro de la tabla.
+
+<DT><B>cellpadding =</B> núm
+<DD>Indica el espacio en puntos que separa el borde de cada celda y el contenido de esta.
+
+<DT><B>width =</B> núm o núm%.
+<DD>Indica la anchura de la tabla en puntos o en porcentaje en función del ancho de la ventana del visor. Si no se indica este parámetro, el ancho se adecuará al tamaño de los contenidos de las celdas.
+
+<DT><B>height =</B> núm o núm%.
+<DD>Indica la altura de la tabla en puntos o en porcentaje en función del alto de la ventana del visor. Si no se indica este parámetro, la altura se adecuará a la altura de los contenidos de las celdas.
+
+<DT><B>bgcolor =</B> código de color
+<DD>Especifica el color de fondo de la tabla.
+
+</DL>
+</td>
+</tr>
+</table>
+
+
+<p>Para definir una fila de celdas se utiliza la directiva <B>&lt;TR&gt;</B>  <B>&lt;/TR&gt;</B>. </p>
+
+<p>
+Para definir las celdas que componen la fila se utilizan las directivas <B>&lt;TD&gt;</B> <B>&lt;/TD&gt;</B> o <B>&lt;TH&gt;</B> <B>&lt;/TH&gt;</B>. <B>&lt;TD&gt;</B> indica una celda normal, y <B>&lt;TH&gt;</B> indica una celda de cabecera, cuyo contenido será resaltado en negrita y en un tamaño ligeramente superior al normal. Los parámetros opcionales de ambas directivas son:
+</P>
+
+<table border="2" bordercolor="red">  
+<tr>
+<td>
+<DL>
+<DT><B>align =</B> LEFT / CENTER / RIGHT / JUSTIFY
+<DD>Indica cómo se debe alinear horizontalmente el contenido de la celda: a la izquierda (LEFT), a la derecha (RIGHT), centrado (CENTER) o justificado (JUSTIFY).
+
+<DT><B>valign =</B> TOP / MIDDLE / BOTTOM
+<DD>Indica la alineación vertical del contenido de la celda, en la parte superior (TOP), en la inferior (BOTTOM), o en el centro (MIDDLE).
+
+<DT><B>rowspan =</B> núm
+<DD>Indica el número de filas que ocupará la celda. Por defecto ocupa una sola fila.
+
+<DT><B>colspan =</B> num
+<DD>Indica el número de columnas que ocupará la celda. Por defecto ocupa una sola columna.
+
+<DT><B>width =</B> núm o núm%.
+<DD>Indica la anchura de la columna en puntos o en porcentaje en función del ancho de la ventana del visor. Si no se indica este parámetro, el ancho se adecuará al tamaño de los contenidos.
+
+<DT><B>bgcolor =</B> código de color
+<DD>Especifica el color de fondo del elemento de la tabla.
+</DL>
+</td>
+</tr>
+</table>
+
+<p>
+El contenido de las celdas puede ser cualquier elemento de HTML, vbg., un texto, una imagen, un hiperenlace, una lista, etc.</p>
+<P>
+
+Si hay que dejar una celda en blanco, se utiliza <em>&amp;nbsp;</em> (<i>non-breaking space</i>) para que cree el recuadro alrededor.</p>
+	<p>
+
+Se utiliza <B>&lt;caption> &lt;/caption></B> para poner título a una tabla. Si incluye la opción <B>align = "bottom"</B> el título aparecerá debajo de la tabla.</p>
+
+
+
+
+
+
+
+<hr>
+
+
+	<h2>
+		<a name="ESTILOS">HOJAS DE ESTILO
+		</a>
+	</h2>
+
+
+
+
+
+
+<h3>
+	Unidades de longitud
+</h3>
+
+<p>
+Las longitudes se expresan mediante un número seguido de una abreviatura de dos letras que indica la unidad de medida, excepto para el valor 0 que no las necesita. Es posible en algunos casos que la longitud sea precedida de un signo   (+) o (-) para indicar valores positivos y negativos.
+
+
+Se utilizan dos tipos de unidades: Absolutas y relativas. Las absolutas solo deberían utilizarse cuando se conociesen las propiedades físicas del dispositivo de salida, por lo que las más utilizadas son las relativas. Las medidas son las siguientes:
+</p>
+
+<table border="2" align="center">
+	<tr>
+		<th>Nombre</th>
+		<th>Tipo</th>
+		<th>Descripción</th>
+	</tr>
+	<tr>
+		<td>em</td>
+		<td>relativa</td>
+		<td>Tamaño de la fuente en el elemento padre</td>
+	</tr>
+	<tr>
+		<td>ex</td>
+		<td>relativa</td>
+		<td>Altura de una x en la fuente del elemento padre</td>
+	</tr>
+	<tr>
+		<td>px</td>
+		<td>relativa</td>
+		<td>pixel, relativa al dispositivo</td>
+	</tr>
+	<tr>
+		<td>in</td>
+		<td>absoluta</td>
+		<td>pulgadas</td>
+	</tr>
+	<tr>
+		<td>cm</td>
+		<td>absoluta</td>
+		<td>centímetros</td>
+	</tr>
+	<tr>
+		<td>mm</td>
+		<td>absoluta</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>pt</td>
+		<td>absoluta</td>
+		<td>puntos (1/72 pulgadas)</td>
+	</tr>
+	<tr>
+		<td>pc</td>
+		<td>absoluta</td>
+		<td>picas (12 puntos)</td>
+	</tr>
+</table>
+</p>
+
+<p>
+Los porcentajes se expresan con números seguidos del símbolo % y siempre son relativos a los demás valores.
+</p>
+ 
+
+
+<h3>Colores</h3>
+
+<p>
+El valor de un color se define bien por su nombre (si existe para ese color concreto) o por su código RGB. Los nombres de colores existentes son aqua, black, fuschia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white y yellow. El código RGB se expresa de tres modos distintos:
+</p>
+
+
+<ul>
+
+<li>
+
+Mediante el símbolo # seguido de 6 dígitos que corresponden a las tres componentes del color expresadas en hexadecimal, #RRGGBB.
+</li>	
+<li>
+Mediante la función rgb(x,x,x)	en que los argumentos son las tres componentes del color expresadas en decimal y variando entre 0 y 255.
+</li>	
+<li>
+Mediante la función rgb(x,x,x)	en que los argumentos son las tres componentes del color expresadas en porcentajes respecto del total de cada una. Por ejemplo rgb(50%,87%,23%).
+</li>	
+</ul>
+
+<h3>
+	Estilos
+</h3>
+
+<p>
+	Los estilos, y especialmente el uso de hojas de estilo separadas, suministran la posibilidad de controlar de modo eficiente la apariencia de los documentos, separando su contenido de su forma, y permitiendo definir tipos de estructuras adicionales a las existentes en HTML. 
+</p>
+
+<p>
+	<b>CSS</b> es el acrónimo de <b>Cascading Style Sheets</b> que corresponde a los <b>archivos de estilo</b>. Para consultar sus características puede dirigirse a 
+<a href="http://www.w3.org/Style/CSS" title="Referencia de archivos de estilo" target="CSS">W3C Cascading Style Sheet</a>. 
+</p>
+
+<p>
+	Es recomendable consultar el proyecto <a href="http://www.csszengarden.com/" title="CSS Zen Garden" target="CSSZenGarden">CSS Zen Garden</a> que muestra cómo puede cambiar (drásticamente) la forma de un documento utilizando diferentes estilos sin modificar el texto HTML. 
+</p>
+
+<p>
+	Para editar los archivos de estilo 			
+	es recomendable utilizar un programa especializado. Por ejemplo, Stylizer, que puede conseguirse gratuitamente en
+</p>
+
+<p style="text-align: center">
+<a href="http://www.skybound.ca/" target="Stylizer" title="Stylizer">http://www.skybound.ca/</a>. 
+</p>    
+	
+</p>
+
+<p>
+	En primer lugar, lo lógico es que el estilo sea definido en un archivo, así puede aplicarse a varios archivos simultáneamente. Para ello, en la sección <b>&lt;head></b> hay que incluir una directiva &lt;link> como la siguiente, que es la que he utilizado en este manual.
+</p>
+
+<p align=center class="ejemplo">	
+&lt;link rel="stylesheet" type="text/css" href="MiEstilo.css">
+</p>
+
+
+<p>El archivo <b>MiEstilo.css</b> contiene las siguientes líneas:
+
+<pre class="ejemplo">
+@charset "iso-8859-1";
+&lt;style type="text/css">
+...
+...
+...
+...
+&lt;/style>
+</pre>
+
+
+
+</p>
+<p>
+La primera línea hace referencia al tipo de codificación empleado, que coincide con el de Windows en España. Entre las dos órdenes <b>style</b> queda descrito un estilo concreto.
+</p>
+
+<p>Un archivo CSS está compuesto de reglas. Cada regla consiste en un selector y un bloque de declaraciones sobre el mismo. Cada selector modifica un elemento HTML. El bloque de declaraciones consiste en un conjunto de declaraciones separadas por punto y coma. Cada declaración consiste en el nombre de una propiedad y un valor para la misma, separados por dos puntos. Pueden incluirse comentarios entre los símbolos <b>/*</b> y <b>*/</b>. Por ejemplo, en este documento he incluido:
+</p>
+
+<pre class="ejemplo">
+/* 
+Las cabeceras de nivel 1 se escribirán con letra roja
+*/
+
+h1 	
+	{ 
+		color: red;
+	}
+/* 
+Los párrafos se escribirán sangrados dos emes, 
+con un margen superior de 10 píxeles e inferior de 0,
+y alineando a derecha e izquierda
+*/
+ p 
+	{ 
+		text-indent: 2em; 
+		margin-top: 10; 
+		margin-bottom: 0;
+		text-align: justify;
+	}
+</pre>
+
+
+<p>Los selectores hacen referencia a elementos HTML basados en diferentes características, como id, class, type, attribute, y otros. Los más importantes son:</p>
+								  
+
+<ul>
+	<li> El selector de elementos los selecciona por nombre. Por ejemplo, el siguiente afecta a los párrafos (&lt;p>) y les pone alineación a ambos lados.
+
+<pre class="ejemplo">
+p
+    {
+        text-align: justify;
+    }	 
+</pre>
+	</li>
+
+	<li> El selector <b>id</b> se define mediante el símbolo <b>#</b> y un <b>nombre</b> y se aplica a cualquier elemento con la opción <b>id="nombre"</b>. Así,
+
+<pre class="ejemplo">
+#tintaverde
+	{
+    	color: green;
+	}
+</pre>
+se usa con cualquier elemento de HTML, por ejemplo, 
+<pre>p id="tintaverde"</pre> y produce el siguiente resultado:
+
+<p id="tintaverde"> ¡Soy verde!</p>
+
+	</li>
+	
+	<li> El selector <b>class</b> se define mediante un punto <b>.</b> y un <b>nombre</b> y se aplica a cualquier elemento con la opción <b>.nombre</b>. También puede definirse asociado a un elemento concreto en cuyo caso solo afecta a dicho tipo de elemento. Así, he definido 
+
+<pre class="ejemplo">
+.ejemplo
+    {
+        background-color: yellow;
+        border-style:solid;
+        border-width: 1px;
+        padding: 10px;
+    }	
+</pre>
+
+que hace que todos los elementos a los que se les aplique esa clase se escriban sobre fondo amarillo, con un borde de 1 pixel continuo y con un margen de 10 píxeles. 
+En concreto, lo utilizo en los ejemplos de este apartado, mediante 
+<b>pre class="ejemplo"</b>.
+
+Si se define asociado a un elemento concreto, ya solo afectará a ese tipo de elementos, como en
+
+<pre class="ejemplo">
+p.azul
+    {
+        background: #afeeee;
+    }
+} </pre>   
+que puedo aplicar a cualquier párrafo (y solo a ellos) escribiendo <b>p class="azul"</b>
+</p>
+
+<p class="azul">¡Este es el resultado!</p>
+</li>
+
+<li> Pueden definirse varios selectores	simultáneamente, separándolos con comas, como en
+
+<pre class="ejemplo">
+h1, h2, h3, h4, h5, h6 
+    { 
+        margin-left: 1%; 
+        text-align: center;
+    }
+</pre>	
+</li>
+
+<li> Pueden definirse en varias ocasiones valores para un mismo elemento. Así, además de la definición anterior, puede ponerse color rojo a las cabeceras de primer nivel añadiendo en el archivo:
+
+<pre class="ejemplo">
+h1 	
+	{ 
+	color: red;
+	}
+</pre>	
+  
+</li>
+	 
+
+
+
+<li> El color de fondo se especifica con la propiedad <b>background-color</b>. La propiedad <b>background-image</b> hace que se use una imagen como fondo de un elemento.</p>
+
+<pre class="ejemplo">
+body 
+    {				   
+        background-image: url("sheets.jpg");
+    }
+</pre>
+	
+</li>
+</ul>
+
+
+<h2>Texto</h2>
+
+<ul> 
+<li> La propiedad <b>color</b> indica el color del texto.
+</li> 
+
+<li> La propiedad <b>text-align</b> indica la alineación horizontal del texto, que puede ser <b>center</b>, <b>left</b>,  <b>right</b>, o <b>justify</b>.
+</li> 
+
+<li> La propiedad <b>text-transform</b> permite pasar un texto a mayúsculas, a minúsculas, o poner en mayúsculas la primera letra. Los valores son  <b>uppercase</b>, <b>lowercase</b> y <b>capitalize</b> respectivamente.
+</li> 
+
+<li> La propiedad <b>text-indent</b> define el sangrado de la primera línea del texto.
+
+<pre class="ejemplo">
+p 
+    {
+        text-indent: 50px;
+    }
+</pre>
+</li> 
+
+</ul>				 
+						
+
+
+<h2>Tablas</h2>
+	   
+<p>El borde de una tabla se define con la propiedad <b>border</b>.</p>
+<pre class="ejemplo">		
+table, th, td 
+    {
+        border: 1px solid black;
+    } 									   
+</pre>
+
+<p>En el ejemplo anterior las tablas tienen doble borde, ya que tanto ella como &lt;th> y &lt;td> tienen bordes. Para que solo haya uno se utiliza la propiedad <b>border-collapse</b>.</p>
+
+<pre class="ejemplo">
+table 
+    {
+        border-collapse: collapse;
+    }				   
+
+table, th, td 
+    {
+            border: 1px solid black;
+    }
+</pre>
+
+<p>
+La anchura y la altura se definen con las propiedades <b>width</b> y <b>height</b>.
+</p>
+						 
+<pre class="ejemplo">
+table 
+    {
+        width: 100%;
+    }
+
+th 
+    {
+        height: 50px;
+    } 
+</pre>
+							   
+<p>
+	Además de la opción <b>text-align</b> para la alineación horizontal puede usarse <b>vertical-align</b> para alineación vertical con <b>top</b>, <b>bottom</b> y <b>middle</b>.
+
+La propiedad <b>padding</b> (relleno) controla el espacio alrededor del texto en las cuatro direcciones (arriba, derecha, abajo e izquierda).
+</p>
+
+<pre class="ejemplo">
+	padding: 20px 30px 20px 30px;
+</pre>
+
+
+<h2>El modelo de <b>cajas</b></h2>
+
+<p>Todos los elementos de HTML (en \(\LaTeX\) ocurre lo mismo) se consideran cajas. (Este concepto está tomado, evidentemente, de la tipografía). Cada caja consta de márgenes (Margin), bordes (Border), relleno (Padding), y, por último, el contenido (Content) del elemento. Cuando se especifican la altura y la anchura, estas corresponden al contenido. El tamaño total se obtiene sumando el resto de tamaños.</p>
+								  
+
+
+
+<pre class="ejemplo">
+div 
+    {
+        width:  300px;
+        padding: 25px;
+        border:  25px solid red;
+        margin:  25px;
+    }
+</pre>
+
+<p>Para que tengan efecto la propiedades del borde es necesario definir el estilo. Los valores habituales son los siguientes:
+</p>
+
+<ul>
+<li> none: Sin borde </li>
+
+<li> dotted: De puntos </li>
+
+<li> dashed: De rayitas </li>
+
+<li> solid: Continuo </li>
+
+<li> double: Doble  </li>
+
+<li> groove: 3D  </li>
+
+</ul>
+
+<p> La anchura del borde puede darse en píxeles o con una de estas tres palabras: <b>thin</b>, <b>medium</b>, o <b>thick</b>.</p>
+						 
+
+
+<p>
+Los cuatro márgenes se fijan independientemente
+</p>
+
+<pre class="ejemplo">		  
+p 
+    {
+        margin-top:    100px;
+        margin-bottom: 100px;
+        margin-right:  150px;
+        margin-left:    50px;
+    }	   
+</pre>
+
+
+
+<p>
+Lo mismo ocurre con el relleno</p>
+
+<pre class="ejemplo">
+p 
+    {
+        padding-top:    25px;
+        padding-right:  50px;
+        padding-bottom: 25px;
+        padding-left:   50px;
+    }
+</pre>
+ 
+
+
+
+<h2><a name="ref">Referencias</a></h2>
+
+<div class="caja">
+	<div class="color">
+
+		<p>	Existen multitud de introducciones a HTML y CSS. 
+		</p>
+	</div>
+
+	<p>
+	El lugar canónico desde el que puede accederse a las especificaciones de HTML, información sobre URL, y hojas de estilo, es 
+	<a href="http://www.w3.org">
+		http://www.w3.org
+	</a>
+	</p>
+
+	<p>
+
+
+	Además, son muchos los lugares en que se pueden encontrar referencias, basta con utilizar un buscador, como por ejemplo 
+	<a href="http://www.google.com">
+		http://www.google.com
+	</a>.
+	</p>	 
+
+	<p>
+	Puede encontrarse gran cantidad de información y cursos muy interesantes en
+	<a href="http://www.w3schools.com/">
+		http://www.w3schools.com/
+	</a>.
+
+	</p>	
+	
+	<p>
+	Este texto es una somera introducción a HTML y CSS, pero suficiente para el curso.
+	</p>	
+</div>
+
+
+</body>
+</html>
+

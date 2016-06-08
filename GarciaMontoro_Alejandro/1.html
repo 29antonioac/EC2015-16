@@ -80,7 +80,7 @@
     <!-- Hoja de estilos general -->
     <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
 
-    <title>EC: Alejandro García Montoro</title>
+    <title>EC: Alejandro García Montoro - 2</title>
 </head>
 
 <body>
@@ -89,12 +89,27 @@
 
         <header>
             <div id="nombre">
-                <h1>Estadística Computacional</h1>
+                <h1>Alejandro</h1>
+                <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
-            Soluciones al examen final de la asignatura Estadística Computacional de la UGR
+            Soluciones al segundo ejercicio del examen final de la asignatura Estadística Computacional
         </div>
 
         <div id="datos">
@@ -102,10 +117,6 @@
 
             <div id="datos_contenido">
                 <dl>
-                    <dt>Nombre</dt>
-                        <dd>Alejandro.</dd>
-                    <dt>Apellidos</dt>
-                        <dd>García Montoro.</dd>
                     <dt>DNI</dt>
                         <dd>76628233F</dd>
                     <dt>Grupo</dt>
@@ -120,14 +131,14 @@
             <div id="textoSol">
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Introducción:<p>
+                        <p class="cabecera">Enunciado:<p>
                         <p>
                           Considera en el plano un cuadrado centrado en el origen, de lado 200.
                         </p>
                         
                         <p>
                           Considera un punto que comienza en el origen y se desplaza del siguiente modo:
-                          <ol>
+                          <ol class="lista">
                             <li>En cada paso se lanzan dos monedas.</li>
                             <li>Si la primera moneda es cara, el punto se mueve una unidad a la derecha, si es cruz lo hace a la izquierda.</li>
                             <li>Si la segunda moneda es cara, el punto se mueve una unidad hacia arriba, si es cruz lo hace hacia abajo.</li>
@@ -139,20 +150,19 @@
                 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 1:<p>
+                        <p class="cabecera">Apartado 1:<p>
                         <p>
                             Función que simule el movimiento del punto y devuelva:
-                            <ol>
+                            <ol class="lista">
                               <li> La progresión aleatoria definida.</li>
                               <li> Cuántos pasos han sido necesarios para llegar al límite.</li>
-                              <li> La función debe tener un argumento que limite el número de movimientos y que si se alcanza devuelva una frase que diga "No he terminado de moverme" y, en caso contrario, que diga "He llegado al límite".</li>
                             </ol>
                         </p>
                     </div>
                     <div class="solucion">
                         <p>Definimos la función requerida, en la que el lanzamiento de la moneda lo simularemos con la función <code>sample</code>, tomando dos muestras con reemplazamiento del conjunto <code>{1,2}</code>, donde <code>1</code> representa la cara de la moneda y <code>2</code>, la cruz.</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">movimiento</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">maxIter</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">mostrar</span> <span class="hl std">= F){</span>
+<div class="chunk" id="1-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">f</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(){</span>
   <span class="hl com"># Definimos la posición inicial</span>
   <span class="hl std">pos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">)</span>
 
@@ -163,7 +173,7 @@
   <span class="hl com"># Inicializamos el contador de iteraciones</span>
   <span class="hl std">iteraciones</span> <span class="hl kwb">&lt;-</span> <span class="hl num">0</span>
 
-  <span class="hl kwa">while</span><span class="hl std">(</span> <span class="hl opt">!</span><span class="hl std">(</span><span class="hl num">100</span> <span class="hl opt">%in%</span> <span class="hl kwd">abs</span><span class="hl std">(pos))</span> <span class="hl opt">&amp;&amp;</span> <span class="hl std">iteraciones</span> <span class="hl opt">&lt;</span> <span class="hl std">maxIter){</span>
+  <span class="hl kwa">while</span><span class="hl std">(</span> <span class="hl opt">!</span><span class="hl std">(</span><span class="hl num">100</span> <span class="hl opt">%in%</span> <span class="hl kwd">abs</span><span class="hl std">(pos))){</span>
     <span class="hl com"># Simulamos las dos monedas: 1 es cara; 2 es cruz:</span>
     <span class="hl std">monedas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">2</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">replace</span> <span class="hl std">= T)</span>
 
@@ -183,20 +193,7 @@
     <span class="hl std">iteraciones</span> <span class="hl kwb">&lt;-</span> <span class="hl std">iteraciones</span> <span class="hl opt">+</span> <span class="hl num">1</span>
   <span class="hl std">}</span>
 
-  <span class="hl kwa">if</span><span class="hl std">(</span><span class="hl num">100</span> <span class="hl opt">%in%</span> <span class="hl kwd">abs</span><span class="hl std">(pos)){</span>
-    <span class="hl kwa">if</span><span class="hl std">(mostrar){</span>
-      <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He llegado al límite.\n&quot;</span><span class="hl std">)</span>
-    <span class="hl std">}</span>
-    <span class="hl std">exito</span> <span class="hl kwb">&lt;-</span> <span class="hl std">T</span>
-  <span class="hl std">}</span>
-  <span class="hl kwa">else</span><span class="hl std">{</span>
-    <span class="hl kwa">if</span><span class="hl std">(mostrar){</span>
-      <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;No he terminado de moverme.\n&quot;</span><span class="hl std">)</span>
-    <span class="hl std">}</span>
-    <span class="hl std">exito</span> <span class="hl kwb">&lt;-</span> <span class="hl std">F</span>
-  <span class="hl std">}</span>
-
-  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">Progresion</span> <span class="hl std">= camino,</span> <span class="hl kwc">Pasos</span> <span class="hl std">= iteraciones,</span> <span class="hl kwc">Exito</span> <span class="hl std">= exito))</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">Progresion</span> <span class="hl std">= camino,</span> <span class="hl kwc">Pasos</span> <span class="hl std">= iteraciones))</span>
 <span class="hl std">}</span>
 </pre></div>
 </div></div>
@@ -205,7 +202,7 @@
 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 2:<p>
+                        <p class="cabecera">Apartado 2:<p>
                         <p>
                             Una simulación del proceso y representación gráfica del movimiento.
                         </p>
@@ -214,20 +211,15 @@
                         <p>Para simular el proceso simplemente tenemos que llamar a la función con el número máximo de iteraciones que se requieran. Podemos llamarlo con <code>10000</code> iteraciones:</p>
                         
                         
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">movimiento</span><span class="hl std">(</span><span class="hl num">10000</span><span class="hl std">,</span> <span class="hl kwc">mostrar</span> <span class="hl std">= T)</span>
-</pre></div>
-<div class="output"><pre class="knitr r">## He llegado al límite.
+<div class="chunk" id="1-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos la simulación</span>
+<span class="hl std">res</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">f</span><span class="hl std">()</span>
 </pre></div>
 </div></div>
 
-
-
-
-                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><code class="knitr inline">TRUE</code>, podemos confirmar que sí se ha llegado al borde del cuadrado.</p>
                         <p>Para hacer un gráfico del proceso, simplemente tenemos que recuperar el camino con el elemento <code>Progresion</code> de la lista devuelta por el método y dibujar los puntos de ese vector. Podemos añadir, para la mejor visualización del gráfico, unas líneas que representen el borde del recinto y un par de puntos que representen el punto inicial y el punto final.
                       
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Gráfico del progreso</span>
+<div class="chunk" id="1-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Gráfico del progreso</span>
 <span class="hl kwd">plot</span><span class="hl std">(res</span><span class="hl opt">$</span><span class="hl std">Progresion,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;steelblue&quot;</span><span class="hl std">,</span> <span class="hl kwc">asp</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
      <span class="hl kwc">xlim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">xlab</span><span class="hl std">=</span><span class="hl str">&quot;Eje X&quot;</span><span class="hl std">,</span>
      <span class="hl kwc">ylim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">ylab</span><span class="hl std">=</span><span class="hl str">&quot;Eje Y&quot;</span><span class="hl std">,</span>
@@ -238,51 +230,39 @@
 <span class="hl std">punto.final</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">t</span><span class="hl std">(res</span><span class="hl opt">$</span><span class="hl std">Progresion[</span><span class="hl kwd">nrow</span><span class="hl std">(res</span><span class="hl opt">$</span><span class="hl std">Progresion),])</span>
 <span class="hl kwd">points</span><span class="hl std">(</span><span class="hl kwd">rbind</span><span class="hl std">(punto.inicial, punto.final),</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
 
-<span class="hl com"># # Añadimos los bordes del recinto cuadrado</span>
-<span class="hl com"># abline(h=c(-100,100), v=c(-100,100), col=&quot;coral&quot;)</span>
-
 <span class="hl com"># Añadimos los bordes del recinto cuadrado con polygon</span>
 <span class="hl kwd">polygon</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">border</span> <span class="hl std">=</span> <span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/1-3-1.png" title="plot of chunk 1-3" alt="plot of chunk 1-3" class="plot" /></div></div>
                     </div>
                 </div>
 
-                <div class="ejercicio">
+                <div class="ejercicio ultimo">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 3:<p>
+                        <p class="cabecera">Apartado 3:<p>
                         <p>
-                            Una función con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
+                            Una función, D, con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
                         </p>
                     </div>
                     <div class="solucion">
                         <p>Definimos la función solicitada, en la que usamos <code>replicate</code>, una función de <code>R</code> que permite repetir un proceso tantas veces como se le indique. Como lo que queremos es el número de pasos, lo que haremos será repetir <code>n</code> veces la llamada a <code>movimiento</code>, tomando el resultado que nos interesa: el elemento <code>Pasos</code> de la lista devuelta:</p>
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">repeticion</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl kwc">maxPasos</span> <span class="hl std">=</span> <span class="hl num">Inf</span><span class="hl std">){</span>
-  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(n,</span> <span class="hl kwd">movimiento</span><span class="hl std">(maxPasos)</span><span class="hl opt">$</span><span class="hl std">Pasos))</span>
+<div class="chunk" id="1-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos la función para repetir el experimento n veces</span>
+<span class="hl std">D</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">1000</span><span class="hl std">){</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">replicate</span><span class="hl std">(n,</span> <span class="hl kwd">f</span><span class="hl std">()</span><span class="hl opt">$</span><span class="hl std">Pasos))</span>
 <span class="hl std">}</span>
 </pre></div>
 </div></div>
-                    </div>
-                </div>
                 
-                <div class="ejercicio ultimo">
-                    <div class="enunciado">
-                        <p class="cabecera">Ejercicio 4:<p>
-                        <p>
-                            Ejecuta la función repitiendo 100 veces el proceso inicial y calcula el tiempo medio de salida.
-                        </p>
-                    </div>
-                    <div class="solucion">
-                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto. Además,usaremos la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos el número de repeticiones</span>
-<span class="hl std">num.rep</span> <span class="hl kwb">&lt;-</span> <span class="hl num">100</span>
+                        <p>Esta función se puede usar, por ejemplo, para tomar la media de pasos necesarios para salir del recinto en 10 repeticiones del proceso del movimiento. Para ello usamos <code>mean</code> sobre el vector devuelto por la función anteriormente definida. Además, podemos usar la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
+<div class="chunk" id="1-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos el número de repeticiones</span>
+<span class="hl std">num.rep</span> <span class="hl kwb">&lt;-</span> <span class="hl num">10</span>
 
 <span class="hl com"># Tomamos nota del reloj en el instante actual</span>
 <span class="hl std">inicio</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">Sys.time</span><span class="hl std">()</span>
 
-<span class="hl com"># Hacemos las 100 repeticiones solicitadas</span>
-<span class="hl std">pasos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">repeticion</span><span class="hl std">(num.rep)</span>
+<span class="hl com"># Hacemos las repeticiones solicitadas</span>
+<span class="hl std">pasos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">D</span><span class="hl std">(num.rep)</span>
 
 <span class="hl com"># Tomamos nota del reloj en el instante actual</span>
 <span class="hl std">final</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">Sys.time</span><span class="hl std">()</span>
@@ -299,8 +279,8 @@
 </pre></div>
 </div></div>
 
-                        <p>Tenemos así que, de media, se necesitan unos 5902.1 pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, 2.533517 segundos en calcular la trayectoria del punto hasta que sale del recinto.
-                    </div>
+                        <p>Tenemos así que, de media, se necesitan unos 4980.2 pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, 1.5394866 segundos en calcular la trayectoria del punto hasta que sale del recinto.
+                </div>
                 </div>
             </div>
         </section>

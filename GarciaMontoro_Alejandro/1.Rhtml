@@ -18,7 +18,7 @@
     <!-- Hoja de estilos general -->
     <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
 
-    <title>EC: Alejandro García Montoro</title>
+    <title>EC: Alejandro García Montoro - 2</title>
 </head>
 
 <body>
@@ -27,12 +27,27 @@
 
         <header>
             <div id="nombre">
-                <h1>Estadística Computacional</h1>
+                <h1>Alejandro</h1>
+                <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
-            Soluciones al examen final de la asignatura Estadística Computacional de la UGR
+            Soluciones al segundo ejercicio del examen final de la asignatura Estadística Computacional
         </div>
 
         <div id="datos">
@@ -40,10 +55,6 @@
 
             <div id="datos_contenido">
                 <dl>
-                    <dt>Nombre</dt>
-                        <dd>Alejandro.</dd>
-                    <dt>Apellidos</dt>
-                        <dd>García Montoro.</dd>
                     <dt>DNI</dt>
                         <dd>76628233F</dd>
                     <dt>Grupo</dt>
@@ -58,14 +69,14 @@
             <div id="textoSol">
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Introducción:<p>
+                        <p class="cabecera">Enunciado:<p>
                         <p>
                           Considera en el plano un cuadrado centrado en el origen, de lado 200.
                         </p>
                         
                         <p>
                           Considera un punto que comienza en el origen y se desplaza del siguiente modo:
-                          <ol>
+                          <ol class="lista">
                             <li>En cada paso se lanzan dos monedas.</li>
                             <li>Si la primera moneda es cara, el punto se mueve una unidad a la derecha, si es cruz lo hace a la izquierda.</li>
                             <li>Si la segunda moneda es cara, el punto se mueve una unidad hacia arriba, si es cruz lo hace hacia abajo.</li>
@@ -77,21 +88,20 @@
                 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 1:<p>
+                        <p class="cabecera">Apartado 1:<p>
                         <p>
                             Función que simule el movimiento del punto y devuelva:
-                            <ol>
+                            <ol class="lista">
                               <li> La progresión aleatoria definida.</li>
                               <li> Cuántos pasos han sido necesarios para llegar al límite.</li>
-                              <li> La función debe tener un argumento que limite el número de movimientos y que si se alcanza devuelva una frase que diga "No he terminado de moverme" y, en caso contrario, que diga "He llegado al límite".</li>
                             </ol>
                         </p>
                     </div>
                     <div class="solucion">
                         <p>Definimos la función requerida, en la que el lanzamiento de la moneda lo simularemos con la función <code>sample</code>, tomando dos muestras con reemplazamiento del conjunto <code>{1,2}</code>, donde <code>1</code> representa la cara de la moneda y <code>2</code>, la cruz.</p>
 
-<!--begin.rcode
-movimiento <- function(maxIter = 10, mostrar = F){
+<!--begin.rcode 1-1
+f <- function(){
   # Definimos la posición inicial
   pos <- c(0,0)
   
@@ -102,7 +112,7 @@ movimiento <- function(maxIter = 10, mostrar = F){
   # Inicializamos el contador de iteraciones
   iteraciones <- 0
   
-  while( !(100 %in% abs(pos)) && iteraciones < maxIter){
+  while( !(100 %in% abs(pos))){
     # Simulamos las dos monedas: 1 es cara; 2 es cruz:
     monedas <- sample(1:2, 2, replace = T)
     
@@ -122,20 +132,7 @@ movimiento <- function(maxIter = 10, mostrar = F){
     iteraciones <- iteraciones + 1
   }
   
-  if(100 %in% abs(pos)){
-    if(mostrar){
-      cat("He llegado al límite.\n")
-    }
-    exito <- T
-  }
-  else{
-    if(mostrar){
-      cat("No he terminado de moverme.\n")
-    }
-    exito <- F
-  }
-  
-  return(list(Progresion = camino, Pasos = iteraciones, Exito = exito))
+  return(list(Progresion = camino, Pasos = iteraciones))
 }
 end.rcode-->
                     </div>
@@ -143,7 +140,7 @@ end.rcode-->
 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 2:<p>
+                        <p class="cabecera">Apartado 2:<p>
                         <p>
                             Una simulación del proceso y representación gráfica del movimiento.
                         </p>
@@ -152,20 +149,15 @@ end.rcode-->
                         <p>Para simular el proceso simplemente tenemos que llamar a la función con el número máximo de iteraciones que se requieran. Podemos llamarlo con <code>10000</code> iteraciones:</p>
                         
                         
-<!--begin.rcode
-res <- movimiento(10000, mostrar = T)
+<!--begin.rcode 1-2
+# Generamos la simulación
+res <- f()
 end.rcode-->
 
-<!--begin.rcode include=FALSE
-mensaje <- ifelse(res$Exito, "sí", "no")
-end.rcode-->
-
-
-                        <p>Además de con el mensaje impreso, podemos comprobar si hemos llegado o no al borde con el resultado devuelto: como <code>res$Exito = </code><!-- rinline res$Exito-->, podemos confirmar que <!-- rinline I(mensaje)--> se ha llegado al borde del cuadrado.</p>
                         <p>Para hacer un gráfico del proceso, simplemente tenemos que recuperar el camino con el elemento <code>Progresion</code> de la lista devuelta por el método y dibujar los puntos de ese vector. Podemos añadir, para la mejor visualización del gráfico, unas líneas que representen el borde del recinto y un par de puntos que representen el punto inicial y el punto final.
                       
 
-<!--begin.rcode
+<!--begin.rcode 1-3
 # Gráfico del progreso
 plot(res$Progresion, type="l", col="steelblue", asp=1,
      xlim=c(-100,100), xlab="Eje X",
@@ -177,51 +169,39 @@ punto.inicial <- c(0,0)
 punto.final <- t(res$Progresion[nrow(res$Progresion),])
 points(rbind(punto.inicial, punto.final), pch=20, col="blue")
 
-# # Añadimos los bordes del recinto cuadrado
-# abline(h=c(-100,100), v=c(-100,100), col="coral")
-
 # Añadimos los bordes del recinto cuadrado con polygon
 polygon(c(-100,100,100,-100), c(100,100,-100,-100), border = "coral")
 end.rcode-->
                     </div>
                 </div>
 
-                <div class="ejercicio">
+                <div class="ejercicio ultimo">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 3:<p>
+                        <p class="cabecera">Apartado 3:<p>
                         <p>
-                            Una función con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
+                            Una función, D, con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
                         </p>
                     </div>
                     <div class="solucion">
                         <p>Definimos la función solicitada, en la que usamos <code>replicate</code>, una función de <code>R</code> que permite repetir un proceso tantas veces como se le indique. Como lo que queremos es el número de pasos, lo que haremos será repetir <code>n</code> veces la llamada a <code>movimiento</code>, tomando el resultado que nos interesa: el elemento <code>Pasos</code> de la lista devuelta:</p>
 
-<!--begin.rcode
-repeticion <- function(n = 1000, maxPasos = Inf){
-  return(replicate(n, movimiento(maxPasos)$Pasos))
+<!--begin.rcode 1-4
+# Definimos la función para repetir el experimento n veces
+D <- function(n = 1000){
+  return(replicate(n, f()$Pasos))
 }
 end.rcode-->
-                    </div>
-                </div>
                 
-                <div class="ejercicio ultimo">
-                    <div class="enunciado">
-                        <p class="cabecera">Ejercicio 4:<p>
-                        <p>
-                            Ejecuta la función repitiendo 100 veces el proceso inicial y calcula el tiempo medio de salida.
-                        </p>
-                    </div>
-                    <div class="solucion">
-                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto. Además,usaremos la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
-<!--begin.rcode
+                        <p>Esta función se puede usar, por ejemplo, para tomar la media de pasos necesarios para salir del recinto en 10 repeticiones del proceso del movimiento. Para ello usamos <code>mean</code> sobre el vector devuelto por la función anteriormente definida. Además, podemos usar la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
+<!--begin.rcode 1-5
 # Definimos el número de repeticiones
-num.rep <- 100
+num.rep <- 10
 
 # Tomamos nota del reloj en el instante actual
 inicio <- Sys.time()
 
-# Hacemos las 100 repeticiones solicitadas
-pasos <- repeticion(num.rep)
+# Hacemos las repeticiones solicitadas
+pasos <- D(num.rep)
 
 # Tomamos nota del reloj en el instante actual
 final <- Sys.time()
@@ -238,7 +218,7 @@ tiempo.media <- (tiempo.total)/num.rep
 end.rcode-->
 
                         <p>Tenemos así que, de media, se necesitan unos <!-- rinline I(pasos.media) --> pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, <!-- rinline I(tiempo.media) --> segundos en calcular la trayectoria del punto hasta que sale del recinto.
-                    </div>
+                </div>
                 </div>
             </div>
         </section>

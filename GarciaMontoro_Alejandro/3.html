@@ -1,0 +1,253 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+    <meta charset="utf-8">
+
+    <!-- Etiqueta imprescindible para que los dispositivos pongan el viewport
+    del mismo tamaño que su ancho y no tengan zoom inicial -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Hoja de estilos para empezar con un estilo (casi) nulo (obtenida en http://cssreset.com) -->
+    <link href="CSS/reset.css" rel="stylesheet" type="text/css" />
+
+    <!-- Tipografías usadas -->
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn:400,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+
+    <!-- Hoja de estilos general -->
+    <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
+
+    <title>EC: Alejandro García Montoro - 3</title>
+</head>
+
+<body>
+    <!-- Div necesario para centrar todo el contenido y darle un ancho específico -->
+    <div id="wrapper">
+
+        <header>
+            <div id="nombre">
+                <h1>Alejandro</h1>
+                <h2>García Montoro</h2>
+            </div>
+        </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="examen">
+            Soluciones al tercer ejercicio del examen final de la asignatura Estadística Computacional
+        </div>
+ 
+        <div id="datos">
+            <h2>Datos</h2>
+
+            <div id="datos_contenido">
+                <dl>
+                    <dt>DNI</dt>
+                        <dd>76628233F</dd>
+                    <dt>Grupo</dt>
+                        <dd>Doble grado en ingeniería informática y matemáticas.</dd>
+                </dl>
+            </div>
+        </div>
+
+        <section id="soluciones">
+            <h2>Soluciones al examen</h2>
+
+            <div id="textoSol">
+                <div class="ejercicio">
+                    <div class="enunciado">
+                        <p class="cabecera">Enunciado:</p>
+                        
+                        <p>En este ejercicio se va a simular la clasificación de una serie de datos en el plano a partir de una recta, generando todos los datos del problema de forma aleatoria. El enunciado está basado en un ejercicio visto en la asignatura Aprendizaje Automático, correspondiente al grado en ingeniería informática.</p>
+                        <p>Considérese un cuadrado de lado 100 centrado en el origen. Se pide generar una muestra aleatoria de 50 puntos uniformemente distribuida sobre el cuadrado.</p>
+                        <p>Además, se pide generar una recta de forma aleatoria que corte al cuadrado.</p>
+                        <p>Por último, se pide clasificar, a partir de la recta, los puntos de la muestra generada: si se quedan a un lado se les asignará la clase <code>1</code> y, si se quedan al otro, la clase <code>-1</code>
+                    </div>
+                        
+                    <div class="solucion">
+                        <p>Primero se ha implementado la siguiente función, que genera una lista de <code>N</code> vectores, cada de los cuales contiene una muestra de tamaño <code>dim</code> de una distribución uniforme entre los valores especificados por el vector de dos elementos <code>rango</code>.</p>
+
+<div class="chunk" id="3-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una lista de N vectores de dimensión dim con una muestra</span>
+<span class="hl com"># uniforme en el intervalo [rango[1], rango[2]]</span>
+<span class="hl std">simula_unif</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">N</span><span class="hl std">,</span> <span class="hl kwc">dim</span><span class="hl std">,</span> <span class="hl kwc">rango</span><span class="hl std">){</span>
+    <span class="hl kwd">lapply</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(dim, N), runif,</span> <span class="hl kwc">min</span> <span class="hl std">= rango[</span><span class="hl num">1</span><span class="hl std">],</span> <span class="hl kwc">max</span> <span class="hl std">= rango[</span><span class="hl num">2</span><span class="hl std">])</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+                    
+                        <p>Generamos ahora los datos solicitados, usando la función anterior y tomando como <code>x</code> (resp. <code>y</code>) los primeros (resp. segundos) valores de cada vector generado:</p>                  
+
+<div class="chunk" id="3-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Muestra uniforme de 50 puntos en el cuadrado [-50,50] x [-50,50]</span>
+<span class="hl std">datos_unif</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">simula_unif</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">))</span>
+
+<span class="hl com"># Guardamos las coordenadas en variables diferentes</span>
+<span class="hl std">unif.x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">unlist</span><span class="hl std">(</span><span class="hl kwd">lapply</span><span class="hl std">(datos_unif,</span> <span class="hl str">'[['</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">))</span>
+<span class="hl std">unif.y</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">unlist</span><span class="hl std">(</span><span class="hl kwd">lapply</span><span class="hl std">(datos_unif,</span> <span class="hl str">'[['</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">))</span>
+</pre></div>
+</div></div>
+                        
+                        <p>Podemos ver la muestra generada con la función <code>plot</code>:</p>
+
+<div class="chunk" id="3-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(unif.x, unif.y,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">'red'</span><span class="hl std">,</span> <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">asp</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;Muestra uniforme&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># Añadimos los bordes del recinto cuadrado con polygon</span>
+<span class="hl kwd">polygon</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwc">border</span> <span class="hl std">=</span> <span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/3-3-1.png" title="plot of chunk 3-3" alt="plot of chunk 3-3" class="plot" /></div></div>
+
+                        <p>Para la generación de una recta aleatoria se ha implementado la siguiente función:</p>
+
+<div class="chunk" id="3-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Genera los parámetros (a,b) de una recta aleatoria y = a*x + b que corta</span>
+<span class="hl com"># al cuadrado [intervalo[1], intervalo[2]] x [intervalo[1], intervalo[2]]</span>
+<span class="hl std">simula_recta</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">intervalo</span><span class="hl std">){</span>
+    <span class="hl com"># Simulamos dos puntos dentro del cuadrado intervalo x intervalo</span>
+    <span class="hl std">punto1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">min</span><span class="hl std">=intervalo[</span><span class="hl num">1</span><span class="hl std">],</span> <span class="hl kwc">max</span><span class="hl std">=intervalo[</span><span class="hl num">2</span><span class="hl std">])</span>
+    <span class="hl std">punto2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">runif</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">min</span><span class="hl std">=intervalo[</span><span class="hl num">1</span><span class="hl std">],</span> <span class="hl kwc">max</span><span class="hl std">=intervalo[</span><span class="hl num">2</span><span class="hl std">])</span>
+
+    <span class="hl com"># Generamos los parámetros que definen la recta</span>
+    <span class="hl std">a</span> <span class="hl kwb">&lt;-</span> <span class="hl std">(punto2[</span><span class="hl num">2</span><span class="hl std">]</span> <span class="hl opt">-</span> <span class="hl std">punto1[</span><span class="hl num">2</span><span class="hl std">])</span> <span class="hl opt">/</span> <span class="hl std">(punto2[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">-</span> <span class="hl std">punto1[</span><span class="hl num">1</span><span class="hl std">])</span>
+    <span class="hl std">b</span> <span class="hl kwb">&lt;-</span> <span class="hl opt">-</span><span class="hl std">a</span> <span class="hl opt">*</span> <span class="hl std">punto1[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl std">punto1[</span><span class="hl num">2</span><span class="hl std">]</span>
+
+    <span class="hl com"># Devolvemos un vector concatenando ambos parámetros</span>
+    <span class="hl kwd">c</span><span class="hl std">(a,b)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<p>Vamos a crear ahora una estructura abstracta que genera funciones etiquetadoras. Para ello definimos <code>generador_etiquetados</code>, una función que al ser llamada con otra función <code>f</code> como parámetro devuelve una función etiquetadora; es decir, una función que devuelve 1 o -1 según el signo que toma la función <code>f</code> al recibir los parámetros <code>x</code> e <code>y</code>:
+
+<div class="chunk" id="3-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una función etiquetadora basada en el signo que</span>
+<span class="hl com"># toma el parámetro f</span>
+<span class="hl std">generador_etiquetados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">f</span><span class="hl std">){</span>
+    <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">){</span>
+        <span class="hl kwd">sign</span><span class="hl std">(</span><span class="hl kwd">f</span><span class="hl std">(x,y))</span>
+    <span class="hl std">}</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<p>Resolver el ejercicio con la estructura anterior es ahora más sencillo: simplemente tenemos que definir la función <code>f(x,y) = y - ax - b</code>, donde <code>a</code> y <code>b</code> son los parámetros que definen la recta <code>y = ax + b</code>.</p>
+
+<p>Por tanto, basta simular una recta haciendo uso de la función implementada anteriormente y definir la función <code>f_1</code>, que será la que pasaremos al generador de funciones etiquetadoras:</p>
+
+<div class="chunk" id="3-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos recta aleatoria</span>
+<span class="hl std">recta</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">simula_recta</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">))</span>
+
+<span class="hl com"># Definimos la función cuyo signo etiquetará los datos</span>
+<span class="hl std">f1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">){</span>
+    <span class="hl std">y</span> <span class="hl opt">-</span> <span class="hl std">recta[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">x</span> <span class="hl opt">-</span> <span class="hl std">recta[</span><span class="hl num">2</span><span class="hl std">]</span>
+<span class="hl std">}</span>
+
+<span class="hl com"># Generamos función etiquetadora</span>
+<span class="hl std">etiquetado1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">generador_etiquetados</span><span class="hl std">(f1)</span>
+
+<span class="hl com"># Encapsulamos los datos y las etiquetas en un data frame</span>
+<span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= unif.x,</span> <span class="hl kwc">Y</span> <span class="hl std">= unif.y,</span>
+                    <span class="hl kwc">Etiqueta</span> <span class="hl std">=</span> <span class="hl kwd">etiquetado1</span><span class="hl std">(unif.x, unif.y))</span>
+</pre></div>
+</div></div>
+
+<p>Por último, generamos la gráfica con <code>plot</code>, asignando un color diferente según el etiquetado, y añadiendo la gráfica de la recta simulada:</p>
+
+<div class="chunk" id="3-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos un vector de colores basado en las etiqueta</span>
+<span class="hl std">colores</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">ifelse</span><span class="hl std">(datos</span><span class="hl opt">$</span><span class="hl std">Etiqueta</span> <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># Generamos la gráfica</span>
+<span class="hl kwd">plot</span><span class="hl std">(datos</span><span class="hl opt">$</span><span class="hl std">X, datos</span><span class="hl opt">$</span><span class="hl std">Y,</span> <span class="hl kwc">asp</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">= colores,</span> <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;Muestra uniforme etiquetada&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># Añadimos los bordes del recinto cuadrado con polygon</span>
+<span class="hl kwd">polygon</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwc">border</span> <span class="hl std">=</span> <span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># Dibujamos la recta clasificadora</span>
+<span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwd">rev</span><span class="hl std">(recta))</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/3-7-1.png" title="plot of chunk 3-7" alt="plot of chunk 3-7" class="plot" /></div></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="clear"></div>
+    </div>
+    <footer>Granada, a 8 de junio de 2016</footer>
+</body>
+
+</html>
