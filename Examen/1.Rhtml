@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 2</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+Primero importamos el libro ggplot para las gráficas
+
+<!--begin.rcode setup
+require(ggplot2)
+end.rcode-->
+
+
+Escribimos la función pedida.
+
+<!--begin.rcode progresionPunto
+progresionPunto <- function(max.iteraciones = 10000) {
+  # Definimos la posición inicial
+  pos.inicial <- c(0,0)
+
+  # La matriz camino va a contener la posición X,Y en cada instante
+  camino <- data.frame(X = pos.inicial[1],
+                       Y = pos.inicial[2])
+  
+  # Añadimos un contador de iteraciones
+  # En cualquier problema de este tipo hay que hacerlo
+  # Para evitar que se quede sin encontrar solución
+  iteraciones <- 0
+  
+  # Pos es la posición actual del punto
+  posicion <- pos.inicial
+  
+  while (!any(abs(posicion) >= 100) && iteraciones < max.iteraciones) {
+    tirada <- sample(c(-1,1), 2, replace = TRUE)
+    
+    # La primera tirada es el eje X, la segunda el eje Y.
+    posicion <- posicion + tirada
+    
+    # Actualizamos el camino
+    camino <- rbind(camino, posicion)
+    
+    iteraciones <- iteraciones + 1
+  }
+  
+  camino$Iteraciones <- 0:(nrow(camino)-1)
+  
+  return(list("Camino" = camino, "Iteraciones" = iteraciones))
+  
+}
+end.rcode-->
+
+Vamos a probarla.
+
+<!--begin.rcode pruebaUna
+resultado <- progresionPunto()
+data.poly <- data.frame(x = c(-100,-100,100,100), y = c(-100,100,100,-100))
+
+data.progresion <- resultado$Camino
+
+g <- ggplot() + geom_line(data = data.progresion, aes(X,Y, alpha = Iteraciones)) +  geom_polygon(data = data.poly, aes(x,y),colour="black",fill=NA)
+g + ggtitle(paste("Camino realizado en",resultado$Iteraciones,"iteraciones")) + geom_point(data = data.progresion[c(1,nrow(data.progresion-1)),], aes(X,Y, colour = "red", size = 1.3)) + guides(size = FALSE, colour = FALSE)
+end.rcode-->
+
+Ahora escribamos una función para replicar esta simulación <em>n</em> veces.
+
+<!--begin.rcode muchasProgresiones
+muchasProgresiones <- function(n = 3) {
+  replicate(n = n, expr = progresionPunto()$Iteraciones)
+}
+end.rcode-->
+
+Vamos a probarlo con el valor por defecto, 3.
+
+<!--begin.rcode pruebaMuchas
+muchas <- muchasProgresiones()
+muchas
+end.rcode-->
+
+La media es <!--rinline I(mean(muchas)) -->
+
+</body>
+</html>

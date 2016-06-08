@@ -1,0 +1,208 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 1</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+Leamos el fichero en una hoja de datos.
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;Datos.txt&quot;</span><span class="hl std">)</span>
+<span class="hl std">datos</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Peso Altura Edad   Sexo
+## 1    75    175   21 Hombre
+## 2    81    178   22 Hombre
+## 3    56    162   22  Mujer
+## 4    68    180   21  Mujer
+## 5    79    182   24 Hombre
+## 6    89    185   22 Hombre
+## 7    62    157   21  Mujer
+## 8    59    165   22  Mujer
+## 9    83    180   23 Hombre
+## 10   55    160   22  Mujer
+## 11   72    174   21 Hombre
+## 12   56    161   23  Mujer
+## 13   84    182   22 Hombre
+## 14   64    163   24  Mujer
+## 15   76    172   22 Hombre
+## 16   68    169   21  Mujer
+## 17   58    162   24 Hombre
+## 18   78    178   22 Hombre
+## 19   62    157   21  Mujer
+## 20   77    165   21 Hombre
+## 21   71    182   22  Mujer
+## 22   55    163   24  Mujer
+## 23   78    174   25 Hombre
+## 24   77    181   23 Hombre
+## 25   81    181   22 Hombre
+## 26   75    174   23 Hombre
+## 27   60    167   21  Mujer
+## 28   68    178   21 Hombre
+## 29   68    182   22  Mujer
+## 30   89    185   22 Hombre
+## 31   82    190   21 Hombre
+## 32   59    155   22  Mujer
+## 33   63    173   21  Mujer
+## 34   75    177   24 Hombre
+## 35   62    174   21  Mujer
+## 36   81    183   22 Hombre
+</pre></div>
+</div></div>
+
+Para hacer un resumen estadístico usamos la función <em>summary</em>.
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(datos)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
+##  Min.   :55.00   Min.   :155.0   Min.   :21.00   Hombre:20  
+##  1st Qu.:62.00   1st Qu.:164.5   1st Qu.:21.00   Mujer :16  
+##  Median :71.50   Median :174.0   Median :22.00              
+##  Mean   :70.72   Mean   :172.9   Mean   :22.14              
+##  3rd Qu.:78.25   3rd Qu.:181.0   3rd Qu.:23.00              
+##  Max.   :89.00   Max.   :190.0   Max.   :25.00
+</pre></div>
+</div></div>
+
+Ahora particularizamos este resumen para mujeres y hombres.
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">mujeres</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">which</span><span class="hl std">(datos</span><span class="hl opt">$</span><span class="hl std">Sexo</span> <span class="hl opt">==</span> <span class="hl str">&quot;Mujer&quot;</span><span class="hl std">)</span>
+
+<span class="hl com"># Comprobamos que hemos hecho bien la partición</span>
+<span class="hl std">datos[mujeres,]</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Peso Altura Edad  Sexo
+## 3    56    162   22 Mujer
+## 4    68    180   21 Mujer
+## 7    62    157   21 Mujer
+## 8    59    165   22 Mujer
+## 10   55    160   22 Mujer
+## 12   56    161   23 Mujer
+## 14   64    163   24 Mujer
+## 16   68    169   21 Mujer
+## 19   62    157   21 Mujer
+## 21   71    182   22 Mujer
+## 22   55    163   24 Mujer
+## 27   60    167   21 Mujer
+## 29   68    182   22 Mujer
+## 32   59    155   22 Mujer
+## 33   63    173   21 Mujer
+## 35   62    174   21 Mujer
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Mostramos el resumen de las mujeres</span>
+<span class="hl kwd">summary</span><span class="hl std">(datos[mujeres,])</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
+##  Min.   :55.00   Min.   :155.0   Min.   :21.00   Hombre: 0  
+##  1st Qu.:58.25   1st Qu.:160.8   1st Qu.:21.00   Mujer :16  
+##  Median :62.00   Median :164.0   Median :22.00              
+##  Mean   :61.75   Mean   :166.9   Mean   :21.88              
+##  3rd Qu.:65.00   3rd Qu.:173.2   3rd Qu.:22.00              
+##  Max.   :71.00   Max.   :182.0   Max.   :24.00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Mostramos el resumen de los hombres</span>
+<span class="hl kwd">summary</span><span class="hl std">(datos[</span><span class="hl opt">-</span><span class="hl std">mujeres,])</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
+##  Min.   :58.00   Min.   :162.0   Min.   :21.00   Hombre:20  
+##  1st Qu.:75.00   1st Qu.:174.0   1st Qu.:21.75   Mujer : 0  
+##  Median :78.00   Median :178.0   Median :22.00              
+##  Mean   :77.90   Mean   :177.8   Mean   :22.35              
+##  3rd Qu.:81.25   3rd Qu.:182.0   3rd Qu.:23.00              
+##  Max.   :89.00   Max.   :190.0   Max.   :25.00
+</pre></div>
+</div></div>
+
+Ahora vamos a contrastar la suposición de que el peso medio de los hombres y de las mujeres era el mismo.
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com">#Altura mujeres y hombres</span>
+<span class="hl std">peso.M</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos</span><span class="hl opt">$</span><span class="hl std">Peso[mujeres]</span>
+<span class="hl std">peso.H</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos</span><span class="hl opt">$</span><span class="hl std">Peso[</span><span class="hl opt">-</span><span class="hl std">mujeres]</span>
+
+<span class="hl kwd">t.test</span><span class="hl std">(peso.M,peso.H)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 	Welch Two Sample t-test
+## 
+## data:  peso.M and peso.H
+## t = -8.0607, df = 33.764, p-value = 2.247e-09
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -20.22273 -12.07727
+## sample estimates:
+## mean of x mean of y 
+##     61.75     77.90
+</pre></div>
+</div></div>
+
+Como el p-valor es muy muy pequeño, podemos afirmar la hipótesis alternativa, que es que la diferencia de las medias NO es 0. 
+
+
+</body>
+</html>

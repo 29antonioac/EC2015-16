@@ -1,0 +1,113 @@
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 3</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+
+<h2> Escribe una función, <b>Dado(n=100)</b>, que simule el lanzamiento de un dado en n ocasiones y devuelva un vector con los resultados.</h2>
+
+<!--begin.rcode
+Dado <- function(n = 100) {
+  if (!is.numeric(n))
+    stop("No has introducido un número!")
+  
+  # Tomamos n muestras del vector 1:6 con reemplazamiento.
+  dado <- sample(6, n, replace = TRUE)
+  return(dado)
+}
+end.rcode-->
+
+La probamos:
+
+<!--begin.rcode
+Dado(12)
+Dado(5)
+Dado(3)
+Dado(3.5)
+Dado("A")
+end.rcode-->
+
+<h2> Escriba CuatroDados(n=100) que simule el lanzamiento de cuatro dados en n ocasiones y devolver una matriz con los resultados.</h2>
+
+<!--begin.rcode
+CuatroDados <- function(n = 100) {
+  if (!is.numeric(n))
+    stop("No has introducido un número!")
+  
+  # Llamamos a cbind con la lista resultante de replicar Dado(4) n veces
+  cuatroDados <- do.call(cbind, replicate(n = n, Dado(4), simplify = FALSE))
+  return(cuatroDados)
+}
+end.rcode-->
+
+La prueba
+
+<!--begin.rcode
+CuatroDados(12)
+CuatroDados(5)
+CuatroDados(3)
+CuatroDados(3.5)
+CuatroDados("A")
+end.rcode-->
+
+
+<h2> Escriba SumaDeCuatroDados(n=100), que devuelva la suma de n tiradas de cuatro dados </h2>
+
+<!--begin.rcode
+SumaDeCuatroDados <- function(n=100) {
+  dados <- CuatroDados(n)
+  
+  # Realizamos la suma por columnas (MARGIN = 2) de la matriz dados
+  suma <- apply(X = dados, MARGIN = 2, sum)
+  return(suma)
+}
+end.rcode-->
+
+La prueba:
+
+<!--begin.rcode
+SumaDeCuatroDados(12)
+SumaDeCuatroDados(2)
+SumaDeCuatroDados(4)
+SumaDeCuatroDados("12")
+end.rcode-->
+
+<h2> Con n=5000, devuelva la probabilidad de que la suma de los cuatro dados sea menor que 12.</h2>
+
+<!--begin.rcode
+sumas <- SumaDeCuatroDados(5000)
+
+# sumas < 12 devuelve un vector lógico que vale TRUE cuando la suma es menor que 12
+# En R la suma de vectores lógicos devuelve el número de TRUE del vector
+# Al dividir por la longitud del vector, obtenemos la proporción de TRUE
+# Por tanto, usamos la función mean, que hace justamente esto.
+mean(sumas < 12)
+end.rcode-->
+
+<h2> Lo mismo pero para que la suma sea menor que <em>x</em> </h2>
+
+<!--begin.rcode
+ProbabilidadSumaDeCuatroDados <- function(x = 12, n = 5000) {
+  if (!is.numeric(n) || !is.numeric(x))
+    stop("No has introducido números!")
+  
+  sumas <- SumaDeCuatroDados(n)
+  return(mean(sumas < x))
+}
+end.rcode-->
+
+<!--begin.rcode
+ProbabilidadSumaDeCuatroDados(x = 12, n = 5000)
+ProbabilidadSumaDeCuatroDados(x = 12, n = 10000)
+ProbabilidadSumaDeCuatroDados(x = 12, n = 20000)
+ProbabilidadSumaDeCuatroDados(x = NA, n = 5000)
+end.rcode-->
+
+</body>
+</html>

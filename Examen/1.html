@@ -1,0 +1,153 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 2</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+Primero importamos el libro ggplot para las gráficas
+
+<div class="chunk" id="setup"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">require</span><span class="hl std">(ggplot2)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## Loading required package: ggplot2
+</pre></div>
+</div></div>
+
+
+Escribimos la función pedida.
+
+<div class="chunk" id="progresionPunto"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">progresionPunto</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">max.iteraciones</span> <span class="hl std">=</span> <span class="hl num">10000</span><span class="hl std">) {</span>
+  <span class="hl com"># Definimos la posición inicial</span>
+  <span class="hl std">pos.inicial</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">)</span>
+
+  <span class="hl com"># La matriz camino va a contener la posición X,Y en cada instante</span>
+  <span class="hl std">camino</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= pos.inicial[</span><span class="hl num">1</span><span class="hl std">],</span>
+                       <span class="hl kwc">Y</span> <span class="hl std">= pos.inicial[</span><span class="hl num">2</span><span class="hl std">])</span>
+
+  <span class="hl com"># Añadimos un contador de iteraciones</span>
+  <span class="hl com"># En cualquier problema de este tipo hay que hacerlo</span>
+  <span class="hl com"># Para evitar que se quede sin encontrar solución</span>
+  <span class="hl std">iteraciones</span> <span class="hl kwb">&lt;-</span> <span class="hl num">0</span>
+
+  <span class="hl com"># Pos es la posición actual del punto</span>
+  <span class="hl std">posicion</span> <span class="hl kwb">&lt;-</span> <span class="hl std">pos.inicial</span>
+
+  <span class="hl kwa">while</span> <span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">any</span><span class="hl std">(</span><span class="hl kwd">abs</span><span class="hl std">(posicion)</span> <span class="hl opt">&gt;=</span> <span class="hl num">100</span><span class="hl std">)</span> <span class="hl opt">&amp;&amp;</span> <span class="hl std">iteraciones</span> <span class="hl opt">&lt;</span> <span class="hl std">max.iteraciones) {</span>
+    <span class="hl std">tirada</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">),</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+
+    <span class="hl com"># La primera tirada es el eje X, la segunda el eje Y.</span>
+    <span class="hl std">posicion</span> <span class="hl kwb">&lt;-</span> <span class="hl std">posicion</span> <span class="hl opt">+</span> <span class="hl std">tirada</span>
+
+    <span class="hl com"># Actualizamos el camino</span>
+    <span class="hl std">camino</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">rbind</span><span class="hl std">(camino, posicion)</span>
+
+    <span class="hl std">iteraciones</span> <span class="hl kwb">&lt;-</span> <span class="hl std">iteraciones</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl std">}</span>
+
+  <span class="hl std">camino</span><span class="hl opt">$</span><span class="hl std">Iteraciones</span> <span class="hl kwb">&lt;-</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(camino)</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span>
+
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;Camino&quot;</span> <span class="hl std">= camino,</span> <span class="hl str">&quot;Iteraciones&quot;</span> <span class="hl std">= iteraciones))</span>
+
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+Vamos a probarla.
+
+<div class="chunk" id="pruebaUna"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">resultado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">progresionPunto</span><span class="hl std">()</span>
+<span class="hl std">data.poly</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">),</span> <span class="hl kwc">y</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">100</span><span class="hl std">))</span>
+
+<span class="hl std">data.progresion</span> <span class="hl kwb">&lt;-</span> <span class="hl std">resultado</span><span class="hl opt">$</span><span class="hl std">Camino</span>
+
+<span class="hl std">g</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">ggplot</span><span class="hl std">()</span> <span class="hl opt">+</span> <span class="hl kwd">geom_line</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= data.progresion,</span> <span class="hl kwd">aes</span><span class="hl std">(X,Y,</span> <span class="hl kwc">alpha</span> <span class="hl std">= Iteraciones))</span> <span class="hl opt">+</span>  <span class="hl kwd">geom_polygon</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= data.poly,</span> <span class="hl kwd">aes</span><span class="hl std">(x,y),</span><span class="hl kwc">colour</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">,</span><span class="hl kwc">fill</span><span class="hl std">=</span><span class="hl num">NA</span><span class="hl std">)</span>
+<span class="hl std">g</span> <span class="hl opt">+</span> <span class="hl kwd">ggtitle</span><span class="hl std">(</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Camino realizado en&quot;</span><span class="hl std">,resultado</span><span class="hl opt">$</span><span class="hl std">Iteraciones,</span><span class="hl str">&quot;iteraciones&quot;</span><span class="hl std">))</span> <span class="hl opt">+</span> <span class="hl kwd">geom_point</span><span class="hl std">(</span><span class="hl kwc">data</span> <span class="hl std">= data.progresion[</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl kwd">nrow</span><span class="hl std">(data.progresion</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)),],</span> <span class="hl kwd">aes</span><span class="hl std">(X,Y,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span> <span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">1.3</span><span class="hl std">))</span> <span class="hl opt">+</span> <span class="hl kwd">guides</span><span class="hl std">(</span><span class="hl kwc">size</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl kwc">colour</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/pruebaUna-1.png" title="plot of chunk pruebaUna" alt="plot of chunk pruebaUna" class="plot" /></div></div>
+
+Ahora escribamos una función para replicar esta simulación <em>n</em> veces.
+
+<div class="chunk" id="muchasProgresiones"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">muchasProgresiones</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">3</span><span class="hl std">) {</span>
+  <span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">= n,</span> <span class="hl kwc">expr</span> <span class="hl std">=</span> <span class="hl kwd">progresionPunto</span><span class="hl std">()</span><span class="hl opt">$</span><span class="hl std">Iteraciones)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+Vamos a probarlo con el valor por defecto, 3.
+
+<div class="chunk" id="pruebaMuchas"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">muchas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">muchasProgresiones</span><span class="hl std">()</span>
+<span class="hl std">muchas</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 7442 4554 8488
+</pre></div>
+</div></div>
+
+La media es 6828
+
+</body>
+</html>

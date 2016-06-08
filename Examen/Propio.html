@@ -1,0 +1,243 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 3</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+
+<h2> Escribe una función, <b>Dado(n=100)</b>, que simule el lanzamiento de un dado en n ocasiones y devuelva un vector con los resultados.</h2>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">Dado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl kwa">if</span> <span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">is.numeric</span><span class="hl std">(n))</span>
+    <span class="hl kwd">stop</span><span class="hl std">(</span><span class="hl str">&quot;No has introducido un número!&quot;</span><span class="hl std">)</span>
+
+  <span class="hl com"># Tomamos n muestras del vector 1:6 con reemplazamiento.</span>
+  <span class="hl std">dado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">6</span><span class="hl std">, n,</span> <span class="hl kwc">replace</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+  <span class="hl kwd">return</span><span class="hl std">(dado)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La probamos:
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 2 2 5 1 3 2 2 6 5 2 6 5
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2 3 1 3 3
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2 5 4
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">3.5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 2 2 4
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in Dado(&quot;A&quot;): No has introducido un número!
+</pre></div>
+</div></div>
+
+<h2> Escriba CuatroDados(n=100) que simule el lanzamiento de cuatro dados en n ocasiones y devolver una matriz con los resultados.</h2>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl kwa">if</span> <span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">is.numeric</span><span class="hl std">(n))</span>
+    <span class="hl kwd">stop</span><span class="hl std">(</span><span class="hl str">&quot;No has introducido un número!&quot;</span><span class="hl std">)</span>
+
+  <span class="hl com"># Llamamos a cbind con la lista resultante de replicar Dado(4) n veces</span>
+  <span class="hl std">cuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">do.call</span><span class="hl std">(cbind,</span> <span class="hl kwd">replicate</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">= n,</span> <span class="hl kwd">Dado</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">),</span> <span class="hl kwc">simplify</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>
+  <span class="hl kwd">return</span><span class="hl std">(cuatroDados)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La prueba
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+## [1,]    2    3    3    1    4    5    6    3    6     3     4     1
+## [2,]    4    1    2    5    2    2    6    3    2     1     2     3
+## [3,]    2    2    3    1    5    1    4    1    5     4     1     4
+## [4,]    6    5    3    2    1    5    2    4    4     1     4     5
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl num">5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    3    1    6    4    1
+## [2,]    5    1    4    4    4
+## [3,]    2    6    3    2    6
+## [4,]    4    3    1    1    6
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3]
+## [1,]    6    5    3
+## [2,]    3    1    5
+## [3,]    1    6    4
+## [4,]    6    5    5
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl num">3.5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##      [,1] [,2] [,3]
+## [1,]    5    5    3
+## [2,]    6    3    3
+## [3,]    4    4    2
+## [4,]    4    5    1
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">CuatroDados</span><span class="hl std">(</span><span class="hl str">&quot;A&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in CuatroDados(&quot;A&quot;): No has introducido un número!
+</pre></div>
+</div></div>
+
+
+<h2> Escriba SumaDeCuatroDados(n=100), que devuelva la suma de n tiradas de cuatro dados </h2>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">SumaDeCuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span><span class="hl std">=</span><span class="hl num">100</span><span class="hl std">) {</span>
+  <span class="hl std">dados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">CuatroDados</span><span class="hl std">(n)</span>
+
+  <span class="hl com"># Realizamos la suma por columnas (MARGIN = 2) de la matriz dados</span>
+  <span class="hl std">suma</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">apply</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= dados,</span> <span class="hl kwc">MARGIN</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">, sum)</span>
+  <span class="hl kwd">return</span><span class="hl std">(suma)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+La prueba:
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 16 10 18 12 16 11 17 18 18 12 14 10
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 11 12
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 14  7 17 11
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl str">&quot;12&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in CuatroDados(n): No has introducido un número!
+</pre></div>
+</div></div>
+
+<h2> Con n=5000, devuelva la probabilidad de que la suma de los cuatro dados sea menor que 12.</h2>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sumas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(</span><span class="hl num">5000</span><span class="hl std">)</span>
+
+<span class="hl com"># sumas &lt; 12 devuelve un vector lógico que vale TRUE cuando la suma es menor que 12</span>
+<span class="hl com"># En R la suma de vectores lógicos devuelve el número de TRUE del vector</span>
+<span class="hl com"># Al dividir por la longitud del vector, obtenemos la proporción de TRUE</span>
+<span class="hl com"># Por tanto, usamos la función mean, que hace justamente esto.</span>
+<span class="hl kwd">mean</span><span class="hl std">(sumas</span> <span class="hl opt">&lt;</span> <span class="hl num">12</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2438
+</pre></div>
+</div></div>
+
+<h2> Lo mismo pero para que la suma sea menor que <em>x</em> </h2>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">ProbabilidadSumaDeCuatroDados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5000</span><span class="hl std">) {</span>
+  <span class="hl kwa">if</span> <span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">is.numeric</span><span class="hl std">(n)</span> <span class="hl opt">|| !</span><span class="hl kwd">is.numeric</span><span class="hl std">(x))</span>
+    <span class="hl kwd">stop</span><span class="hl std">(</span><span class="hl str">&quot;No has introducido números!&quot;</span><span class="hl std">)</span>
+
+  <span class="hl std">sumas</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">SumaDeCuatroDados</span><span class="hl std">(n)</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">mean</span><span class="hl std">(sumas</span> <span class="hl opt">&lt;</span> <span class="hl std">x))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ProbabilidadSumaDeCuatroDados</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5000</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2306
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">ProbabilidadSumaDeCuatroDados</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">10000</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2342
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">ProbabilidadSumaDeCuatroDados</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">12</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">20000</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 0.2375
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">ProbabilidadSumaDeCuatroDados</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5000</span><span class="hl std">)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in ProbabilidadSumaDeCuatroDados(x = NA, n = 5000): No has introducido números!
+</pre></div>
+</div></div>
+
+</body>
+</html>

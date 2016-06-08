@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Examen Estadística Computacional 2015-16 - Ejercicio 1</title>
+</head>
+
+<body>
+
+<h1>Antonio Álvarez Caballero</h1>
+
+Leamos el fichero en una hoja de datos.
+
+<!--begin.rcode
+datos <- read.csv("Datos.txt")
+datos
+end.rcode-->
+
+Para hacer un resumen estadístico usamos la función <em>summary</em>.
+
+<!--begin.rcode
+summary(datos)
+end.rcode-->
+
+Ahora particularizamos este resumen para mujeres y hombres.
+
+<!--begin.rcode
+mujeres <- which(datos$Sexo == "Mujer")
+
+# Comprobamos que hemos hecho bien la partición
+datos[mujeres,]
+
+# Mostramos el resumen de las mujeres
+summary(datos[mujeres,])
+
+# Mostramos el resumen de los hombres
+summary(datos[-mujeres,])
+end.rcode-->
+
+Ahora vamos a contrastar la suposición de que el peso medio de los hombres y de las mujeres era el mismo.
+
+<!--begin.rcode
+#Altura mujeres y hombres
+peso.M <- datos$Peso[mujeres]
+peso.H <- datos$Peso[-mujeres]
+
+t.test(peso.M,peso.H)
+end.rcode-->
+
+Como el p-valor es muy muy pequeño, podemos afirmar la hipótesis alternativa, que es que la diferencia de las medias NO es 0. 
+
+
+</body>
+</html>
