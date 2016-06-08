@@ -1,0 +1,219 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+    <meta charset="utf-8">
+
+    <!-- Etiqueta imprescindible para que los dispositivos pongan el viewport
+    del mismo tamaño que su ancho y no tengan zoom inicial -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Hoja de estilos para empezar con un estilo (casi) nulo (obtenida en http://cssreset.com) -->
+    <link href="CSS/reset.css" rel="stylesheet" type="text/css" />
+
+    <!-- Tipografías usadas -->
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn:400,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+
+    <!-- Hoja de estilos general -->
+    <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
+
+    <title>EC: Alejandro García Montoro - Datos</title>
+</head>
+
+<body>
+    <!-- Div necesario para centrar todo el contenido y darle un ancho específico -->
+    <div id="wrapper">
+
+        <header>
+            <div id="nombre">
+                <h1>Estadística Computacional</h1>
+            </div>
+        </header>
+
+        <div id="examen">
+            Soluciones al segundo ejercicio
+        </div>
+
+        <div id="datos">
+            <h2>Datos</h2>
+
+            <div id="datos_contenido">
+                <dl>
+                    <dt>Nombre</dt>
+                        <dd>Alejandro.</dd>
+                    <dt>Apellidos</dt>
+                        <dd>García Montoro.</dd>
+                    <dt>DNI</dt>
+                        <dd>76628233F</dd>
+                    <dt>Grupo</dt>
+                        <dd>Doble grado en ingeniería informática y matemáticas.</dd>
+                </dl>
+            </div>
+        </div>
+
+        <section id="soluciones">
+            <h2>Soluciones al examen</h2>
+
+            <div id="textoSol">
+                <div class="ejercicio">
+                    <div class="enunciado">
+                        <p class="cabecera">Enunciado:</p>
+                        
+                        <p>El archivo <code>http://www.ugr.es/local/andresgc/ec/Datos.txt</code> contiene unos datos. Léelos en una hoja de datos. Haz un resumen estadístico de los mismos. Haz sendos resúmenes estadísticos de los hombres y de las mujeres. Suponiendo que la muestra está tomada al azar de una población donde se pensaba que el peso medio de los hombres y el de las mujeres era el mismo y que se desea contrastar si ha cambiado esta suposición, utiliza la función t.test para realizarlo.</p>
+                    </div>
+                        
+                    <div class="solucion">
+                        <p>Un rápido vistazo al archivo de texto nos permite ver que se trata de un archivo CSV; es decir, en el que los valores de cada campo están separados por comas. Leemos por tanto el archivo de texto con la función <code>read.csv</code>, a la que podemos pasar una URL absoluta y nos devuelve un objeto del tipo <code>data.frame</code></p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos del archivo de texto en un data.frame</span>
+<span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;http://www.ugr.es/~andresgc/ec/Datos.txt&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+                    
+                        <p>Para hacer un resumen de una forma fácil podemos usar la función <code>summary</code>, cuyo cometido es exactamente el que vamos buscando. Además, para buscar posibles correlaciones entre todos los datos vamos a usar la función <code>pairs</code>, que genera gráficos para cada par de variables. Como luego vamos a tener que generar el mismo tipo de resumen para los hombres y mujeres por separado, vamos a encapsular estas dos órdenes en una función que reciba como parámetro el conjunto de datos a resumir; así aprovechamos código y acotamos los posibles errores de programación:</p>                    
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">resumen</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">dat</span><span class="hl std">){</span>
+  <span class="hl com"># Generamos un resumen automático de los datos</span>
+  <span class="hl std">resultado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(dat)</span>
+
+  <span class="hl com"># Generamos un gráfico para ver posibles correlaciones</span>
+  <span class="hl kwd">pairs</span><span class="hl std">(dat,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;steelblue&quot;</span><span class="hl std">)</span>
+
+  <span class="hl kwd">return</span><span class="hl std">(resultado)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<p>Hacemos ya el resumen conjunto pasándole a la función anteriormente definida el objeto <code>datos</code>:
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">resumen</span><span class="hl std">(datos)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
+##  Min.   :55.00   Min.   :155.0   Min.   :21.00   Hombre:20  
+##  1st Qu.:62.00   1st Qu.:164.5   1st Qu.:21.00   Mujer :16  
+##  Median :71.50   Median :174.0   Median :22.00              
+##  Mean   :70.72   Mean   :172.9   Mean   :22.14              
+##  3rd Qu.:78.25   3rd Qu.:181.0   3rd Qu.:23.00              
+##  Max.   :89.00   Max.   :190.0   Max.   :25.00
+</pre></div>
+</div></div>
+
+                        <p>Para hacer los resúmenes separados de hombres y mujeres primero tenemos que separar unos datos de otros. Para ello vamos a tomar todas las filas del <code>data.frame</code> cuya columna <code>Sexo</code> sea de un único tipo, generando así un vector de tipo lógico que usaremos para elegir las filas deseadas:</p>
+                        
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos correspondientes a hombres y </span>
+<span class="hl com"># los de las mujeres por separado</span>
+<span class="hl std">datos.hombres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos[datos</span><span class="hl opt">$</span><span class="hl std">Sexo</span> <span class="hl opt">==</span> <span class="hl str">&quot;Hombre&quot;</span><span class="hl std">, ]</span>
+<span class="hl std">datos.mujeres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos[datos</span><span class="hl opt">$</span><span class="hl std">Sexo</span> <span class="hl opt">==</span> <span class="hl str">&quot;Mujer&quot;</span><span class="hl std">, ]</span>
+</pre></div>
+</div></div>
+
+                        <p>Además, como ahora la última columna es siempre igual, podemos eliminarla para que en los resúmenes no se tenga en cuenta esta variable, que no dará información nueva al ser constante en cada subconjunto:</p>
+                        
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Eliminamos la última columna, que contiene valores constantes</span>
+<span class="hl std">datos.hombres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos.hombres[,</span> <span class="hl opt">-</span><span class="hl kwd">ncol</span><span class="hl std">(datos.hombres)]</span>
+<span class="hl std">datos.mujeres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos.mujeres[,</span> <span class="hl opt">-</span><span class="hl kwd">ncol</span><span class="hl std">(datos.mujeres)]</span>
+</pre></div>
+</div></div>
+
+                        <p>Podemos reutilizar la función <code>resumen</code> para generar resúmenes de sendos subconjuntos y comprobar que todo lo hecho hasta ahora es correcto:</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos el resumen para los hombres</span>
+<span class="hl kwd">resumen</span><span class="hl std">(datos.hombres)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad      
+##  Min.   :58.00   Min.   :162.0   Min.   :21.00  
+##  1st Qu.:75.00   1st Qu.:174.0   1st Qu.:21.75  
+##  Median :78.00   Median :178.0   Median :22.00  
+##  Mean   :77.90   Mean   :177.8   Mean   :22.35  
+##  3rd Qu.:81.25   3rd Qu.:182.0   3rd Qu.:23.00  
+##  Max.   :89.00   Max.   :190.0   Max.   :25.00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Generamos el resumen para las mujeres</span>
+<span class="hl kwd">resumen</span><span class="hl std">(datos.mujeres)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-6-2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad      
+##  Min.   :55.00   Min.   :155.0   Min.   :21.00  
+##  1st Qu.:58.25   1st Qu.:160.8   1st Qu.:21.00  
+##  Median :62.00   Median :164.0   Median :22.00  
+##  Mean   :61.75   Mean   :166.9   Mean   :21.88  
+##  3rd Qu.:65.00   3rd Qu.:173.2   3rd Qu.:22.00  
+##  Max.   :71.00   Max.   :182.0   Max.   :24.00
+</pre></div>
+</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="clear"></div>
+    </div>
+    <footer>Granada, a 8 de junio de 2016</footer>
+</body>
+
+</html>

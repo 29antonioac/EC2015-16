@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+  <title>Ejemplo de uso de knitr con HTML</title>
+</head>
+<body>
+
+<center>
+  <H1>Ejemplo de uso de <code>knitr</code> con HTML</H1>
+</center>  
+
+<h2>Introducción</h2>
+<p>El libro <b>knitr</b> permite construir un archivo HTML que integra resultados de R.   Evidentemente, el libro con todas sus dependencias debe estar en la biblioteca, en caso contrario debe usar la orden <b>install.packages("knitr", dependencies = TRUE)</b>. Una vez cargado con la orden	<b>library(knitr)</b>,
+basta con crear un archivo con la extensión <code>Rhtml</code> que incluya un texto en formato <code>HTML</code> y 
+además incluya unos comentarios especiales que serán ejecutados en R y cuyos resultados, mezclados con el texto original,
+constituirán un archivo con el mismo nombre que el archivo suministrado y con extensión <code>html</code>.
+</p>				 
+
+<p>
+Esto es, si el archivo se llama <code>1.Rhtml</code> y se encuentra en el directorio de trabajo, se ejecuta la orden <code>knit("1.Rhtml")</code> y se obtendrá el archivo <code>1.html</code> (y varios archivos adicionales en el directorio <code>figure</code> si se incluyen gráficos).
+</p>
+
+<p>
+Los comentarios especiales son de la forma
+<pre>
+&lt;!--begin.rcode [metaórdenes]
+	Órdenes de R
+end.rcode-->
+</pre>
+dónde las metaórdenes afectan al tipo de salida de R.
+</p>
+<h2>Ejemplos</h2>
+  <p>
+  
+  Generación de 20 números de la normal 0, 1.
+  </p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r">    <span class="hl com">## Esta línea es un comentario que no afecta al resultado final</span>
+    <span class="hl std">x</span><span class="hl kwb">=</span><span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">20</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+	Si no quiere que aparezcan las órdenes que producen un resultado, basta con que use la metaorden
+<code>echo=FALSE</code>. En el siguiente bloque se presentan los valores anteriormente generados.
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="output"><pre class="knitr r">##  [1] -0.4308246  0.3141454  1.5027913 -0.7446318 -1.5917306 -1.5547131
+##  [7] -0.6630832  0.2066910  1.2723385 -0.2007627  1.4436135  0.9824401
+## [13] -0.3731473  0.4430664  0.5569185  0.5838843  0.1241592  0.6685565
+## [19] -0.2313163  0.3405932
+</pre></div>
+</div></div>
+
+  <p>Este es el histograma de esos datos (centrado mediante la opción
+   <code>fig.align='center'</code> y de tamaño 4x4 mediante las opciones <code>fig.width=4, fig.height=4</code>):</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r">        <span class="hl com">## @knitr histograma</span>
+    <span class="hl kwd">hist</span><span class="hl std">(x)</span>
+</pre></div>
+</div><div class="rimage center"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+	
+Si para hacer un gráfico se dan varias órdenes, el programa graba todas las imágenes intermedias y puede presentarlas todas. 
+Si solo quiere mostrar alguna de ellas utilice la opción <code>fig.keep</code>. El valor predeterminado es <code>fig.keep='high'</code> que muestra solamente la última.
+Si hay demasiados gráficos y solo quiere conservar el último puede usar la opción
+<code>fig.keep='last'</code>.
+
+	
+<p>
+	Las expresiones de R se formatean adecuadamente de modo predeterminado. Si las órdenes son:
+	<pre>
+		for(k in 1:10){fj=cos(
+		sin(k)*
+	k^
+	2)+3;cat(k,"\t",fj,"\n")}
+	</pre>
+	obtendrá:
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r">        <span class="hl kwa">for</span><span class="hl std">(k</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">){fj</span><span class="hl kwb">=</span><span class="hl kwd">cos</span><span class="hl std">(</span>
+                <span class="hl kwd">sin</span><span class="hl std">(k)</span><span class="hl opt">*</span>
+        <span class="hl std">k</span><span class="hl opt">^</span>
+        <span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">;</span><span class="hl kwd">cat</span><span class="hl std">(k,</span><span class="hl str">&quot;\t&quot;</span><span class="hl std">,fj,</span><span class="hl str">&quot;\n&quot;</span><span class="hl std">)}</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 1 	 3.666367 
+## 2 	 2.120315 
+## 3 	 3.296204 
+## 4 	 3.897146 
+## 5 	 3.399675 
+## 6 	 2.194442 
+## 7 	 3.713429 
+## 8 	 3.883706 
+## 9 	 2.615308 
+## 10 	 2.455527
+</pre></div>
+</div></div>
+
+<p>
+  Además puede incluir expresiones en el texto con la opción 
+  <b> <code>&lt;!--rinline expresión --></code> </b>
+  como por ejemplo, la media de x es <code class="knitr inline">0.1324494</code>.</p>
+
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+
+<br>  
+<br>  
+<br>  
+<br>  
+<br>  
+</body>
+</html>
+

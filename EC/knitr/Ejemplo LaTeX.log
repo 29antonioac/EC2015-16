@@ -1,0 +1,225 @@
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2011.6.21)  19 OCT 2015 00:12
+entering extended mode
+**C:/Documents*and*Settings/AGC/Escritorio/knitr/Ejemplo*LaTeX.tex
+("C:/Documents and Settings/AGC/Escritorio/knitr/Ejemplo LaTeX.tex"
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
+vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
+an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
+romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
+sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
+senglishmax, welsh, loaded.
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/04/25 v0.06b Graphics/color for pdfTeX
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+("C:\Documents and Settings\AGC\Escritorio\knitr\framed.sty"
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip43
+\fb@frw=\dimen105
+\fb@frh=\dimen106
+\FrameRule=\dimen107
+\FrameSep=\dimen108
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\base\alltt.sty"
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/06 v3.8l The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Archivos de programa\MiKTeX 2.9\tex\generic\babel\spanish.ldf"
+Language: spanish.ldf 2009/01/02 v5.0h Spanish support from the babel system
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen109
+)
+\es@datefmt=\count89
+\es@quottoks=\toks15
+\es@quotdepth=\count90
+Package babel Info: Making " an active character on input line 492.
+Package babel Info: Making . an active character on input line 585.
+Package babel Info: Making < an active character on input line 630.
+Package babel Info: Making > an active character on input line 630.
+))
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+("C:\Archivos de programa\MiKTeX 2.9\tex\latex\base\ansinew.def"
+File: ansinew.def 2008/03/30 v1.1d Input encoding file
+))
+("C:\Documents and Settings\AGC\Escritorio\knitr\Ejemplo LaTeX.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+
+("C:\Documents and Settings\AGC\Datos de programa\MiKTeX\2.9\tex\context\base\s
+upp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count91
+\scratchdimen=\dimen110
+\scratchbox=\box26
+\nofMPsegments=\count92
+\nofMParguments=\count93
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count94
+\MPscratchDim=\dimen111
+\MPnumerator=\count95
+\everyMPtoPDFconversion=\toks19
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 65.
+Package color Info: Redefining color shadecolor on input line 68.
+
+Overfull \hbox (8.48305pt too wide) in paragraph at lines 70--70
+[]    []\OT1/cmtt/m/it/10 ## Esta lnea es un comentario que no afecta al resu
+ltado final[][] 
+ []
+
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 71.
+Package color Info: Redefining color shadecolor on input line 82.
+
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 86--86
+[]\OT1/cmtt/m/n/10 ##  [1]  0.9146237  0.8868649 -1.2075838  1.6407446 -1.44170
+70  0.6084051[] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 93.
+
+Overfull \hbox (8.48305pt too wide) in paragraph at lines 95--95
+[]    []\OT1/cmtt/m/it/10 ## Esta lnea es un comentario que no afecta al resu
+ltado final[][] 
+ []
+
+
+Overfull \hbox (3.07591pt too wide) in paragraph at lines 102--104
+[]\OT1/cmr/m/n/10 Este es el his-to-gra-ma de $\OML/cmm/m/it/10 x$ \OT1/cmr/m/n
+/10 (cen-tra-do me-dian-te la op-cion \OT1/cmtt/m/n/10 fig.align='center'
+ []
+
+Package color Info: Redefining color shadecolor on input line 106.
+<figure/unnamed-chunk-4-1.pdf, id=1, 289.08pt x 289.08pt>
+File: figure/unnamed-chunk-4-1.pdf Graphic file (type pdf)
+
+<use figure/unnamed-chunk-4-1.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-4-1.pdf used on input line 113.
+(pdftex.def)             Requested size: 289.07928pt x 289.09251pt.
+ [1
+
+{C:/Documents and Settings/AGC/Configuración local/Datos de programa/MiKTeX/2.9
+/pdftex/config/pdftex.map} <C:/Documents and Settings/AGC/Escritorio/knitr/figu
+re/unnamed-chunk-4-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 126.
+
+<figure/unnamed-chunk-5-1.pdf, id=18, 578.16pt x 578.16pt>
+File: figure/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+
+<use figure/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-5-1.pdf used on input line 132.
+(pdftex.def)             Requested size: 345.0pt x 344.99312pt.
+ [2 <C:/Documents and Settings/AGC/Escritorio/knitr/figure/unnamed-chunk-5-1.pd
+f>]
+("C:\Documents and Settings\AGC\Escritorio\knitr\Ejemplo LaTeX.aux") ) 
+Here is how much of TeX's memory you used:
+ 1913 strings out of 494053
+ 25455 string characters out of 3145731
+ 83611 words of memory out of 3000000
+ 5214 multiletter control sequences out of 15000+200000
+ 6455 words of font info for 24 fonts, out of 3000000 for 9000
+ 715 hyphenation exceptions out of 8191
+ 27i,6n,27p,352b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Archi
+vos de programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Archiv
+os de programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Archivo
+s de programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Archivo
+s de programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Archivos
+ de programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Archivos d
+e programa/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Archivos de p
+rograma/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Archivos de pr
+ograma/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on "Ejemplo LaTeX.pdf" (2 pages, 101711 bytes).
+PDF statistics:
+ 55 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+

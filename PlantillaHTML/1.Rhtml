@@ -18,7 +18,7 @@
     <!-- Hoja de estilos general -->
     <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
 
-    <title>EC: Alejandro García Montoro</title>
+    <title>EC: Alejandro García Montoro - 2</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
         </header>
 
         <div id="examen">
-            Soluciones al examen final de la asignatura Estadística Computacional de la UGR
+            Soluciones al primer ejercicio
         </div>
 
         <div id="datos">
@@ -58,7 +58,7 @@
             <div id="textoSol">
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Introducción:<p>
+                        <p class="cabecera">Enunciado:<p>
                         <p>
                           Considera en el plano un cuadrado centrado en el origen, de lado 200.
                         </p>
@@ -77,13 +77,12 @@
                 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 1:<p>
+                        <p class="cabecera">Apartado 1:<p>
                         <p>
                             Función que simule el movimiento del punto y devuelva:
                             <ol>
                               <li> La progresión aleatoria definida.</li>
                               <li> Cuántos pasos han sido necesarios para llegar al límite.</li>
-                              <li> La función debe tener un argumento que limite el número de movimientos y que si se alcanza devuelva una frase que diga "No he terminado de moverme" y, en caso contrario, que diga "He llegado al límite".</li>
                             </ol>
                         </p>
                     </div>
@@ -91,7 +90,7 @@
                         <p>Definimos la función requerida, en la que el lanzamiento de la moneda lo simularemos con la función <code>sample</code>, tomando dos muestras con reemplazamiento del conjunto <code>{1,2}</code>, donde <code>1</code> representa la cara de la moneda y <code>2</code>, la cruz.</p>
 
 <!--begin.rcode
-movimiento <- function(maxIter = 10, mostrar = F){
+movimiento <- function(mostrar = F){
   # Definimos la posición inicial
   pos <- c(0,0)
   
@@ -102,7 +101,7 @@ movimiento <- function(maxIter = 10, mostrar = F){
   # Inicializamos el contador de iteraciones
   iteraciones <- 0
   
-  while( !(100 %in% abs(pos)) && iteraciones < maxIter){
+  while( !(100 %in% abs(pos))){
     # Simulamos las dos monedas: 1 es cara; 2 es cruz:
     monedas <- sample(1:2, 2, replace = T)
     
@@ -122,20 +121,7 @@ movimiento <- function(maxIter = 10, mostrar = F){
     iteraciones <- iteraciones + 1
   }
   
-  if(100 %in% abs(pos)){
-    if(mostrar){
-      cat("He llegado al límite.\n")
-    }
-    exito <- T
-  }
-  else{
-    if(mostrar){
-      cat("No he terminado de moverme.\n")
-    }
-    exito <- F
-  }
-  
-  return(list(Progresion = camino, Pasos = iteraciones, Exito = exito))
+  return(list(Progresion = camino, Pasos = iteraciones))
 }
 end.rcode-->
                     </div>
@@ -143,7 +129,7 @@ end.rcode-->
 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 2:<p>
+                        <p class="cabecera">Apartado 2:<p>
                         <p>
                             Una simulación del proceso y representación gráfica del movimiento.
                         </p>
@@ -153,7 +139,7 @@ end.rcode-->
                         
                         
 <!--begin.rcode
-res <- movimiento(10000, mostrar = T)
+res <- movimiento()
 end.rcode-->
 
 <!--begin.rcode include=FALSE
@@ -188,31 +174,23 @@ end.rcode-->
 
                 <div class="ejercicio">
                     <div class="enunciado">
-                        <p class="cabecera">Ejercicio 3:<p>
+                        <p class="cabecera">Apartado 3:<p>
                         <p>
-                            Una función con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
+                            Una función, D, con un argumento que permita repetir un número de veces, <code>n</code>, este proceso y devuelva un vector con el número de pasos necesarios para salir del recinto en cada repetición.
                         </p>
                     </div>
                     <div class="solucion">
                         <p>Definimos la función solicitada, en la que usamos <code>replicate</code>, una función de <code>R</code> que permite repetir un proceso tantas veces como se le indique. Como lo que queremos es el número de pasos, lo que haremos será repetir <code>n</code> veces la llamada a <code>movimiento</code>, tomando el resultado que nos interesa: el elemento <code>Pasos</code> de la lista devuelta:</p>
 
 <!--begin.rcode
-repeticion <- function(n = 1000, maxPasos = Inf){
-  return(replicate(n, movimiento(maxPasos)$Pasos))
+repeticion <- function(n = 1000){
+  return(replicate(n, movimiento()$Pasos))
 }
 end.rcode-->
                     </div>
                 </div>
                 
-                <div class="ejercicio ultimo">
-                    <div class="enunciado">
-                        <p class="cabecera">Ejercicio 4:<p>
-                        <p>
-                            Ejecuta la función repitiendo 100 veces el proceso inicial y calcula el tiempo medio de salida.
-                        </p>
-                    </div>
-                    <div class="solucion">
-                        <p>Para tomar la media de pasos necesarios para salir del recinto en 100 repeticiones del proceso del movimiento basta llamar a la función anteriormente definida y ejecutar <code>mean</code> sobre el vector devuelto. Además,usaremos la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
+                        <p>Esta función se puede usar, por ejemplo, para tomar la media de pasos necesarios para salir del recinto en 10 repeticiones del proceso del movimiento. Para ello usamos <code>mean</code> sobre el vector devuelto por la función anteriormente definida. Además, podemos usar la función <code>Sys.time()</code> para medir el tiempo medio que el ordenador tarda en realizar el procedimiento.</p>
 <!--begin.rcode
 # Definimos el número de repeticiones
 num.rep <- 100
@@ -238,8 +216,6 @@ tiempo.media <- (tiempo.total)/num.rep
 end.rcode-->
 
                         <p>Tenemos así que, de media, se necesitan unos <!-- rinline I(pasos.media) --> pasos para salir del recinto. Además podemos obtener que el ordenador ha necesitado, de media, <!-- rinline I(tiempo.media) --> segundos en calcular la trayectoria del punto hasta que sale del recinto.
-                    </div>
-                </div>
             </div>
         </section>
         

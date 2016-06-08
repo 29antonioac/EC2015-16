@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uso de knitr con LaTeX</title>
+</head>
+<body>
+
+<center>
+  <H1>Uso de <code>knitr</code> con LaTeX</H1>
+</center>  
+
+<h2>Introducción</h2>				  
+
+<p>El libro <b>knitr</b> permite construir un archivo LaTeX que integra resultados de R. Evidentemente, el libro con todas sus dependencias debe estar en la biblioteca, en caso contrario utilice la orden
+<code>
+install.packages("knitr", dependencies = TRUE)	
+</code>.
+</p>
+
+<p>Una vez cargado con la orden	<b>library(knitr)</b>,
+basta con crear un archivo con la extensión <code>Rnw</code> que incluya un texto en formato <code>LaTeX</code> y 
+además incluya unos bloques especiales que serán ejecutados en R y cuyos resultados, mezclados con el texto original,
+constituirán un archivo con el mismo nombre que el archivo suministrado y con extensión <code>tex</code>.
+</p>				 
+
+<p>
+Esto es, si el archivo se llama <code>1.Rnw</code> y se encuentra en el directorio de trabajo, se ejecuta la orden <code>knit("1.Rnw")</code> y se obtendrá el archivo <code>1.tex</code>.
+</p>
+
+<p>
+Los bloques especiales se identifican entre las órdenes especiales
+
+<table border=2>
+<tr>
+<td>
+<<>>=
+</td>
+<td>
+    Indica que comienza el bloque de órdenes R
+</td>
+</tr>
+<tr>
+<td>
+@
+</td>
+<td>
+	Indica que termina el bloque de órdenes R
+</td>
+</tr>
+</table>
+<p>
+Entre << y >> se pueden introducir metaórdenes para R, que afectan al tipo de salida de R.
+</p>
+
+<p>
+Lo recomendable es escribir primero el documento LaTeX y compilarlo para que no tenga errores. Luego se añaden los bloques de órdenes de R (también previamente comprobadas) y continuamos el procedimiento.
+</p>
+			   
+
+<p>
+En el archivo Rnw, si se va a utilizar texto español desde Windows, se debería incluir lo siguiente:
+</p> 
+
+<pre>
+\documentclass[10pt,a4paper,oneside]{book}
+\usepackage[spanish]{babel}
+
+%\usepackage[cp850]{inputenc}            
+%Para que utilice los caracteres especiales de MS-DOS
+
+\usepackage[ansinew]{inputenc}           
+%Para que utilice los caracteres especiales de Windows
+</pre>
+
+</body>
+</html>
+
+

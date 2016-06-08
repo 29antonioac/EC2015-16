@@ -1,0 +1,255 @@
+/***************************************************
+********************         ***********************
+******************** GENERAL ***********************
+********************         ***********************
+****************************************************/
+
+.clear{
+    clear: both;
+}
+
+body{
+    background: white;
+    color: black;
+    line-height: 1.5em;
+    font-family: 'Merriweather', serif;
+}
+
+#wrapper {
+    max-width: 75%;
+    margin: 0 auto;
+    margin-bottom: 60px; /* Espacio para el footer */
+}
+
+a {
+    text-decoration: none;
+    color: #345678;
+    border-bottom: 2px solid white;
+    margin-bottom: -2px;
+}
+
+a:hover {
+    border-color: #345678;
+    -webkit-transition: color 500ms, border-color 0.8s;
+    -moz-transition: color 500ms, border-color 0.8s;
+    -o-transition: color 500ms, border-color 0.8s;
+    -ms-transition: color 500ms, border-color 0.8s;
+    transition: color 500ms, border-color 0.8s;
+}
+
+/***************************************************
+ ********************        ***********************
+ ******************** HEADER ***********************
+ ********************        ***********************
+ ***************************************************/
+
+header {
+    /* "Imagen + título" como flex apaisado */
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */;
+
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+
+    -webkit-justify-content: center;
+    justify-content: center;
+
+    margin: 40px 0 20px 0;
+    font-family: 'Vollkorn', serif;
+    line-height: 2em;
+
+    color: #345678;
+}
+
+#nombre{
+    -webkit-order: 2;
+    order: 2;
+}
+
+header h1{
+    font-size: 60px;
+    padding-bottom: 0px; /* Espacio con respecto a la raya y el subtítulo */
+    font-variant: small-caps;
+    text-align: center;
+    width: 700px;
+    line-height: 0.65em;
+}
+
+header h2{
+    font-size: 21px;
+    color: black;
+    border-top: 1px solid #ccc;
+    padding-left: 14px;
+    text-align: center;
+    font-variant: small-caps;
+}
+
+/***************************************************
+*******************          ***********************
+*******************  EXAMEN  ***********************
+*******************          ***********************
+***************************************************/
+
+#examen {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 60px; /* Espacio para el núcleo de la página */
+    text-align: center;
+    font-variant: small-caps;
+}
+
+/***************************************************
+*******************           **********************
+*******************   DATOS   **********************
+*******************           **********************
+***************************************************/
+
+#datos{
+    width: 20%;
+    float: left;
+}
+
+#datos h2, #soluciones h2{
+    border-bottom: 1px solid #ccc;
+    text-variant: small-caps;
+    font-family: 'Vollkorn', serif;
+    text-align: center;
+    font-size: 33px;
+    margin: 0 0 20px 0;
+    padding-bottom: 5px;
+    color: #345678;
+}
+
+#datos h2 {
+    text-align: left;
+    padding-left:15px;
+}
+
+#datos_contenido {
+    padding-left: 15px;
+}
+
+dt {
+    float: left;
+    color: #345678;
+}
+
+dt:after {
+    content: ":";
+}
+
+dd {
+    margin: 0 0 0 80px;
+    padding: 0 0 10px 0;
+}
+
+/****************************************************
+*******************            **********************
+******************* SOLUCIONES **********************
+*******************            **********************
+****************************************************/
+
+#soluciones{
+    width: 75%;
+    float: right;
+}
+
+/* Apila Datos y Soluciones para pantallas con resolución
+   menor a 1350 píxeles. */
+@media (max-width: 1350px) {
+    #datos, #soluciones{
+        clear: both;
+        width: 100%;
+    }
+
+    #datos {
+        margin-bottom: 40px;
+    }
+}
+
+#soluciones h2{
+    text-align: right;
+}
+
+.ejercicio {
+    text-align: justify;
+    margin-bottom: 50px;
+    text-indent: 2em; /* Le da sangría a la primera línea de cada párrafo */
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+.ejercicio p{
+    margin-top: 10px;
+}
+
+.enunciado {
+    font-family: 'Vollkorn', serif;
+    font-size: 20px;
+    margin: auto auto 15px auto;
+}
+
+.enunciado .cabecera {
+    font-family: 'Vollkorn', serif;
+    font-style: italic;
+    color: #345678;
+    font-size: 25px;
+}
+
+.solucion::before{
+    content: "Solución:";
+    font-family: 'Vollkorn', serif;
+    font-style: italic;
+    color: #345678;
+    font-size: 25px;
+}
+
+.ultimo {
+    border-bottom: 0;
+}
+
+
+/***************************************************
+*******************           **********************
+*******************   FOOTER  **********************
+*******************           **********************
+***************************************************/
+
+footer{
+    width: 100%;
+    text-align: center;
+    margin-bottom:10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+/***************************************************
+*******************           **********************
+*******************   CHUNK   **********************
+*******************           **********************
+***************************************************/
+
+.chunk{
+    margin-left: 2em;
+    font-family: 'Cousine';
+    text-indent: 0; /* Reinicia la sangría a 0 :) */
+
+    border-left: 1px solid #ccc;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+code {
+    font-family: 'Cousine';
+    background-color: #ddd;
+}

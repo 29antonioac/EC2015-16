@@ -1,0 +1,130 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Etiqueta imprescindible para que los dispositivos pongan el viewport
+    del mismo tamaño que su ancho y no tengan zoom inicial -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Hoja de estilos para empezar con un estilo (casi) nulo (obtenida en http://cssreset.com) -->
+    <link href="CSS/reset.css" rel="stylesheet" type="text/css" />
+
+    <!-- Tipografías usadas -->
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn:400,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+
+    <!-- Hoja de estilos general -->
+    <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
+
+    <title>EC: Alejandro García Montoro - Datos</title>
+</head>
+
+<body>
+    <!-- Div necesario para centrar todo el contenido y darle un ancho específico -->
+    <div id="wrapper">
+
+        <header>
+            <div id="nombre">
+                <h1>Estadística Computacional</h1>
+            </div>
+        </header>
+
+        <div id="examen">
+            Soluciones al segundo ejercicio
+        </div>
+
+        <div id="datos">
+            <h2>Datos</h2>
+
+            <div id="datos_contenido">
+                <dl>
+                    <dt>Nombre</dt>
+                        <dd>Alejandro.</dd>
+                    <dt>Apellidos</dt>
+                        <dd>García Montoro.</dd>
+                    <dt>DNI</dt>
+                        <dd>76628233F</dd>
+                    <dt>Grupo</dt>
+                        <dd>Doble grado en ingeniería informática y matemáticas.</dd>
+                </dl>
+            </div>
+        </div>
+
+        <section id="soluciones">
+            <h2>Soluciones al examen</h2>
+
+            <div id="textoSol">
+                <div class="ejercicio">
+                    <div class="enunciado">
+                        <p class="cabecera">Enunciado:</p>
+                        
+                        <p>El archivo <code>http://www.ugr.es/local/andresgc/ec/Datos.txt</code> contiene unos datos. Léelos en una hoja de datos. Haz un resumen estadístico de los mismos. Haz sendos resúmenes estadísticos de los hombres y de las mujeres. Suponiendo que la muestra está tomada al azar de una población donde se pensaba que el peso medio de los hombres y el de las mujeres era el mismo y que se desea contrastar si ha cambiado esta suposición, utiliza la función t.test para realizarlo.</p>
+                    </div>
+                        
+                    <div class="solucion">
+                        <p>Un rápido vistazo al archivo de texto nos permite ver que se trata de un archivo CSV; es decir, en el que los valores de cada campo están separados por comas. Leemos por tanto el archivo de texto con la función <code>read.csv</code>, a la que podemos pasar una URL absoluta y nos devuelve un objeto del tipo <code>data.frame</code></p>
+
+<!--begin.rcode
+# Guardamos los datos del archivo de texto en un data.frame
+datos <- read.csv("http://www.ugr.es/~andresgc/ec/Datos.txt")
+end.rcode-->
+                    
+                        <p>Para hacer un resumen de una forma fácil podemos usar la función <code>summary</code>, cuyo cometido es exactamente el que vamos buscando. Además, para buscar posibles correlaciones entre todos los datos vamos a usar la función <code>pairs</code>, que genera gráficos para cada par de variables. Como luego vamos a tener que generar el mismo tipo de resumen para los hombres y mujeres por separado, vamos a encapsular estas dos órdenes en una función que reciba como parámetro el conjunto de datos a resumir; así aprovechamos código y acotamos los posibles errores de programación:</p>                    
+
+<!--begin.rcode
+resumen <- function(dat){
+  # Generamos un resumen automático de los datos
+  resultado <- summary(dat)
+  
+  # Generamos un gráfico para ver posibles correlaciones
+  pairs(dat, pch=20, col="steelblue")
+  
+  return(resultado)
+}
+end.rcode-->
+
+<p>Hacemos ya el resumen conjunto pasándole a la función anteriormente definida el objeto <code>datos</code>:
+
+<!--begin.rcode
+resumen(datos)
+end.rcode-->
+
+                        <p>Para hacer los resúmenes separados de hombres y mujeres primero tenemos que separar unos datos de otros. Para ello vamos a tomar todas las filas del <code>data.frame</code> cuya columna <code>Sexo</code> sea de un único tipo, generando así un vector de tipo lógico que usaremos para elegir las filas deseadas:</p>
+                        
+<!--begin.rcode
+# Guardamos los datos correspondientes a hombres y 
+# los de las mujeres por separado
+datos.hombres <- datos[datos$Sexo == "Hombre", ]
+datos.mujeres <- datos[datos$Sexo == "Mujer", ]
+end.rcode-->
+
+                        <p>Además, como ahora la última columna es siempre igual, podemos eliminarla para que en los resúmenes no se tenga en cuenta esta variable, que no dará información nueva al ser constante en cada subconjunto:</p>
+                        
+<!--begin.rcode
+# Eliminamos la última columna, que contiene valores constantes
+datos.hombres <- datos.hombres[, -ncol(datos.hombres)]
+datos.mujeres <- datos.mujeres[, -ncol(datos.mujeres)]
+end.rcode-->
+
+                        <p>Podemos reutilizar la función <code>resumen</code> para generar resúmenes de sendos subconjuntos y comprobar que todo lo hecho hasta ahora es correcto:</p>
+
+<!--begin.rcode
+# Generamos el resumen para los hombres
+resumen(datos.hombres)
+
+# Generamos el resumen para las mujeres
+resumen(datos.mujeres)
+end.rcode-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="clear"></div>
+    </div>
+    <footer>Granada, a 8 de junio de 2016</footer>
+</body>
+
+</html>
