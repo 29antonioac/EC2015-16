@@ -93,11 +93,25 @@
                 <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
             Soluciones al tercer ejercicio del examen final de la asignatura Estadística Computacional
         </div>
-
+ 
         <div id="datos">
             <h2>Datos</h2>
 
@@ -128,7 +142,7 @@
                     <div class="solucion">
                         <p>Primero se ha implementado la siguiente función, que genera una lista de <code>N</code> vectores, cada de los cuales contiene una muestra de tamaño <code>dim</code> de una distribución uniforme entre los valores especificados por el vector de dos elementos <code>rango</code>.</p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una lista de N vectores de dimensión dim con una muestra</span>
+<div class="chunk" id="3-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una lista de N vectores de dimensión dim con una muestra</span>
 <span class="hl com"># uniforme en el intervalo [rango[1], rango[2]]</span>
 <span class="hl std">simula_unif</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">N</span><span class="hl std">,</span> <span class="hl kwc">dim</span><span class="hl std">,</span> <span class="hl kwc">rango</span><span class="hl std">){</span>
     <span class="hl kwd">lapply</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(dim, N), runif,</span> <span class="hl kwc">min</span> <span class="hl std">= rango[</span><span class="hl num">1</span><span class="hl std">],</span> <span class="hl kwc">max</span> <span class="hl std">= rango[</span><span class="hl num">2</span><span class="hl std">])</span>
@@ -138,7 +152,7 @@
                     
                         <p>Generamos ahora los datos solicitados, usando la función anterior y tomando como <code>x</code> (resp. <code>y</code>) los primeros (resp. segundos) valores de cada vector generado:</p>                  
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Muestra uniforme de 50 puntos en el cuadrado [-50,50] x [-50,50]</span>
+<div class="chunk" id="3-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Muestra uniforme de 50 puntos en el cuadrado [-50,50] x [-50,50]</span>
 <span class="hl std">datos_unif</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">simula_unif</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">))</span>
 
 <span class="hl com"># Guardamos las coordenadas en variables diferentes</span>
@@ -149,17 +163,17 @@
                         
                         <p>Podemos ver la muestra generada con la función <code>plot</code>:</p>
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(unif.x, unif.y,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">'red'</span><span class="hl std">,</span> <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">asp</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
+<div class="chunk" id="3-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(unif.x, unif.y,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">'red'</span><span class="hl std">,</span> <span class="hl kwc">pch</span> <span class="hl std">=</span> <span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">asp</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span>
      <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;Muestra uniforme&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span><span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">)</span>
 
 <span class="hl com"># Añadimos los bordes del recinto cuadrado con polygon</span>
 <span class="hl kwd">polygon</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">),</span> <span class="hl kwc">border</span> <span class="hl std">=</span> <span class="hl str">&quot;coral&quot;</span><span class="hl std">)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/3-3-1.png" title="plot of chunk 3-3" alt="plot of chunk 3-3" class="plot" /></div></div>
 
                         <p>Para la generación de una recta aleatoria se ha implementado la siguiente función:</p>
 
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Genera los parámetros (a,b) de una recta aleatoria y = a*x + b que corta</span>
+<div class="chunk" id="3-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Genera los parámetros (a,b) de una recta aleatoria y = a*x + b que corta</span>
 <span class="hl com"># al cuadrado [intervalo[1], intervalo[2]] x [intervalo[1], intervalo[2]]</span>
 <span class="hl std">simula_recta</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">intervalo</span><span class="hl std">){</span>
     <span class="hl com"># Simulamos dos puntos dentro del cuadrado intervalo x intervalo</span>
@@ -178,7 +192,7 @@
 
 <p>Vamos a crear ahora una estructura abstracta que genera funciones etiquetadoras. Para ello definimos <code>generador_etiquetados</code>, una función que al ser llamada con otra función <code>f</code> como parámetro devuelve una función etiquetadora; es decir, una función que devuelve 1 o -1 según el signo que toma la función <code>f</code> al recibir los parámetros <code>x</code> e <code>y</code>:
 
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una función etiquetadora basada en el signo que</span>
+<div class="chunk" id="3-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Devuelve una función etiquetadora basada en el signo que</span>
 <span class="hl com"># toma el parámetro f</span>
 <span class="hl std">generador_etiquetados</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">f</span><span class="hl std">){</span>
     <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">){</span>
@@ -192,7 +206,7 @@
 
 <p>Por tanto, basta simular una recta haciendo uso de la función implementada anteriormente y definir la función <code>f_1</code>, que será la que pasaremos al generador de funciones etiquetadoras:</p>
 
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos recta aleatoria</span>
+<div class="chunk" id="3-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos recta aleatoria</span>
 <span class="hl std">recta</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">simula_recta</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">))</span>
 
 <span class="hl com"># Definimos la función cuyo signo etiquetará los datos</span>
@@ -204,13 +218,14 @@
 <span class="hl std">etiquetado1</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">generador_etiquetados</span><span class="hl std">(f1)</span>
 
 <span class="hl com"># Encapsulamos los datos y las etiquetas en un data frame</span>
-<span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= unif.x,</span> <span class="hl kwc">Y</span> <span class="hl std">= unif.y,</span> <span class="hl kwc">Etiqueta</span> <span class="hl std">=</span> <span class="hl kwd">etiquetado1</span><span class="hl std">(unif.x, unif.y))</span>
+<span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwc">X</span> <span class="hl std">= unif.x,</span> <span class="hl kwc">Y</span> <span class="hl std">= unif.y,</span>
+                    <span class="hl kwc">Etiqueta</span> <span class="hl std">=</span> <span class="hl kwd">etiquetado1</span><span class="hl std">(unif.x, unif.y))</span>
 </pre></div>
 </div></div>
 
 <p>Por último, generamos la gráfica con <code>plot</code>, asignando un color diferente según el etiquetado, y añadiendo la gráfica de la recta simulada:</p>
 
-<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos un vector de colores basado en las etiqueta</span>
+<div class="chunk" id="3-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Definimos un vector de colores basado en las etiqueta</span>
 <span class="hl std">colores</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">ifelse</span><span class="hl std">(datos</span><span class="hl opt">$</span><span class="hl std">Etiqueta</span> <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
 
 <span class="hl com"># Generamos la gráfica</span>
@@ -223,7 +238,7 @@
 <span class="hl com"># Dibujamos la recta clasificadora</span>
 <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwd">rev</span><span class="hl std">(recta))</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+</div><div class="rimage default"><img src="figure/3-7-1.png" title="plot of chunk 3-7" alt="plot of chunk 3-7" class="plot" /></div></div>
 
                     </div>
                 </div>

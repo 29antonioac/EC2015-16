@@ -93,10 +93,25 @@
                 <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
-            Soluciones al segundo ejercicio del examen final de la asignatura Estadística Computacional
+            Soluciones al primer ejercicio del examen final de la asignatura Estadística Computacional
         </div>
+
 
         <div id="datos">
             <h2>Datos</h2>
@@ -125,14 +140,14 @@
                     <div class="solucion">
                         <p>Un rápido vistazo al archivo de texto nos permite ver que se trata de un archivo CSV; es decir, en el que los valores de cada campo están separados por comas. Leemos por tanto el archivo de texto con la función <code>read.csv</code>, a la que podemos pasar una URL absoluta y nos devuelve un objeto del tipo <code>data.frame</code></p>
 
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos del archivo de texto en un data.frame</span>
+<div class="chunk" id="2-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos del archivo de texto en un data.frame</span>
 <span class="hl std">datos</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;http://www.ugr.es/~andresgc/ec/Datos.txt&quot;</span><span class="hl std">)</span>
 </pre></div>
 </div></div>
                     
                         <p>Para hacer un resumen de una forma fácil podemos usar la función <code>summary</code>, cuyo cometido es exactamente el que vamos buscando. Además, para buscar posibles correlaciones entre todos los datos vamos a usar la función <code>pairs</code>, que genera gráficos para cada par de variables. Como luego vamos a tener que generar el mismo tipo de resumen para los hombres y mujeres por separado, vamos a encapsular estas dos órdenes en una función que reciba como parámetro el conjunto de datos a resumir; así aprovechamos código y acotamos los posibles errores de programación:</p>                    
 
-<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">resumen</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">dat</span><span class="hl std">){</span>
+<div class="chunk" id="2-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">resumen</span> <span class="hl kwb">&lt;-</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">dat</span><span class="hl std">){</span>
   <span class="hl com"># Generamos un resumen automático de los datos</span>
   <span class="hl std">resultado</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">summary</span><span class="hl std">(dat)</span>
 
@@ -146,9 +161,9 @@
 
 <p>Hacemos ya el resumen conjunto pasándole a la función anteriormente definida el objeto <code>datos</code>:
 
-<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">resumen</span><span class="hl std">(datos)</span>
+<div class="chunk" id="2-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">resumen</span><span class="hl std">(datos)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/2-3-1.png" title="plot of chunk 2-3" alt="plot of chunk 2-3" class="plot" /></div><div class="rcode">
 <div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
 ##  Min.   :55.00   Min.   :155.0   Min.   :21.00   Hombre:20  
 ##  1st Qu.:62.00   1st Qu.:164.5   1st Qu.:21.00   Mujer :16  
@@ -161,7 +176,7 @@
 
                         <p>Para hacer los resúmenes separados de hombres y mujeres primero tenemos que separar unos datos de otros. Para ello vamos a tomar todas las filas del <code>data.frame</code> cuya columna <code>Sexo</code> sea de un único tipo, generando así un vector de tipo lógico que usaremos para elegir las filas deseadas:</p>
                         
-<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos correspondientes a hombres y </span>
+<div class="chunk" id="2-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Guardamos los datos correspondientes a hombres y </span>
 <span class="hl com"># los de las mujeres por separado</span>
 <span class="hl std">datos.hombres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos[datos</span><span class="hl opt">$</span><span class="hl std">Sexo</span> <span class="hl opt">==</span> <span class="hl str">&quot;Hombre&quot;</span><span class="hl std">, ]</span>
 <span class="hl std">datos.mujeres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos[datos</span><span class="hl opt">$</span><span class="hl std">Sexo</span> <span class="hl opt">==</span> <span class="hl str">&quot;Mujer&quot;</span><span class="hl std">, ]</span>
@@ -170,7 +185,7 @@
 
                         <p>Además, como ahora la última columna es siempre igual, podemos eliminarla para que en los resúmenes no se tenga en cuenta esta variable, que no dará información nueva al ser constante en cada subconjunto:</p>
                         
-<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Eliminamos la última columna, que contiene valores constantes</span>
+<div class="chunk" id="2-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Eliminamos la última columna, que contiene valores constantes</span>
 <span class="hl std">datos.hombres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos.hombres[,</span> <span class="hl opt">-</span><span class="hl kwd">ncol</span><span class="hl std">(datos.hombres)]</span>
 <span class="hl std">datos.mujeres</span> <span class="hl kwb">&lt;-</span> <span class="hl std">datos.mujeres[,</span> <span class="hl opt">-</span><span class="hl kwd">ncol</span><span class="hl std">(datos.mujeres)]</span>
 </pre></div>
@@ -178,10 +193,10 @@
 
                         <p>Podemos reutilizar la función <code>resumen</code> para generar resúmenes de sendos subconjuntos y comprobar que todo lo hecho hasta ahora es correcto:</p>
 
-<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos el resumen para los hombres</span>
+<div class="chunk" id="2-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Generamos el resumen para los hombres</span>
 <span class="hl kwd">resumen</span><span class="hl std">(datos.hombres)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/2-6-1.png" title="plot of chunk 2-6" alt="plot of chunk 2-6" class="plot" /></div><div class="rcode">
 <div class="output"><pre class="knitr r">##       Peso           Altura           Edad      
 ##  Min.   :58.00   Min.   :162.0   Min.   :21.00  
 ##  1st Qu.:75.00   1st Qu.:174.0   1st Qu.:21.75  
@@ -193,7 +208,7 @@
 <div class="source"><pre class="knitr r"><span class="hl com"># Generamos el resumen para las mujeres</span>
 <span class="hl kwd">resumen</span><span class="hl std">(datos.mujeres)</span>
 </pre></div>
-</div><div class="rimage default"><img src="figure/unnamed-chunk-6-2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+</div><div class="rimage default"><img src="figure/2-6-2.png" title="plot of chunk 2-6" alt="plot of chunk 2-6" class="plot" /></div><div class="rcode">
 <div class="output"><pre class="knitr r">##       Peso           Altura           Edad      
 ##  Min.   :55.00   Min.   :155.0   Min.   :21.00  
 ##  1st Qu.:58.25   1st Qu.:160.8   1st Qu.:21.00  
@@ -203,6 +218,21 @@
 ##  Max.   :71.00   Max.   :182.0   Max.   :24.00
 </pre></div>
 </div></div>
+
+                      <p>Por último, podemos comprobar que los pesos medios de ambos subconjuntos ya no son iguales</p>
+<div class="chunk" id="2-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Vemos la media de peso en los hombres</span>
+<span class="hl kwd">mean</span><span class="hl std">(datos.hombres</span><span class="hl opt">$</span><span class="hl std">Peso)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 77.9
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Vemos la media de peso en los mujeres</span>
+<span class="hl kwd">mean</span><span class="hl std">(datos.mujeres</span><span class="hl opt">$</span><span class="hl std">Peso)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 61.75
+</pre></div>
+</div></div>
+
+
                     </div>
                 </div>
             </div>

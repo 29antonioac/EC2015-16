@@ -31,11 +31,25 @@
                 <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
             Soluciones al tercer ejercicio del examen final de la asignatura Estadística Computacional
         </div>
-
+ 
         <div id="datos">
             <h2>Datos</h2>
 
@@ -66,7 +80,7 @@
                     <div class="solucion">
                         <p>Primero se ha implementado la siguiente función, que genera una lista de <code>N</code> vectores, cada de los cuales contiene una muestra de tamaño <code>dim</code> de una distribución uniforme entre los valores especificados por el vector de dos elementos <code>rango</code>.</p>
 
-<!--begin.rcode
+<!--begin.rcode 3-1
 # Devuelve una lista de N vectores de dimensión dim con una muestra
 # uniforme en el intervalo [rango[1], rango[2]]
 simula_unif <- function(N, dim, rango){
@@ -76,7 +90,7 @@ end.rcode-->
                     
                         <p>Generamos ahora los datos solicitados, usando la función anterior y tomando como <code>x</code> (resp. <code>y</code>) los primeros (resp. segundos) valores de cada vector generado:</p>                  
 
-<!--begin.rcode
+<!--begin.rcode 3-2
 # Muestra uniforme de 50 puntos en el cuadrado [-50,50] x [-50,50]
 datos_unif <- simula_unif(50, 2, c(-50,50))
 
@@ -87,7 +101,7 @@ end.rcode-->
                         
                         <p>Podemos ver la muestra generada con la función <code>plot</code>:</p>
 
-<!--begin.rcode
+<!--begin.rcode 3-3
 plot(unif.x, unif.y, col = 'red', pch = 20, asp=1,
      main="Muestra uniforme", xlab="", ylab="")
 
@@ -97,7 +111,7 @@ end.rcode-->
 
                         <p>Para la generación de una recta aleatoria se ha implementado la siguiente función:</p>
 
-<!--begin.rcode
+<!--begin.rcode 3-4
 # Genera los parámetros (a,b) de una recta aleatoria y = a*x + b que corta
 # al cuadrado [intervalo[1], intervalo[2]] x [intervalo[1], intervalo[2]]
 simula_recta <- function(intervalo){
@@ -116,7 +130,7 @@ end.rcode-->
 
 <p>Vamos a crear ahora una estructura abstracta que genera funciones etiquetadoras. Para ello definimos <code>generador_etiquetados</code>, una función que al ser llamada con otra función <code>f</code> como parámetro devuelve una función etiquetadora; es decir, una función que devuelve 1 o -1 según el signo que toma la función <code>f</code> al recibir los parámetros <code>x</code> e <code>y</code>:
 
-<!--begin.rcode
+<!--begin.rcode 3-5
 # Devuelve una función etiquetadora basada en el signo que
 # toma el parámetro f
 generador_etiquetados <- function(f){
@@ -130,7 +144,7 @@ end.rcode-->
 
 <p>Por tanto, basta simular una recta haciendo uso de la función implementada anteriormente y definir la función <code>f_1</code>, que será la que pasaremos al generador de funciones etiquetadoras:</p>
 
-<!--begin.rcode
+<!--begin.rcode 3-6
 # Generamos recta aleatoria
 recta <- simula_recta(c(-50,50))
 
@@ -149,7 +163,7 @@ end.rcode-->
 
 <p>Por último, generamos la gráfica con <code>plot</code>, asignando un color diferente según el etiquetado, y añadiendo la gráfica de la recta simulada:</p>
 
-<!--begin.rcode
+<!--begin.rcode 3-7
 # Definimos un vector de colores basado en las etiqueta
 colores <- ifelse(datos$Etiqueta == 1, "green", "red")
 

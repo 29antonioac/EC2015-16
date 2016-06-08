@@ -31,10 +31,25 @@
                 <h2>García Montoro</h2>
             </div>
         </header>
+        
+        <nav id="enlaces">
+            <ul>
+                <li>
+                    <a href="./datos.html">Ejercicio 1</a>
+                </li>
+                <li>
+                    <a href="./1.html">Ejercicio 2</a>
+                </li>
+                <li>
+                    <a href="./3.html">Ejercicio 3</a>
+                </li>
+            </ul>
+        </nav>
 
         <div id="examen">
-            Soluciones al segundo ejercicio del examen final de la asignatura Estadística Computacional
+            Soluciones al primer ejercicio del examen final de la asignatura Estadística Computacional
         </div>
+
 
         <div id="datos">
             <h2>Datos</h2>
@@ -63,14 +78,14 @@
                     <div class="solucion">
                         <p>Un rápido vistazo al archivo de texto nos permite ver que se trata de un archivo CSV; es decir, en el que los valores de cada campo están separados por comas. Leemos por tanto el archivo de texto con la función <code>read.csv</code>, a la que podemos pasar una URL absoluta y nos devuelve un objeto del tipo <code>data.frame</code></p>
 
-<!--begin.rcode
+<!--begin.rcode 2-1
 # Guardamos los datos del archivo de texto en un data.frame
 datos <- read.csv("http://www.ugr.es/~andresgc/ec/Datos.txt")
 end.rcode-->
                     
                         <p>Para hacer un resumen de una forma fácil podemos usar la función <code>summary</code>, cuyo cometido es exactamente el que vamos buscando. Además, para buscar posibles correlaciones entre todos los datos vamos a usar la función <code>pairs</code>, que genera gráficos para cada par de variables. Como luego vamos a tener que generar el mismo tipo de resumen para los hombres y mujeres por separado, vamos a encapsular estas dos órdenes en una función que reciba como parámetro el conjunto de datos a resumir; así aprovechamos código y acotamos los posibles errores de programación:</p>                    
 
-<!--begin.rcode
+<!--begin.rcode 2-2
 resumen <- function(dat){
   # Generamos un resumen automático de los datos
   resultado <- summary(dat)
@@ -84,13 +99,13 @@ end.rcode-->
 
 <p>Hacemos ya el resumen conjunto pasándole a la función anteriormente definida el objeto <code>datos</code>:
 
-<!--begin.rcode
+<!--begin.rcode 2-3
 resumen(datos)
 end.rcode-->
 
                         <p>Para hacer los resúmenes separados de hombres y mujeres primero tenemos que separar unos datos de otros. Para ello vamos a tomar todas las filas del <code>data.frame</code> cuya columna <code>Sexo</code> sea de un único tipo, generando así un vector de tipo lógico que usaremos para elegir las filas deseadas:</p>
                         
-<!--begin.rcode
+<!--begin.rcode 2-4
 # Guardamos los datos correspondientes a hombres y 
 # los de las mujeres por separado
 datos.hombres <- datos[datos$Sexo == "Hombre", ]
@@ -99,7 +114,7 @@ end.rcode-->
 
                         <p>Además, como ahora la última columna es siempre igual, podemos eliminarla para que en los resúmenes no se tenga en cuenta esta variable, que no dará información nueva al ser constante en cada subconjunto:</p>
                         
-<!--begin.rcode
+<!--begin.rcode 2-5
 # Eliminamos la última columna, que contiene valores constantes
 datos.hombres <- datos.hombres[, -ncol(datos.hombres)]
 datos.mujeres <- datos.mujeres[, -ncol(datos.mujeres)]
@@ -107,13 +122,24 @@ end.rcode-->
 
                         <p>Podemos reutilizar la función <code>resumen</code> para generar resúmenes de sendos subconjuntos y comprobar que todo lo hecho hasta ahora es correcto:</p>
 
-<!--begin.rcode
+<!--begin.rcode 2-6
 # Generamos el resumen para los hombres
 resumen(datos.hombres)
 
 # Generamos el resumen para las mujeres
 resumen(datos.mujeres)
 end.rcode-->
+
+                      <p>Por último, podemos comprobar que los pesos medios de ambos subconjuntos ya no son iguales</p>
+<!--begin.rcode 2-7
+# Vemos la media de peso en los hombres
+mean(datos.hombres$Peso)
+
+# Vemos la media de peso en los mujeres
+mean(datos.mujeres$Peso)
+end.rcode-->
+
+
                     </div>
                 </div>
             </div>
